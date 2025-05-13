@@ -18,6 +18,7 @@
         :total="users.total || 0"
         :items-per-page="users.per_page || 10"
         :current-page="users.current_page || 1"
+        deleteroute="users.destroy"
         @update:page="handlePageChange"
       />
     </div>
@@ -70,6 +71,7 @@ const handlePageChange = (newPage: number) => {
 };
 
 const columns = [
+  { label: "Id", key: "id" },
   { label: "Name", key: "name" },
   { label: "Email", key: "email" },
   //   { label: "Role", key: "role" },

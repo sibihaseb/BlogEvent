@@ -8,16 +8,16 @@
             <th v-for="(col, i) in columns" :key="i" class="px-4 py-2 font-semibold">
               {{ col.label }}
             </th>
+            <th class="px-4 py-2 font-semibold text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            v-for="(row, rowIndex) in rows"
-            :key="rowIndex"
-            class="border-t hover:bg-gray-50"
-          >
+          <tr v-for="(row, rowIndex) in rows" :key="rowIndex" class="border-t">
             <td v-for="(col, colIndex) in columns" :key="colIndex" class="px-4 py-2">
               {{ row[col.key] }}
+            </td>
+            <td class="px-4 py-2 flex justify-center">
+              <Trash2 @click="deleteData(row.id)" />
             </td>
           </tr>
         </tbody>
@@ -53,6 +53,7 @@
         </template>
       </PaginationList>
     </PaginationRoot>
+    <DeleteModal v-if="deleteRecord" :route="props.deleteroute" :id="deleteId" />
   </div>
 </template>
 
@@ -64,6 +65,11 @@ import {
   PaginationEllipsis,
 } from "reka-ui";
 import { ref, watch } from "vue";
+import DeleteModal from "./DeleteModal.vue";
+import { Trash2 } from "lucide-vue-next";
+import type { Ref } from "vue";
+const deleteRecord: Ref<boolean> = ref(false);
+const deleteId: Ref<number> = ref(0);
 
 interface Column {
   label: string;
@@ -76,13 +82,12 @@ const props = defineProps<{
   total: number;
   currentPage?: number;
   itemsPerPage?: number;
+  deleteroute: string;
 }>();
 
 const emit = defineEmits<{
   (e: "update:page", value: number): void;
 }>();
-
-console.log(props.total);
 
 const page = ref(props.currentPage || 1);
 const itemsPerPage = ref(props.itemsPerPage || 20);
@@ -92,10 +97,8 @@ watch(page, (val) => {
   emit("update:page", val);
 });
 
-// // Compute the rows to display for the current page
-// const paginatedRows = computed(() => {
-//   const start = (page.value - 1) * itemsPerPage.value;
-//   const end = start + itemsPerPage.value;
-//   return props.rows.slice(start, end);
-// });
+const deleteData = (id: number) => {
+  deleteId.value = id;
+  deleteRecord.value = true;
+};
 </script>
