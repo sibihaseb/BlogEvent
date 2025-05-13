@@ -1,15 +1,17 @@
 <template>
   <Head title="User Management" />
   <AppLayout :breadcrumbs="breadcrumbs">
-    <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-      <div class="mb-4">
+    <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
+      <h1>User Managment</h1>
+      <div class="flex justify-between mb-4">
         <input
           v-model="form.search"
           @input="searchUsers"
           type="text"
           placeholder="Search by name or email"
-          class="border border-gray-300 rounded px-3 py-2 w-full"
+          class="border border-gray-300 rounded px-3 py-2"
         />
+        <Button @click="createRecord()">Create user</Button>
       </div>
 
       <Datatable
@@ -19,9 +21,14 @@
         :items-per-page="users.per_page || 10"
         :current-page="users.current_page || 1"
         deleteroute="users.destroy"
+        createroute="users.store"
+        editroute="users.update"
+        :createRecordState="createOpen"
         @update:page="handlePageChange"
+        @update:open="(val) => (createOpen = val)"
       />
     </div>
+    <BaseToast />
   </AppLayout>
 </template>
 
@@ -31,7 +38,9 @@ import { Head, router, useForm } from "@inertiajs/vue3";
 import Datatable from "@/components/Datatable.vue";
 import type { BreadcrumbItem } from "@/types";
 import type { UserTable } from "@/client";
-// import { ref, watch } from "vue";
+import BaseToast from "@/Components/BaseToast.vue";
+import { Button } from "@/components/ui/button";
+import { ref } from "vue";
 
 const props = defineProps({
   users: {
@@ -43,9 +52,8 @@ const props = defineProps({
     type: Object,
   },
 });
-console.log(props.users.total);
 const breadcrumbs: BreadcrumbItem[] = [{ title: "User Management", href: "/users" }];
-
+const createOpen = ref(false);
 const form = useForm({
   search: props.filters.search || "",
 });
@@ -76,11 +84,9 @@ const columns = [
   { label: "Email", key: "email" },
   //   { label: "Role", key: "role" },
 ];
-</script>
 
-<style scoped>
-input:focus {
-  outline: none;
-  border-color: #3182ce;
-}
-</style>
+const createRecord = () => {
+  createOpen.value = true;
+  console.log("Create user", createOpen.value);
+};
+</script>

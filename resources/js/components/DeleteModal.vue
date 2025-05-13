@@ -1,53 +1,37 @@
 <template>
-  <div class="space-y-6">
-    <HeadingSmall
-      title="Delete account"
-      description="Delete your account and all of its resources"
-    />
-    <div
-      class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10"
-    >
-      <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-        <p class="font-medium">Warning</p>
-        <p class="text-sm">Please proceed with caution, this cannot be undone.</p>
-      </div>
-      <Dialog>
-        <DialogTrigger as-child>
-          <Button variant="destructive">Delete Record</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <form class="space-y-6" @submit="deleteUser">
-            <DialogHeader class="space-y-3">
-              <DialogTitle>Are you sure you want to delete your account?</DialogTitle>
-              <DialogDescription>
-                Once your account is deleted, all of its resources and data will also be
-                permanently deleted. Please enter your password to confirm you would like
-                to permanently delete your account.
-              </DialogDescription>
-            </DialogHeader>
+  <Dialog v-model:open="localOpen">
+    <DialogTrigger as-child>
+      <span></span>
+      <!-- Dummy trigger to enable programmatic open -->
+    </DialogTrigger>
+    <DialogContent>
+      <form class="space-y-6" @submit="deleteUser">
+        <DialogHeader class="space-y-3">
+          <DialogTitle>Are you sure you want to delete this record?</DialogTitle>
+          <DialogDescription>
+            Once deleted, this action cannot be undone. Please confirm to permanently
+            delete the record.
+          </DialogDescription>
+        </DialogHeader>
 
-            <DialogFooter class="gap-2">
-              <DialogClose as-child>
-                <Button variant="secondary" @click="closeModal"> Cancel </Button>
-              </DialogClose>
+        <DialogFooter class="gap-2">
+          <DialogClose as-child>
+            <Button variant="secondary" @click="closeModal">Cancel</Button>
+          </DialogClose>
 
-              <Button variant="destructive" :disabled="form.processing">
-                <button type="submit">Delete Record</button>
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
-    </div>
-  </div>
+          <Button variant="destructive" :disabled="form.processing" type="submit">
+            Delete Record
+          </Button>
+        </DialogFooter>
+      </form>
+    </DialogContent>
+  </Dialog>
 </template>
 
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
-
-// Components
-import HeadingSmall from "@/components/HeadingSmall.vue";
 import { Button } from "@/components/ui/button";
+import { ref } from "vue";
 import {
   Dialog,
   DialogClose,
@@ -62,8 +46,10 @@ import {
 const props = defineProps<{
   id: number;
   route: string;
+  open: boolean;
 }>();
-
+const emit = defineEmits(["update:open"]);
+const localOpen = ref(props.open);
 const form = useForm({});
 
 const deleteUser = (e: Event) => {
@@ -79,5 +65,6 @@ const deleteUser = (e: Event) => {
 const closeModal = () => {
   form.clearErrors();
   form.reset();
+  emit("update:open", false);
 };
 </script>
