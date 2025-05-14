@@ -57,6 +57,7 @@
         @update:open="deleteRecord = $event"
       />
     </div>
+    <BaseToast />
   </AppLayout>
 </template>
 
@@ -64,7 +65,7 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import Datatable from "@/components/Datatable.vue";
-// import BaseToast from "@/Components/BaseToast.vue";
+import BaseToast from "@/Components/BaseToast.vue";
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
 import { Trash2, Pencil } from "lucide-vue-next";
