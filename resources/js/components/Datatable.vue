@@ -119,6 +119,7 @@ const editCreateOpen = ref(false);
 const isEditMode = ref(false);
 const selectedRecord = ref<Record<string, any> | null>(null);
 const selectedId = ref<number | null>(null);
+const localcreateRecordState = ref(props.createRecordState);
 
 // Watch for pagination changes and emit updates
 watch(page, (val) => {
@@ -126,7 +127,10 @@ watch(page, (val) => {
 });
 
 watch(editCreateOpen, (val) => {
-  emit("update:open", val);
+  console.log("editCreateOpen", val);
+  if (localcreateRecordState.value) {
+    emit("update:open", val);
+  }
 });
 
 watch(
