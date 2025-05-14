@@ -48,6 +48,7 @@
         </div>
       </div>
       <EditUserModal v-if="editOpen" :user="userEdit" v-model:open="editOpen" />
+      <CreateUserModal v-if="createOpen" v-model:open="createOpen" />
       <DeleteModal
         v-if="deleteRecord"
         :id="deleteId"
@@ -71,6 +72,7 @@ import type { BreadcrumbItem } from "@/types";
 import type { UserTable, User } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
 import EditUserModal from "./EditUserModal.vue";
+import CreateUserModal from "./CreateUserModal.vue";
 import type { Ref } from "vue";
 const props = defineProps<{
   users: UserTable;

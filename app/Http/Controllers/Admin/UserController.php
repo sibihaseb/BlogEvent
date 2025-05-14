@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,7 +19,7 @@ class UserController extends Controller
     {
         $users = User::query()
             ->filter($request->only('search'))
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->paginate(10);
 
         return Inertia::render('admin/users/Index', [
@@ -27,43 +30,38 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
-    }
+        $input = $request->validated();
+        // $temppassword = $input['password'];
+        $input['password'] = Hash::make($input['password']);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $user = User::create($input);
+        // $user->sendEmailVerificationNotificationUser($temppassword);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+        return redirect()->route('users.index')->with('messages', ['title' => 'User Created successfully.']);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $input = $request->validated();
+
+        if (isset($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            unset($input['password']);
+        }
+
+        DB::transaction(function () use ($user, $input) {
+            $user->update($input);
+        }, 2);
+
+        return redirect()->route('users.index')->with('messages', ['title' => 'User Updated successfully.']);
     }
 
     /**

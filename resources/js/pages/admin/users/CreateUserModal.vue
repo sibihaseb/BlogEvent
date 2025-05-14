@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useForm } from "@inertiajs/vue3";
-import type { User } from "@/client";
 
 import {
   Dialog,
@@ -19,7 +18,6 @@ import { Button } from "@/components/ui/button";
 import InputError from "@/components/InputError.vue";
 
 const props = defineProps<{
-  user: User;
   open: boolean;
 }>();
 
@@ -41,8 +39,8 @@ watch(localOpen, (val) => {
 });
 
 const form = useForm({
-  name: props.user.name,
-  email: props.user.email,
+  name: "",
+  email: "",
   password: "",
   password_confirmation: "",
 });
@@ -50,10 +48,10 @@ const form = useForm({
 const submit = (e: Event) => {
   e.preventDefault();
 
-  form.put(route("users.update", props.user.id), {
+  form.post(route("users.store"), {
     preserveScroll: true,
     onSuccess: () => {
-      form.reset("password", "password_confirmation");
+      form.reset();
       closeModal();
     },
   });
@@ -69,14 +67,14 @@ const closeModal = () => {
 <template>
   <Dialog v-model:open="localOpen">
     <DialogTrigger as-child>
-      <Button variant="outline">Edit User</Button>
+      <Button variant="outline">Create User</Button>
     </DialogTrigger>
 
     <DialogContent class="sm:max-w-[500px]">
       <form @submit="submit" class="space-y-6">
         <DialogHeader class="space-y-3">
-          <DialogTitle>Edit User</DialogTitle>
-          <DialogDescription> Update user details and save. </DialogDescription>
+          <DialogTitle>Create User</DialogTitle>
+          <DialogDescription>Enter new user details and save.</DialogDescription>
         </DialogHeader>
 
         <div class="grid gap-4">
@@ -118,14 +116,13 @@ const closeModal = () => {
           <DialogClose as-child>
             <Button variant="secondary" type="button" @click="closeModal">Cancel</Button>
           </DialogClose>
-          <Button type="submit" :disabled="form.processing">Save Changes</Button>
+          <Button type="submit" :disabled="form.processing">Create User</Button>
         </DialogFooter>
 
         <DialogClose
           class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
           aria-label="Close"
-        >
-        </DialogClose>
+        />
       </form>
     </DialogContent>
   </Dialog>
