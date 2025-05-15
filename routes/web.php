@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ChurchEventController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -14,6 +15,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     })->name('dashboard');
 
     Route::resource('users', UserController::class);
+    Route::resource('churchevents', ChurchEventController::class);
 });
 
 require __DIR__ . '/settings.php';
