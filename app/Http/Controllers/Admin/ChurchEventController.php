@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChurchEventRequest;
 use App\Models\ChurchEventTag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,18 +23,16 @@ class ChurchEventController extends Controller
      */
     public function create()
     {
-        $tags = ChurchEventTag::all();
-        return Inertia::render('admin/event/Create', [
-            'tags' => $tags,
-        ]);
+        return Inertia::render('admin/event/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ChurchEventRequest $request)
     {
-        //
+        $input = $request->validated();
+        dd($input);
     }
 
     /**
