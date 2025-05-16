@@ -15,4 +15,11 @@ class ChurchEvent extends Model
         'location',
         'type'
     ];
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        });
+    }
 }

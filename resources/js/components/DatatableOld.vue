@@ -7,7 +7,7 @@ import { Trash2, Pencil } from "lucide-vue-next";
 type Column<T> = {
   accessorKey?: string;
   header: string;
-  cell: (row: T) => string | number;
+  cell: (row: T) => string | number | JSX.Element;
   sortable?: boolean;
   searchable?: boolean;
   width?: string;
@@ -58,6 +58,7 @@ const allSelected = computed(() => {
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-xl font-semibold" v-if="title">{{ title }}</h2>
     </div>
+
     <div class="overflow-x-auto">
       <table class="min-w-full table-auto text-left text-sm">
         <thead class="bg-gray-100">
@@ -91,8 +92,7 @@ const allSelected = computed(() => {
               />
             </td>
             <td v-for="(col, colIndex) in columns" :key="colIndex" class="px-4 py-2">
-              <span v-if="typeof col.cell(row) === 'string'" v-html="col.cell(row)" />
-              <span v-else>{{ col.cell(row) }}</span>
+              {{ col.cell(row) }}
             </td>
             <td v-if="actions?.length" class="px-4 py-2">
               <div class="flex gap-2">
@@ -120,6 +120,7 @@ const allSelected = computed(() => {
           </tr>
         </tbody>
       </table>
+
       <div v-if="!rows.length" class="text-center py-6 text-gray-500">No data found.</div>
     </div>
   </div>
