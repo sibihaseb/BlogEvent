@@ -132,10 +132,6 @@ const columns = [
     cell: (row: ChurchEvent) => row.description,
   },
   {
-    header: "Description",
-    cell: (row: ChurchEvent) => row.description,
-  },
-  {
     header: "Type",
     cell: (row: ChurchEvent) => row.type,
   },
