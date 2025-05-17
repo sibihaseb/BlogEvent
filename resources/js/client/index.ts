@@ -5,3 +5,8 @@ export type { Campaign } from './models/Campaign'
 export type { CampaignTable } from './models/CampaignTable'
 export type { UserTable } from './models/UserTable'
 export type { ToastMessage } from './models/ToastMessage'
+export type { EventBlogs } from './models/EventBlogs'
+export type { EventBlogsTable } from './models/EventBlogsTable'
+export type { EventType } from './models/EventType'
+export type { EventTypeTable } from './models/EventTypeTable'
+

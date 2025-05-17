@@ -48,13 +48,13 @@ import { Button } from "@/components/ui/button";
 import { ref } from "vue";
 import { Trash2, Pencil } from "lucide-vue-next";
 import type { BreadcrumbItem } from "@/types";
-import type { EventType, User } from "@/client";
+import type { EventType, EventTypeTable } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
 import EditEventTypeModal from "./EditEventTypeModal.vue";
 import CreateEventTypeModal from "./CreateEventTypeModal.vue";
 import type { Ref } from "vue";
 const props = defineProps<{
-  eventTypes: EventType;
+  eventTypes: EventTypeTable;
   filters: Record<string, any>;
 }>();
 
@@ -63,7 +63,7 @@ const createOpen = ref(false);
 const deleteRecord: Ref<boolean> = ref(false);
 const deleteId: Ref<number> = ref(0);
 const editOpen = ref(false);
-const typeEdit: Ref<User> = ref({});
+const typeEdit: Ref<EventType> = ref({ name: "", id: 0 });
 const form = useForm({
   search: props.filters.search || "",
 });
@@ -112,7 +112,7 @@ const actions = [
   {
     label: "Edit",
     type: "edit",
-    icon: Pencil,
+    icon: "Pencil",
     onClick: (row: any) => {
       typeEdit.value = row;
       console.log("Edit user", typeEdit.value);
@@ -122,7 +122,7 @@ const actions = [
   {
     label: "Delete",
     type: "delete",
-    icon: Trash2,
+    icon: "Trash2",
     onClick: (row: any) => {
       deleteData(row.id);
     },

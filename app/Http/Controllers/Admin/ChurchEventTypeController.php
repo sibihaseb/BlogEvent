@@ -43,7 +43,7 @@ class ChurchEventTypeController extends Controller
             'name' => 'required|string|max:255',
         ]);
         ChurchEventType::create($data);
-        return redirect()->back()->with('messages', ['title' => 'Event Type Created Successfully']);
+        return redirect()->route('types.index')->with('messages', ['title' => 'Event Type Created Successfully']);
     }
 
     /**
@@ -72,7 +72,7 @@ class ChurchEventTypeController extends Controller
         ]);
         $eventType = ChurchEventType::findOrFail($id);
         $eventType->update($data);
-        return redirect()->back()->with('message', ['title' =>  'Event Type Updated Successfully']);
+        return redirect()->route('types.index')->with('message', ['title' =>  'Event Type Updated Successfully']);
     }
 
     /**
@@ -82,6 +82,6 @@ class ChurchEventTypeController extends Controller
     {
         $eventType = ChurchEventType::findOrFail($id);
         $eventType->delete();
-        return redirect()->back()->with('messages', ['title' => 'Event Type Deleted Successfully']);
+        return redirect()->route('types.index')->with('messages', ['title' => 'Event Type Deleted Successfully']);
     }
 }
