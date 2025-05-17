@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChurchEventRequest;
+use App\Models\ChurchEvent;
 use App\Models\ChurchEventTag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,9 +14,18 @@ class ChurchEventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $churchevents = ChurchEvent::query()
+            ->filter($request->only('search'))
+            ->orderBy('created_at', 'ASC')
+            ->paginate(10);
+
+        return Inertia::render('admin/event/Index', [
+            'churchevents' => $churchevents,
+            'filters' => $request->only('search'),
+            'message' => session('message'),
+        ]);
     }
 
     /**
