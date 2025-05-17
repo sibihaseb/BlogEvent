@@ -40,15 +40,12 @@ watch(localOpen, (val) => {
 
 const form = useForm({
   name: "",
-  email: "",
-  password: "",
-  password_confirmation: "",
 });
 
 const submit = (e: Event) => {
   e.preventDefault();
 
-  form.post(route("users.store"), {
+  form.post(route("types.store"), {
     preserveScroll: true,
     onSuccess: () => {
       form.reset();
@@ -67,14 +64,14 @@ const closeModal = () => {
 <template>
   <Dialog v-model:open="localOpen">
     <DialogTrigger as-child>
-      <Button variant="outline">Create User</Button>
+      <Button variant="outline">Create Type</Button>
     </DialogTrigger>
 
     <DialogContent class="sm:max-w-[500px]">
       <form @submit="submit" class="space-y-6">
         <DialogHeader class="space-y-3">
-          <DialogTitle>Create User</DialogTitle>
-          <DialogDescription>Enter new user details and save.</DialogDescription>
+          <DialogTitle>Create Type</DialogTitle>
+          <DialogDescription>Enter new Event Type details and save.</DialogDescription>
         </DialogHeader>
 
         <div class="grid gap-4">
@@ -83,46 +80,16 @@ const closeModal = () => {
             <Input id="name" type="text" v-model="form.name" />
             <InputError :message="form.errors.name" />
           </div>
-
-          <div class="space-y-1">
-            <Label for="email">Email</Label>
-            <Input id="email" type="email" v-model="form.email" />
-            <InputError :message="form.errors.email" />
-          </div>
-
-          <div class="space-y-1">
-            <Label for="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              v-model="form.password"
-              autocomplete="new-password"
-            />
-            <InputError :message="form.errors.password" />
-          </div>
-
-          <div class="space-y-1">
-            <Label for="password_confirmation">Confirm Password</Label>
-            <Input
-              id="password_confirmation"
-              type="password"
-              v-model="form.password_confirmation"
-            />
-            <InputError :message="form.errors.password_confirmation" />
-          </div>
         </div>
 
         <DialogFooter class="gap-2">
           <DialogClose as-child>
             <Button variant="secondary" type="button" @click="closeModal">Cancel</Button>
           </DialogClose>
-          <Button type="submit" :disabled="form.processing">Create User</Button>
+          <Button type="submit" :disabled="form.processing">Create Type</Button>
         </DialogFooter>
 
-        <DialogClose
-          class="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-          aria-label="Close"
-        />
+        <DialogClose class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" aria-label="Close" />
       </form>
     </DialogContent>
   </Dialog>

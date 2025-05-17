@@ -7,11 +7,11 @@
 
       <div class="flex justify-between mb-4">
         <input v-model="form.search" @input="searcheventTypes(eventTypes.current_page)" type="text"
-          placeholder="Search by name or email" class="border border-gray-300 rounded px-3 py-2" />
-        <Button @click="createRecord">Create user</Button>
+          placeholder="Search by name " class="border border-gray-300 rounded px-3 py-2" />
+        <Button @click="createRecord">Create Event Type</Button>
       </div>
 
-      <Datatable :title="'Event Types List'" :columns="columns" :rows="eventTypes" :selectable="true"
+      <Datatable :title="'Event Types List'" :columns="columns" :rows="eventTypes.data" :selectable="true"
         :actions="actions" />
 
       <div class="flex justify-between items-center mt-4">
@@ -30,8 +30,8 @@
           </Button>
         </div>
       </div>
-      <EditUserModal v-if="editOpen" :user="userEdit" v-model:open="editOpen" />
-      <CreateUserModal v-if="createOpen" v-model:open="createOpen" />
+      <EditEventTypeModal v-if="editOpen" :eventType="typeEdit" v-model:open="editOpen" />
+      <CreateEventTypeModal v-if="createOpen" v-model:open="createOpen" />
       <DeleteModal v-if="deleteRecord" :id="deleteId" route="types.destroy" :open="deleteRecord"
         @update:open="deleteRecord = $event" />
     </div>
@@ -43,18 +43,18 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import Datatable from "@/components/Datatable.vue";
-import BaseToast from "@/Components/BaseToast.vue";
+import BaseToast from "@/components/BaseToast.vue";
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
 import { Trash2, Pencil } from "lucide-vue-next";
 import type { BreadcrumbItem } from "@/types";
-import type { UserTable, User } from "@/client";
+import type { EventType, User } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
-import EditUserModal from "./EditUserModal.vue";
-import CreateUserModal from "./CreateUserModal.vue";
+import EditEventTypeModal from "./EditEventTypeModal.vue";
+import CreateEventTypeModal from "./CreateEventTypeModal.vue";
 import type { Ref } from "vue";
 const props = defineProps<{
-  eventTypes: UserTable;
+  eventTypes: EventType;
   filters: Record<string, any>;
 }>();
 
@@ -63,14 +63,14 @@ const createOpen = ref(false);
 const deleteRecord: Ref<boolean> = ref(false);
 const deleteId: Ref<number> = ref(0);
 const editOpen = ref(false);
-const userEdit: Ref<User> = ref({});
+const typeEdit: Ref<User> = ref({});
 const form = useForm({
   search: props.filters.search || "",
 });
 
 // debounce search input
 let debounceTimeout: number = 0;
-const searcheventTypes = (page) => {
+const searcheventTypes = (page: string) => {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(() => {
     router.get(
@@ -114,8 +114,8 @@ const actions = [
     type: "edit",
     icon: Pencil,
     onClick: (row: any) => {
-      userEdit.value = row;
-      console.log("Edit user", userEdit.value);
+      typeEdit.value = row;
+      console.log("Edit user", typeEdit.value);
       editOpen.value = true;
     },
   },

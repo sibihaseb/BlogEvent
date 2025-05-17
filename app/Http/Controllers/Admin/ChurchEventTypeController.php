@@ -14,11 +14,10 @@ class ChurchEventTypeController extends Controller
      */
     public function index(Request $request)
     {
-        // $eventTypes = ChurchEventType::query()
-        //     ->filter($request->only('search'))
-        //     ->orderBy('created_at', 'ASC')
-        //     ->paginate(10);
-        $eventTypes = ChurchEventType::all();
+        $eventTypes = ChurchEventType::query()
+            ->filter($request->only('search'))
+            ->orderBy('created_at', 'ASC')
+            ->paginate(10);
 
         return Inertia::render('admin/eventType/Index', [
             'eventTypes' => $eventTypes,
@@ -40,7 +39,11 @@ class ChurchEventTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        ChurchEventType::create($data);
+        return redirect()->back()->with('messages', ['title' => 'Event Type Created Successfully']);
     }
 
     /**
@@ -64,7 +67,12 @@ class ChurchEventTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        $eventType = ChurchEventType::findOrFail($id);
+        $eventType->update($data);
+        return redirect()->back()->with('message', ['title' =>  'Event Type Updated Successfully']);
     }
 
     /**
@@ -72,6 +80,8 @@ class ChurchEventTypeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $eventType = ChurchEventType::findOrFail($id);
+        $eventType->delete();
+        return redirect()->back()->with('messages', ['title' => 'Event Type Deleted Successfully']);
     }
 }
