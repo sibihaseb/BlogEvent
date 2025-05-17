@@ -115,7 +115,7 @@ const columns = [
     header: "Banner",
     cell: (row: ChurchEvent) => {
       return row.picture
-        ? `<img src="${row.picture}" alt="user avatar" class="w-10 h-10 rounded-full object-cover" />`
+        ? `<img src="storage/${row.picture}" alt="user avatar" class="w-10 h-10 rounded-full object-cover" />`
         : "";
     },
   },

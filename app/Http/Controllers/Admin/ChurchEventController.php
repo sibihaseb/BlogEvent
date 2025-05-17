@@ -42,7 +42,15 @@ class ChurchEventController extends Controller
     public function store(ChurchEventRequest $request)
     {
         $input = $request->validated();
-        dd($input);
+        $ext = $input['picture']->getClientOriginalExtension();
+        $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
+        $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
+
+        ChurchEvent::create($input);
+
+        return redirect()
+            ->route('churchevents.index')
+            ->with('message', 'Event created successfully');
     }
 
     /**

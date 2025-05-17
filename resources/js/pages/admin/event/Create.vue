@@ -1,37 +1,3 @@
-<script setup lang="ts">
-import { Head, useForm } from "@inertiajs/vue3";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import InputError from "@/components/InputError.vue";
-import AppLayout from "@/layouts/AppLayout.vue";
-import { LoaderCircle } from "lucide-vue-next";
-
-const form = useForm({
-  picture: null as File | null,
-  name: "",
-  description: "",
-  start_time: "",
-  end_time: "",
-  location: "",
-  type: "",
-});
-
-const submit = () => {
-  console.log(form.type);
-  form.post(route("churchevents.store"), {
-    forceFormData: true,
-  });
-};
-
-const handleFileChange = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  if (target.files?.length) {
-    form.picture = target.files[0];
-  }
-};
-</script>
-
 <template>
   <Head title="Create Event" />
   <AppLayout>
@@ -54,19 +20,6 @@ const handleFileChange = (e: Event) => {
             />
             <InputError :message="form.errors.name" />
           </div>
-        </div>
-
-        <!-- Description -->
-        <div class="grid gap-2">
-          <Label for="description">Description</Label>
-          <textarea
-            id="description"
-            v-model="form.description"
-            rows="4"
-            placeholder="Describe the event"
-            class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring focus:ring-primary/20"
-          ></textarea>
-          <InputError :message="form.errors.description" />
         </div>
 
         <!-- Times and Location -->
@@ -119,6 +72,12 @@ const handleFileChange = (e: Event) => {
           </div>
         </div>
 
+        <!-- Description -->
+        <div class="grid gap-2">
+          <Label for="description">Description</Label>
+          <div ref="editor" class="quill-editor"></div>
+          <InputError :message="form.errors.description" />
+        </div>
         <!-- Submit -->
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
@@ -130,3 +89,72 @@ const handleFileChange = (e: Event) => {
     </div>
   </AppLayout>
 </template>
+
+<script setup lang="ts">
+import { Head, useForm } from "@inertiajs/vue3";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import InputError from "@/components/InputError.vue";
+import AppLayout from "@/layouts/AppLayout.vue";
+import { LoaderCircle } from "lucide-vue-next";
+import { onMounted, ref } from "vue";
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
+
+const editor = ref(null);
+let quill = null;
+
+onMounted(() => {
+  quill = new Quill(editor.value, {
+    theme: "snow",
+    placeholder: "Compose an epic...",
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ script: "sub" }, { script: "super" }],
+        [{ indent: "-1" }, { indent: "+1" }],
+        [{ direction: "rtl" }],
+        [{ size: ["small", false, "large", "huge"] }],
+        [{ color: [] }, { background: [] }],
+        [{ font: [] }],
+        [{ align: [] }],
+        ["link", "image", "video"],
+        ["clean"],
+      ],
+    },
+  });
+});
+
+const form = useForm({
+  picture: null as File | null,
+  name: "",
+  description: "",
+  start_time: "",
+  end_time: "",
+  location: "",
+  type: "",
+});
+
+const submit = () => {
+  const html = quill.root.innerHTML;
+  form.description = JSON.stringify(html);
+  form.post(route("churchevents.store"), {
+    forceFormData: true,
+  });
+};
+
+const handleFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  if (target.files?.length) {
+    form.picture = target.files[0];
+  }
+};
+</script>
+<style scoped>
+.quill-editor {
+  height: 300px;
+}
+</style>
