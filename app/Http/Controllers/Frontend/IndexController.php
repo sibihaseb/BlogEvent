@@ -16,4 +16,12 @@ class IndexController extends Controller
             'churchevents' => $churchevents,
         ]);
     }
+
+    public function churchEvents()
+    {
+        $churchevents = ChurchEvent::orderBy('created_at', 'desc')->get();
+        return Inertia::render('frontend/ChurchEvent', [
+            'churchevents' => $churchevents,
+        ]);
+    }
 }

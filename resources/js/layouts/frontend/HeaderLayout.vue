@@ -13,10 +13,10 @@
         </div>
       </div>
       <nav class="hidden lg:flex items-center space-x-8">
-        <a
-          href="#"
+        <Link
+          :href="route('home')"
           class="text-primary hover:text-secondary font-medium transition duration-300"
-          >Home</a
+          >Home</Link
         >
         <a
           href="#about"
@@ -28,10 +28,10 @@
           class="text-primary hover:text-secondary font-medium transition duration-300"
           >Ministries</a
         >
-        <a
-          href="#events"
+        <Link
+          :href="route('church.event')"
           class="text-primary hover:text-secondary font-medium transition duration-300"
-          >Events</a
+          >Events</Link
         >
         <a
           href="#sermons"

@@ -57,12 +57,12 @@
       </div>
 
       <div class="text-center mt-10">
-        <a
-          href="#"
+        <Link
+          :href="route('church.event')"
           class="inline-block border-2 border-primary text-primary px-8 py-3 rounded-button font-semibold hover:bg-primary hover:text-white transition duration-300 !rounded-button whitespace-nowrap"
         >
           View All Events
-        </a>
+        </Link>
       </div>
     </div>
   </section>
@@ -70,6 +70,7 @@
 
 <script setup lang="ts">
 import type { ChurchEvent } from "@/client";
+import { Link } from "@inertiajs/vue3";
 import moment from "moment";
 
 const props = defineProps<{
