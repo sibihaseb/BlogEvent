@@ -72,6 +72,8 @@ import type { BreadcrumbItem } from "@/types";
 import type { ChurchEventTable, ChurchEvent } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
 import type { Ref } from "vue";
+import truncate from "html-truncate";
+
 const props = defineProps<{
   churchevents: ChurchEventTable;
   filters: Record<string, any>;
@@ -129,7 +131,13 @@ const columns = [
   },
   {
     header: "Description",
-    cell: (row: ChurchEvent) => row.description,
+    cell: (row: ChurchEvent) => {
+      let desc = row.description;
+      if (desc.startsWith('"') && desc.endsWith('"')) {
+        desc = desc.slice(1, -1);
+      }
+      return truncate(desc, 300); // keeps HTML tags intact
+    },
   },
   {
     header: "Type",
