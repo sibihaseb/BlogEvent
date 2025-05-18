@@ -60,7 +60,7 @@ const allSelected = computed(() => {
     </div>
     <div class="overflow-x-auto">
       <table class="min-w-full table-auto text-left text-sm">
-        <thead class="bg-gray-100">
+        <thead>
           <tr>
             <th v-if="selectable" class="px-4 py-2">
               <input type="checkbox" :checked="allSelected" @change="toggleSelectAll" />
@@ -80,8 +80,7 @@ const allSelected = computed(() => {
           <tr
             v-for="(row, rowIndex) in rows"
             :key="rowIndex"
-            class="hover:bg-gray-50"
-            :class="{ 'bg-gray-50': selectedRows.includes(row) }"
+            :class="{ 'bg-gray-300': selectedRows.includes(row) }"
           >
             <td v-if="selectable" class="px-4 py-2">
               <input
