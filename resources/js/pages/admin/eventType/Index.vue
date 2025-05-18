@@ -6,7 +6,7 @@
       <h1 class="text-xl font-bold">Event Types</h1>
 
       <div class="flex justify-between mb-4">
-        <input v-model="form.search" @input="searcheventTypes(eventTypes.current_page)" type="text"
+        <input v-model="form.search" @input="searcheventTypes(String(eventTypes.current_page))" type="text"
           placeholder="Search by name " class="border border-gray-300 rounded px-3 py-2" />
         <Button @click="createRecord">Create Event Type</Button>
       </div>

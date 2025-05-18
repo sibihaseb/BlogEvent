@@ -34,6 +34,12 @@ const mainNavItems: NavItem[] = [
     href: route('blogs.index'),
     icon: Users,
   },
+  {
+    title: 'Ministries',
+    href: route('ministries.index'),
+    icon: Users,
+  },
+
 ];
 
 const footerNavItems: NavItem[] = [

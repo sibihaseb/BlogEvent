@@ -1,5 +1,7 @@
-import { EventBlogs } from "./EventBlogsTable"
-
-export type EventBlogsTable = {
-    data: Array<EventBlogs>
+export type EventBlogs = {
+    id: number,
+    name: string,
+    description: string,
+    type: string,
+    image: string,
 }

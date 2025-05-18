@@ -1,6 +1,6 @@
-import { EventBlogs } from "./EventBlogs"
-export type EventBlogsTable = {
-    data: Array<EventBlogs>
+import { Ministry } from './Ministry';
+export type MinistryTable = {
+    data: Array<Ministry>,
     total: number,
     current_page: number,
     per_page: number,
@@ -13,4 +13,4 @@ export type EventBlogsTable = {
         next: string,
         prev: string,
     }
-}
+};
