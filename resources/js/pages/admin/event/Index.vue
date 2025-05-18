@@ -64,7 +64,7 @@
 import AppLayout from "@/layouts/AppLayout.vue";
 import { Head, router, useForm } from "@inertiajs/vue3";
 import Datatable from "@/components/Datatable.vue";
-import BaseToast from "@/Components/BaseToast.vue";
+import BaseToast from "@/components/BaseToast.vue";
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
 import { Trash2, Pencil } from "lucide-vue-next";
@@ -72,7 +72,7 @@ import type { BreadcrumbItem } from "@/types";
 import type { ChurchEventTable, ChurchEvent } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
 import type { Ref } from "vue";
-import truncate from "html-truncate";
+// import truncate from "html-truncate";
 
 const props = defineProps<{
   churchevents: ChurchEventTable;
@@ -88,7 +88,7 @@ const form = useForm({
 
 // debounce search input
 let debounceTimeout: number = 0;
-const searchEvents = (page) => {
+const searchEvents = (page: number) => {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(() => {
     router.get(
@@ -115,7 +115,7 @@ const createRecord = () => {
 const columns = [
   {
     header: "Banner",
-    cell: (row: ChurchEvent) => {
+    cell: (row: any) => {
       return row.picture
         ? `<img src="storage/${row.picture}" alt="user avatar" class="w-10 h-10 rounded-full object-cover" />`
         : "";
@@ -123,25 +123,30 @@ const columns = [
   },
   {
     header: "ID",
-    cell: (row: ChurchEvent) => row.id,
+    cell: (row: any) => row.id,
   },
   {
     header: "Name",
-    cell: (row: ChurchEvent) => row.name,
+    cell: (row: any) => row.name,
   },
   {
-    header: "Description",
-    cell: (row: ChurchEvent) => {
-      let desc = row.description;
-      if (desc.startsWith('"') && desc.endsWith('"')) {
-        desc = desc.slice(1, -1);
-      }
-      return truncate(desc, 300); // keeps HTML tags intact
-    },
+    header: "Short Description",
+    cell: (row: any) => row.short_description,
+    // cell: (row: ChurchEvent) => {
+    //   return row.short_description;
+    //   //   if (!row.description) {
+    //   //     return "";
+    //   //   }
+    //   //   let desc = row.description;
+    //   //   if (desc.startsWith('"') && desc.endsWith('"')) {
+    //   //     desc = desc.slice(1, -1);
+    //   //   }
+    //   //   return truncate(desc, 300); // keeps HTML tags intact
+    // },
   },
   {
     header: "Type",
-    cell: (row: ChurchEvent) => row.type,
+    cell: (row: any) => row.type,
   },
 ];
 

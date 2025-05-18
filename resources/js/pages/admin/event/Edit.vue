@@ -61,6 +61,19 @@
           </div>
         </div>
 
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="name">Event Short Description</Label>
+            <Input
+              id="name"
+              v-model="form.short_description"
+              required
+              placeholder="Enter Short Description"
+            />
+            <InputError :message="form.errors.short_description" />
+          </div>
+        </div>
+
         <!-- Description -->
         <div class="grid gap-2">
           <Label for="description">Description</Label>
@@ -74,6 +87,13 @@
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
             Update Event
           </Button>
+          <Button
+            type="button"
+            class="ml-4"
+            @click="router.visit(route('churchevents.index'))"
+          >
+            Go Back
+          </Button>
         </div>
       </form>
     </div>
@@ -81,7 +101,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, router, useForm } from "@inertiajs/vue3";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -91,18 +111,11 @@ import { LoaderCircle } from "lucide-vue-next";
 import { onMounted, ref } from "vue";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
+import { ChurchEvent } from "@/client";
 
 // Props from the controller
 const props = defineProps<{
-  churchevent: {
-    id: number;
-    name: string;
-    description: string;
-    start_time: string;
-    end_time: string;
-    location: string;
-    type: string;
-  };
+  churchevent: ChurchEvent;
 }>();
 
 const editor = ref(null);
@@ -112,6 +125,7 @@ const form = useForm({
   picture: null as File | null,
   name: props.churchevent.name || "",
   description: props.churchevent.description || "",
+  short_description: props.churchevent.short_description || "",
   start_time: props.churchevent.start_time || "",
   end_time: props.churchevent.end_time || "",
   location: props.churchevent.location || "",
@@ -134,7 +148,7 @@ onMounted(() => {
         [{ color: [] }, { background: [] }],
         [{ font: [] }],
         [{ align: [] }],
-        ["link", "image", "video"],
+        ["link"],
         ["clean"],
       ],
     },

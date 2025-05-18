@@ -71,6 +71,18 @@
             <InputError :message="form.errors.type" />
           </div>
         </div>
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="name">Event Short Description</Label>
+            <Input
+              id="name"
+              v-model="form.short_description"
+              required
+              placeholder="Enter Short Description"
+            />
+            <InputError :message="form.errors.short_description" />
+          </div>
+        </div>
 
         <!-- Description -->
         <div class="grid gap-2">
@@ -84,6 +96,13 @@
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
             Create Event
           </Button>
+          <Button
+            type="button"
+            class="ml-4"
+            @click="router.visit(route('churchevents.index'))"
+          >
+            Go Back
+          </Button>
         </div>
       </form>
     </div>
@@ -91,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, useForm, router } from "@inertiajs/vue3";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -121,7 +140,7 @@ onMounted(() => {
         [{ color: [] }, { background: [] }],
         [{ font: [] }],
         [{ align: [] }],
-        ["link", "image", "video"],
+        ["link"],
         ["clean"],
       ],
     },
@@ -131,6 +150,7 @@ onMounted(() => {
 const form = useForm({
   picture: null as File | null,
   name: "",
+  short_description: "",
   description: "",
   start_time: "",
   end_time: "",

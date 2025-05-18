@@ -23,7 +23,8 @@ class ChurchEventRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
+            'short_description' => 'required|string',
             'start_time' => 'required|date',
             'end_time' => 'required|date|after:start_time',
             'location' => 'required|string',

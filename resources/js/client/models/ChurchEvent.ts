@@ -3,9 +3,10 @@ export type ChurchEvent = {
     id: number;
     name: string;
     picture?: string;
-    description: string;
-    startDate: Date;
-    endDate: Date;
+    short_description?: string;
+    description?: string;
+    start_time: string;
+    end_time: string;
     location?: string;
     type: ChurchEventType;
     createdAt: Date;

@@ -9,6 +9,7 @@ class ChurchEvent extends Model
     protected $fillable = [
         'picture',
         'name',
+        'short_description',
         'description',
         'start_time',
         'end_time',

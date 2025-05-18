@@ -4,7 +4,7 @@
     <HeroSection />
     <HaitianHeritage />
     <QuickAccessGrid />
-    <UpcomingEvents />
+    <UpcomingEvents :churchevents="props.churchevents" />
     <EventCalendar />
     <Ministry />
     <AboutUs />
@@ -26,6 +26,11 @@ import Ministry from "@/components/frontend/Ministry.vue";
 import AboutUs from "@/components/frontend/AboutUs.vue";
 import Blog from "@/components/frontend/Blog.vue";
 import Contact from "@/components/frontend/Contact.vue";
+import type { ChurchEvent } from "@/client";
+
+const props = defineProps<{
+  churchevents: ChurchEvent[];
+}>();
 
 onMounted(() => {
   // Toggle mobile menu
