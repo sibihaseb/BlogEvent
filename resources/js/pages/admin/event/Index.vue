@@ -90,7 +90,7 @@ const searchEvents = (page) => {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(() => {
     router.get(
-      route("users.index"),
+      route("churchevents.index"),
       { search: form.search, page },
       { preserveState: true, replace: true }
     );
@@ -99,7 +99,7 @@ const searchEvents = (page) => {
 
 const handlePageChange = (page: number) => {
   router.get(
-    route("users.index"),
+    route("churchevents.index"),
     { search: form.search, page },
     { preserveState: true, replace: true }
   );
@@ -144,7 +144,7 @@ const actions = [
     type: "edit",
     icon: Pencil,
     onClick: (row: ChurchEvent) => {
-      console.log(row);
+      router.visit(route("churchevents.edit", { id: row.id }));
     },
   },
   {

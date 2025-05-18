@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ChurchEventRequest;
-use App\Models\ChurchEvent;
-use App\Models\ChurchEventTag;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\ChurchEvent;
+use Illuminate\Http\Request;
+use App\Models\ChurchEventTag;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ChurchEventRequest;
 
 class ChurchEventController extends Controller
 {
@@ -64,24 +65,48 @@ class ChurchEventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ChurchEvent $churchevent)
     {
-        //
+        return Inertia::render('admin/event/Edit', [
+            'churchevent' => $churchevent
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ChurchEventRequest $request, ChurchEvent $churchevent)
     {
-        //
+        $input = $request->validated();
+        if ($request->hasFile('picture')) {
+            $ext = $input['picture']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
+            $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
+            if (Storage::exists($churchevent->picture)) {
+                Storage::delete($churchevent->picture);
+            }
+        } else {
+            unset($input['picture']);
+        }
+        $churchevent->update($input);
+
+        return redirect()
+            ->route('churchevents.index')
+            ->with('message', 'Event updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ChurchEvent $churchevent)
     {
-        //
+        if (Storage::exists($churchevent->picture)) {
+            Storage::delete($churchevent->picture);
+        }
+        $churchevent->delete();
+
+        return redirect()
+            ->route('churchevents.index')
+            ->with('message', 'Event deleted successfully');
     }
 }
