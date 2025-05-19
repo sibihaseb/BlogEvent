@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\IndexController;
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/church-event', [IndexController::class, 'churchEvents'])->name('church.event');
+Route::get('/church-event/{churchevent}', [IndexController::class, 'singleEvent'])->name('single.church.event');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {

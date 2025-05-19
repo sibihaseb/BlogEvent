@@ -19,7 +19,7 @@ class ChurchEventController extends Controller
     {
         $churchevents = ChurchEvent::query()
             ->filter($request->only('search'))
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('id', 'ASC')
             ->paginate(10);
 
         return Inertia::render('admin/event/Index', [
@@ -48,6 +48,8 @@ class ChurchEventController extends Controller
         $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
 
         ChurchEvent::create($input);
+
+        $this->imageresize($input['picture'], 1);
 
         return redirect()
             ->route('churchevents.index')

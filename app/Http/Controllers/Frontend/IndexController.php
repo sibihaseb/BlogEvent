@@ -24,4 +24,11 @@ class IndexController extends Controller
             'churchevents' => $churchevents,
         ]);
     }
+
+    public function singleEvent(ChurchEvent $churchevent)
+    {
+        return Inertia::render('frontend/SingleEvent', [
+            'churchevent' => $churchevent,
+        ]);
+    }
 }

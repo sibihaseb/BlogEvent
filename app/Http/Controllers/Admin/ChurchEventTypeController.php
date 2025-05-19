@@ -16,7 +16,7 @@ class ChurchEventTypeController extends Controller
     {
         $eventTypes = ChurchEventType::query()
             ->filter($request->only('search'))
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('id', 'ASC')
             ->paginate(10);
 
         return Inertia::render('admin/eventType/Index', [
