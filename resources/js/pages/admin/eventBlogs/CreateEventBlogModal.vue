@@ -1,0 +1,122 @@
+<template>
+  <Dialog v-model:open="localOpen">
+    <DialogTrigger as-child>
+      <Button variant="outline">Create Blog</Button>
+    </DialogTrigger>
+
+    <DialogContent class="sm:max-w-[500px]">
+      <form @submit="submit" class="space-y-6">
+        <DialogHeader class="space-y-3">
+          <DialogTitle>Create Blog</DialogTitle>
+          <DialogDescription>Enter new Event Blog details and save.</DialogDescription>
+        </DialogHeader>
+
+        <div class="grid gap-4">
+          <div class="space-y-1">
+            <Label for="name">Name</Label>
+            <Input id="name" type="text" v-model="form.name" />
+            <InputError :message="form.errors.name" />
+          </div>
+          <div class="space-y-1">
+            <Label for="type">Type</Label>
+            <Input id="type" type="text" v-model="form.type" />
+            <InputError :message="form.errors.type" />
+          </div>
+          <div class="space-y-1">
+            <Label for="description">Description</Label>
+            <textarea class="border w-full p-2" id="description" v-model="form.description" />
+            <InputError :message="form.errors.description" />
+          </div>
+
+          <div class="space-y-1">
+            <Label for="image">Image</Label>
+            <Input id="image" type="file" @change="handleImageChange" />
+            <InputError :message="form.errors.image" />
+          </div>
+
+          <DialogFooter class="gap-2">
+            <DialogClose as-child>
+              <Button variant="secondary" type="button" @click="closeModal">Cancel</Button>
+            </DialogClose>
+            <Button type="submit" :disabled="form.processing">Create Blog</Button>
+          </DialogFooter>
+
+          <DialogClose class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" aria-label="Close" />
+        </div>
+      </form>
+    </DialogContent>
+  </Dialog>
+</template>
+<script setup lang="ts">
+import { ref, watch } from "vue";
+import { useForm } from "@inertiajs/vue3";
+
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import InputError from "@/components/InputError.vue";
+
+const props = defineProps<{
+  open: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: "update:open", value: boolean): void;
+}>();
+
+const localOpen = ref(props.open);
+
+watch(
+  () => props.open,
+  (val) => {
+    localOpen.value = val;
+  }
+);
+
+watch(localOpen, (val) => {
+  emit("update:open", val);
+});
+
+const form = useForm({
+  name: "",
+  type: "",
+  description: "",
+  image: null,
+});
+
+// image handle
+function handleImageChange(event: any) {
+  const file = event.target.files[0];
+  if (file) {
+    form.image = file;
+  }
+}
+
+const submit = (e: Event) => {
+  e.preventDefault();
+
+  form.post(route("blogs.store"), {
+    preserveScroll: true,
+    onSuccess: () => {
+      form.reset();
+      closeModal();
+    },
+  });
+};
+
+const closeModal = () => {
+  form.clearErrors();
+  form.reset();
+  emit("update:open", false);
+};
+</script>
