@@ -16,8 +16,6 @@ class ChurchEventBlogController extends Controller
      */
     public function index(Request $request)
     {
-
-
         $churchEventBlogs = ChurchEventBlog::query()
             ->filter($request->only('search'))
             ->orderBy('created_at', 'ASC')
@@ -38,7 +36,7 @@ class ChurchEventBlogController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('admin/eventBlogs/Create');
     }
 
     /**
@@ -72,7 +70,11 @@ class ChurchEventBlogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $blog = ChurchEventBlog::findOrFail($id);
+
+        return Inertia::render('admin/eventBlogs/Edit', [
+            'blog' => $blog,
+        ]);
     }
 
     /**

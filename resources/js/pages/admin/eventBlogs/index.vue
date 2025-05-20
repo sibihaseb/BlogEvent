@@ -51,8 +51,6 @@ import { ref } from "vue";
 import type { BreadcrumbItem } from "@/types";
 import type { EventBlogs, EventBlogsTable } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
-import EditEventBlogModal from "./EditEventBlogModal.vue";
-import CreateEventBlogModal from "./CreateEventBlogModal.vue";
 import type { Ref } from "vue";
 const props = defineProps<{
     churchEventBlogs: EventBlogsTable;
@@ -91,8 +89,8 @@ const handlePageChange = (page: number) => {
 };
 
 const createRecord = () => {
-    createOpen.value = true;
-    console.log("Create user modal should open");
+    router.visit(route('blogs.create'));
+
 };
 
 // Define columns
@@ -119,9 +117,8 @@ const actions = [
         type: "edit",
         icon: "pencil", // Use a string identifier for the icon
         onClick: (row: any) => {
-            blogEdit.value = row;
-            console.log("Edit user", blogEdit.value);
-            editOpen.value = true;
+            router.visit(route("blogs.edit", { id: row.id }));
+
         },
     },
     {

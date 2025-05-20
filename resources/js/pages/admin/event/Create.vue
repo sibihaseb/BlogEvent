@@ -1,4 +1,5 @@
 <template>
+
   <Head title="Create Event" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
@@ -12,12 +13,7 @@
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="name">Event Name</Label>
-            <Input
-              id="name"
-              v-model="form.name"
-              required
-              placeholder="Enter event name"
-            />
+            <Input id="name" v-model="form.name" required placeholder="Enter event name" />
             <InputError :message="form.errors.name" />
           </div>
         </div>
@@ -27,42 +23,25 @@
           <div class="flex-1 grid md:grid-cols-2 gap-4">
             <div class="grid gap-2">
               <Label for="start_time">Start Time</Label>
-              <Input
-                id="start_time"
-                type="datetime-local"
-                v-model="form.start_time"
-                required
-              />
+              <Input id="start_time" type="datetime-local" v-model="form.start_time" required />
               <InputError :message="form.errors.start_time" />
             </div>
             <div class="grid gap-2">
               <Label for="end_time">End Time</Label>
-              <Input
-                id="end_time"
-                type="datetime-local"
-                v-model="form.end_time"
-                required
-              />
+              <Input id="end_time" type="datetime-local" v-model="form.end_time" required />
               <InputError :message="form.errors.end_time" />
             </div>
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="location">Location</Label>
-            <Input
-              id="location"
-              v-model="form.location"
-              placeholder="Where is the event?"
-            />
+            <Input id="location" v-model="form.location" placeholder="Where is the event?" />
             <InputError :message="form.errors.location" />
           </div>
           <!-- Type -->
           <div class="flex-1 grid gap-2">
             <Label for="type">Type</Label>
-            <select
-              id="states"
-              v-model="form.type"
-              class="text-sm rounded-[var(--radius)] border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]"
-            >
+            <select id="states" v-model="form.type"
+              class="text-sm rounded-[var(--radius)] border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]">
               <option selected value="">Choose a Type</option>
               <option value="recurring">recurring</option>
               <option value="one_day">one day</option>
@@ -74,12 +53,7 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="name">Event Short Description</Label>
-            <Input
-              id="name"
-              v-model="form.short_description"
-              required
-              placeholder="Enter Short Description"
-            />
+            <Input id="name" v-model="form.short_description" required placeholder="Enter Short Description" />
             <InputError :message="form.errors.short_description" />
           </div>
         </div>
@@ -96,11 +70,7 @@
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
             Create Event
           </Button>
-          <Button
-            type="button"
-            class="ml-4"
-            @click="router.visit(route('churchevents.index'))"
-          >
+          <Button type="button" class="ml-4" @click="router.visit(route('churchevents.index'))">
             Go Back
           </Button>
         </div>
@@ -122,9 +92,12 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
 const editor = ref(null);
-let quill = null;
+let quill: any = null;
 
 onMounted(() => {
+  if (!editor.value) {
+    return;
+  }
   quill = new Quill(editor.value, {
     theme: "snow",
     placeholder: "Compose an epic...",
