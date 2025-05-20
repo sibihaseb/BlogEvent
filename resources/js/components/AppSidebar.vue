@@ -24,6 +24,11 @@ const mainNavItems: NavItem[] = [
         href: '/churchevents',
         icon: Users,
     },
+     {
+        title: 'Event Staff',
+        href: '/staffs',
+        icon: Users,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
