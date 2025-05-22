@@ -39,7 +39,11 @@ const mainNavItems: NavItem[] = [
     href: route('ministries.index'),
     icon: Users,
   },
-
+  {
+        title: 'Event Staff',
+        href: '/staffs',
+        icon: Users,
+    },
 ];
 
 const footerNavItems: NavItem[] = [
@@ -63,7 +67,7 @@ const footerNavItems: NavItem[] = [
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" as-child>
             <Link :href="route('dashboard')">
-            <AppLogo />
+              <AppLogo />
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ChurchEventBlogController;
 use App\Http\Controllers\Admin\ChurchEventController;
 use App\Http\Controllers\Admin\ChurchEventTypeController;
 use App\Http\Controllers\Admin\MinistryController;
+use App\Http\Controllers\Admin\EventStaffControlller;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -23,6 +24,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('church/event/types', ChurchEventTypeController::class);
     Route::resource('church/event/blogs', ChurchEventBlogController::class);
     Route::resource('ministries', MinistryController::class);
+    Route::resource('staffs', EventStaffControlller::class);
 });
 
 require __DIR__ . '/settings.php';
