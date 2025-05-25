@@ -11,9 +11,11 @@ class ChurchEventBlog extends Model
     protected $fillable = [
         'name',
         'type',
+        'short_description',
         'description',
         'image',
     ];
+    protected $appends = ['image_url'];
 
     public function scopeFilter($query, array $filters)
     {

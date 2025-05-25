@@ -22,10 +22,15 @@
                 <div class="flex gap-4 flex-col md:flex-row">
                     <div class="flex-1 grid md:grid-cols-2 gap-4">
                         <div class="grid gap-2">
-
                             <Label for="image">image</Label>
                             <Input id="image" type="file" accept="image/*" @change="handleFileChange" />
                             <InputError :message="form.errors.image" />
+                        </div>
+                        <div class="flex-1 grid gap-2">
+                            <Label for="short_description">Short Description</Label>
+                            <Input id="short_description" type="text" placeholder="Enter Type"
+                                v-model="form.short_description" />
+                            <InputError :message="form.errors.short_description" />
                         </div>
 
                     </div>
@@ -98,6 +103,7 @@ onMounted(() => {
 const form = useForm({
     image: null as File | null,
     name: "",
+    short_description: "",
     description: "",
     end_time: "",
     location: "",

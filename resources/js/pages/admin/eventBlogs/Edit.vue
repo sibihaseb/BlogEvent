@@ -27,6 +27,11 @@
               <Input id="image" type="file" accept="image/*" @change="handleFileChange" />
               <InputError :message="form.errors.image" />
             </div>
+            <div class="flex-1 grid gap-2">
+              <Label for="short_description">Short Description</Label>
+              <Input id="short_description" type="text" placeholder="Enter Type" v-model="form.short_description" />
+              <InputError :message="form.errors.short_description" />
+            </div>
 
           </div>
 
@@ -42,9 +47,9 @@
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
-            Create Blog
+            Update Blog
           </Button>
-          <Button type="button" class="ml-4" @click="router.visit(route('blog.index'))">
+          <Button type="button" class="ml-4" @click="router.visit(route('blogs.index'))">
             Go Back
           </Button>
         </div>
@@ -79,6 +84,7 @@ const form = useForm({
   name: props.blog.name || "",
   description: props.blog.description || "",
   type: props.blog.type || "",
+  short_description: props.blog.short_description || "",
 });
 
 onMounted(() => {
@@ -119,7 +125,7 @@ const submit = () => {
   }
   const html = quill.root.innerHTML;
   form.description = JSON.stringify(html);
-  form.put(route("blog.update", props.blog.id));
+  form.put(route("blogs.update", props.blog.id));
 };
 
 const handleFileChange = (e: Event) => {

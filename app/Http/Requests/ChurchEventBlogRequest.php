@@ -32,7 +32,8 @@ class ChurchEventBlogRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'type' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'short_description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
         ];
     }
@@ -41,7 +42,8 @@ class ChurchEventBlogRequest extends FormRequest
         return [
             'name' => 'nullable|string|max:255',
             'type' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'short_description' => 'nullable|string|max:255',
+            'description' => 'nullable|string',
             'image' => 'nullable|image|max:2048',
         ];
     }
