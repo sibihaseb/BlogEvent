@@ -1,4 +1,5 @@
 <template>
+
   <Head title="Welcome"> </Head>
   <FrontendLayout>
     <HeroSection />
@@ -8,7 +9,7 @@
     <EventCalendar />
     <Ministry />
     <AboutUs />
-    <Blog />
+    <Blog :blogs="props.churcheventBlogs" />
     <Contact />
   </FrontendLayout>
 </template>
@@ -30,7 +31,10 @@ import type { ChurchEvent } from "@/client";
 
 const props = defineProps<{
   churchevents: ChurchEvent[];
+  churcheventBlogs: ChurchEvent[];
 }>();
+console.log("Welcome page props:", props);
+
 
 onMounted(() => {
   // Toggle mobile menu

@@ -14,6 +14,10 @@ Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/church-event', [IndexController::class, 'churchEvents'])->name('church.event');
 Route::get('/church-event/{churchevent}', [IndexController::class, 'singleEvent'])->name('single.church.event');
 
+// Blogs
+Route::get('/event/blogs', [IndexController::class, 'churchEventBlogs'])->name('event.blogs');
+Route::get('/church-event/blogs/{churcheventBlog}', [IndexController::class, 'singleBlog'])->name('single.church.event.blog');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
