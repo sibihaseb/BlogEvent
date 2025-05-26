@@ -1,5 +1,4 @@
 <template>
-
   <Head title="Edit Event" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
@@ -22,19 +21,21 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid md:grid-cols-2 gap-4">
             <div class="grid gap-2">
-
               <Label for="image">Image</Label>
               <Input id="image" type="file" accept="image/*" @change="handleFileChange" />
               <InputError :message="form.errors.image" />
             </div>
             <div class="flex-1 grid gap-2">
               <Label for="short_description">Short Description</Label>
-              <Input id="short_description" type="text" placeholder="Enter Type" v-model="form.short_description" />
+              <Input
+                id="short_description"
+                type="text"
+                placeholder="Enter Type"
+                v-model="form.short_description"
+              />
               <InputError :message="form.errors.short_description" />
             </div>
-
           </div>
-
         </div>
 
         <!-- Description -->
@@ -80,6 +81,7 @@ const editor = ref(null);
 let quill: Quill | null = null;
 
 const form = useForm({
+  _method: "PUT",
   image: null as File | null,
   name: props.blog.name || "",
   description: props.blog.description || "",
@@ -125,7 +127,7 @@ const submit = () => {
   }
   const html = quill.root.innerHTML;
   form.description = JSON.stringify(html);
-  form.put(route("blogs.update", props.blog.id));
+  form.post(route("blogs.update", props.blog.id));
 };
 
 const handleFileChange = (e: Event) => {
