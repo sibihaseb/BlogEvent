@@ -38,10 +38,10 @@
           class="text-primary hover:text-secondary font-medium transition duration-300"
           >Sermons</a
         >
-        <a
-          href="#blog"
+        <Link
+          :href="route('event.blogs')"
           class="text-primary hover:text-secondary font-medium transition duration-300"
-          >Blog</a
+          >Blog</Link
         >
         <a
           href="#contact"

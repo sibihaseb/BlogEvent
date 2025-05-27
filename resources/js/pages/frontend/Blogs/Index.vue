@@ -15,7 +15,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div v-for="blog in visibleBlogs" :key="blog.id"
                         class="bg-white rounded-lg overflow-hidden shadow-md blog-card transition duration-300">
-                        <div class="h-48 bg-gray-200 relative">
+                        <div class="h-80 bg-gray-200 relative">
 
                             <img :src="blog.image_url || defaultImage" :alt="blog.name"
                                 class="w-full h-full object-cover object-top" />

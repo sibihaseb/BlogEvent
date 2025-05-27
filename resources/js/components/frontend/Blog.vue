@@ -10,7 +10,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="blog in props.blogs" :key="blog.id"
           class="bg-white rounded-lg overflow-hidden shadow-md transition duration-300 hover:shadow-lg">
-          <div class="h-48 bg-gray-200">
+          <div class="h-80 bg-gray-200">
             <img :src="blog.image_url || 'https://placehold.co/600x400?text=Blog+image'" :alt="blog.name"
               class="w-full h-full object-cover object-top" />
           </div>

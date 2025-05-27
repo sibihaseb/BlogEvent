@@ -14,7 +14,7 @@
           :key="event.id"
           class="bg-white rounded-lg overflow-hidden shadow-md event-card transition duration-300"
         >
-          <div class="h-48 bg-gray-200 relative">
+          <div class="h-80 bg-gray-200 relative">
             <img
               :src="'storage/' + event.picture || defaultImage"
               :alt="event.name"
