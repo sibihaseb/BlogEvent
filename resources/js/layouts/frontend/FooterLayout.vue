@@ -43,10 +43,10 @@
           <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
           <ul class="space-y-3">
             <li>
-              <a
-                href="#"
+              <Link
+                :href="route('home')"
                 class="text-gray-300 hover:text-secondary transition duration-300"
-                >Home</a
+                >Home</Link
               >
             </li>
             <li>
@@ -64,31 +64,31 @@
               >
             </li>
             <li>
-              <a
-                href="#events"
+              <Link
+                :href="route('church.event')"
                 class="text-gray-300 hover:text-secondary transition duration-300"
-                >Events</a
+                >Events</Link
               >
             </li>
             <li>
               <a
                 href="#sermons"
                 class="text-gray-300 hover:text-secondary transition duration-300"
-                >Sermons</a
+                >Prayer Requests</a
               >
             </li>
             <li>
-              <a
-                href="#blog"
+              <Link
+                :href="route('event.blogs')"
                 class="text-gray-300 hover:text-secondary transition duration-300"
-                >Blog</a
+                >Blog</Link
               >
             </li>
             <li>
-              <a
-                href="#contact"
+              <Link
+                :href="route('contact.us')"
                 class="text-gray-300 hover:text-secondary transition duration-300"
-                >Contact</a
+                >Contact</Link
               >
             </li>
           </ul>

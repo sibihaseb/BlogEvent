@@ -26,9 +26,6 @@ class ChurchEventBlogController extends Controller
             'filters' => $request->only('search'),
             'message' => session('message'),
         ]);
-
-        // Return the view with the data
-
     }
 
     /**

@@ -23,14 +23,14 @@ class IndexController extends Controller
     public function churchEvents()
     {
         $churchevents = ChurchEvent::orderBy('created_at', 'desc')->get();
-        return Inertia::render('frontend/ChurchEvent', [
+        return Inertia::render('frontend/Events/ChurchEvent', [
             'churchevents' => $churchevents,
         ]);
     }
 
     public function singleEvent(ChurchEvent $churchevent)
     {
-        return Inertia::render('frontend/SingleEvent', [
+        return Inertia::render('frontend/Events/SingleEvent', [
             'churchevent' => $churchevent,
         ]);
     }
@@ -44,10 +44,18 @@ class IndexController extends Controller
             'churcheventBlogs' => $churcheventBlogs,
         ]);
     }
+
     public function singleBlog(ChurchEventBlog $churcheventBlog)
     {
         return Inertia::render('frontend/Blogs/SingleBlog', [
             'churcheventBlog' => $churcheventBlog,
+        ]);
+    }
+
+    public function contactUs()
+    {
+        return Inertia::render('frontend/ContactUs', [
+            'appUrl' => env('APP_URL'),
         ]);
     }
 }

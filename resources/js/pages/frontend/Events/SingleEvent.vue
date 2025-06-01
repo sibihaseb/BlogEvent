@@ -9,22 +9,26 @@
 
     <section class="py-16">
       <div class="container mx-auto px-4 max-w-6xl">
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-white dark:bg-black rounded-lg shadow-lg overflow-hidden">
           <img
             :src="'/storage/' + churchevent.picture || defaultImage"
             :alt="churchevent.name"
             class="w-full h-120 object-cover object-top"
           />
           <div class="p-6">
-            <h1 class="text-3xl font-bold text-primary mb-4">{{ churchevent.name }}</h1>
-            <p class="text-gray-600 text-lg mb-6">{{ churchevent.short_description }}</p>
+            <h1 class="text-3xl font-bold text-primary dark:text-white mb-4">
+              {{ churchevent.name }}
+            </h1>
+            <p class="text-gray-600 dark:text-white text-lg mb-6">
+              {{ churchevent.short_description }}
+            </p>
 
             <div class="grid md:grid-cols-2 gap-4 mb-6">
               <div class="flex items-start space-x-3">
                 <i class="ri-time-line text-xl text-primary"></i>
                 <div>
-                  <h4 class="font-semibold text-gray-700">Time</h4>
-                  <p class="text-gray-600">
+                  <h4 class="font-semibold text-gray-700 dark:text-white">Time</h4>
+                  <p class="text-gray-600 dark:text-white">
                     {{ formatTime(churchevent.start_time) }} -
                     {{ formatTime(churchevent.end_time) }}
                   </p>
@@ -34,8 +38,8 @@
               <div class="flex items-start space-x-3" v-if="churchevent.location">
                 <i class="ri-map-pin-line text-xl text-primary"></i>
                 <div>
-                  <h4 class="font-semibold text-gray-700">Location</h4>
-                  <p class="text-gray-600">{{ churchevent.location }}</p>
+                  <h4 class="font-semibold text-gray-700 dark:text-white">Location</h4>
+                  <p class="text-gray-600 dark:text-white">{{ churchevent.location }}</p>
                 </div>
               </div>
             </div>

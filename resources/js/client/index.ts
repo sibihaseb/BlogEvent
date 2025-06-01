@@ -11,4 +11,7 @@ export type { EventType } from './models/EventType'
 export type { EventTypeTable } from './models/EventTypeTable'
 export type { Ministry } from './models/Ministry'
 export type { MinistryTable } from './models/MinistryTable'
+export type { AccordionData } from './models/AccordionData'
+export type { PaginatorObject } from './models/PaginatorObject'
+export type { ContactUs } from './models/ContactUs'
 

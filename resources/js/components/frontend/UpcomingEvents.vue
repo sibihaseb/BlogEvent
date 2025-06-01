@@ -47,10 +47,10 @@
               <i class="ri-map-pin-line mr-2"></i>
               <span>{{ event.location }}</span>
             </div>
-            <a
-              href="#"
+            <Link
+              :href="route('single.church.event', event.id)"
               class="inline-block bg-primary text-white px-6 py-2 rounded-button font-medium hover:bg-opacity-90 transition duration-300 !rounded-button whitespace-nowrap"
-              >RSVP Now</a
+              >RSVP Now</Link
             >
           </div>
         </div>

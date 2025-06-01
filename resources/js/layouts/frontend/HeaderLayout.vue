@@ -15,56 +15,56 @@
       <nav class="hidden lg:flex items-center space-x-8">
         <Link
           :href="route('home')"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
           >Home</Link
         >
         <a
           href="#about"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
           >About Us</a
         >
         <a
           href="#ministries"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
           >Ministries</a
         >
         <Link
           :href="route('church.event')"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
           >Events</Link
         >
         <a
           href="#sermons"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
-          >Sermons</a
+          class="text-primary hover:text-secondary font-bold transition duration-300"
+          >Prayer Requests</a
         >
         <Link
           :href="route('event.blogs')"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
           >Blog</Link
         >
-        <a
-          href="#contact"
-          class="text-primary hover:text-secondary font-medium transition duration-300"
-          >Contact</a
+        <Link
+          :href="route('contact.us')"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
+          >Contact</Link
         >
         <Link
           v-if="$page.props.auth.user"
           :href="route('dashboard')"
-          class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+          class="text-primary hover:text-secondary font-bold transition duration-300"
         >
           Dashboard
         </Link>
         <template v-else>
           <Link
             :href="route('login')"
-            class="inline-block rounded-sm border border-transparent px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A]"
+            class="text-primary hover:text-secondary font-bold transition duration-300"
           >
             Log in
           </Link>
           <Link
             :href="route('register')"
-            class="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+            class="text-primary hover:text-secondary font-bold transition duration-300"
           >
             Register
           </Link>
@@ -72,16 +72,14 @@
       </nav>
       <div class="flex items-center space-x-4">
         <div class="hidden lg:flex items-center space-x-2 border-r pr-4 border-gray-200">
-          <button class="text-sm font-medium">EN</button>
+          <button class="text-sm text-primary font-bold">EN</button>
           <span class="text-gray-300">|</span>
-          <button class="text-sm font-medium text-gray-500">HT</button>
+          <button class="text-sm font-bold text-primary">HT</button>
         </div>
-        <a
-          href="#live"
-          class="hidden lg:inline-block bg-red text-white px-4 py-2 rounded-button font-medium hover:bg-opacity-90 transition duration-300 whitespace-nowrap"
-        >
-          <i class="ri-live-line mr-1"></i> Live Stream
-        </a>
+        <div class="flex text-primary justify-center items-center">
+          <Video fill="red" :size="28" />
+          <h1 class="ml-2 text-sm font-bold text-primary">Live Stream</h1>
+        </div>
         <button class="lg:hidden text-primary w-10 h-10 flex items-center justify-center">
           <i class="ri-menu-line ri-lg"></i>
         </button>
@@ -92,6 +90,7 @@
 
 <script setup lang="ts">
 import { Link } from "@inertiajs/vue3";
+import { Video } from "lucide-vue-next";
 </script>
 
 <style>

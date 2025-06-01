@@ -1,5 +1,4 @@
 <template>
-
   <Head title="Welcome"> </Head>
   <FrontendLayout>
     <HeroSection />
@@ -27,14 +26,13 @@ import Ministry from "@/components/frontend/Ministry.vue";
 import AboutUs from "@/components/frontend/AboutUs.vue";
 import Blog from "@/components/frontend/Blog.vue";
 import Contact from "@/components/frontend/Contact.vue";
-import type { ChurchEvent } from "@/client";
+import type { ChurchEvent, EventBlogs } from "@/client";
 
 const props = defineProps<{
   churchevents: ChurchEvent[];
-  churcheventBlogs: ChurchEvent[];
+  churcheventBlogs: EventBlogs[];
 }>();
 console.log("Welcome page props:", props);
-
 
 onMounted(() => {
   // Toggle mobile menu
