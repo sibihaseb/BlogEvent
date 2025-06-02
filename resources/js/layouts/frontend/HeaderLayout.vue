@@ -18,10 +18,10 @@
           class="text-primary hover:text-secondary font-bold transition duration-300"
           >Home</Link
         >
-        <a
-          href="#about"
+        <Link
+          :href="route('about.us')"
           class="text-primary hover:text-secondary font-bold transition duration-300"
-          >About Us</a
+          >About Us</Link
         >
         <a
           href="#ministries"

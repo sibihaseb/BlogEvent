@@ -50,11 +50,11 @@
               >
             </li>
             <li>
-              <a
-                href="#about"
+              <Link
+                :href="route('about.us')"
                 class="text-gray-300 hover:text-secondary transition duration-300"
-                >About Us</a
-              >
+                >About Us
+              </Link>
             </li>
             <li>
               <a

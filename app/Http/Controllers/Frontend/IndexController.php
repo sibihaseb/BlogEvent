@@ -58,4 +58,9 @@ class IndexController extends Controller
             'appUrl' => env('APP_URL'),
         ]);
     }
+
+    public function aboutUs()
+    {
+        return Inertia::render('frontend/AboutUs');
+    }
 }

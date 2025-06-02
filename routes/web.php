@@ -25,6 +25,9 @@ Route::get('/church-event/blogs/{churcheventBlog}', [IndexController::class, 'si
 Route::get('/contact-us', [IndexController::class, 'contactUs'])->name('contact.us');
 Route::post('/querycontact', [ContactUsController::class, 'contactFormSubmit'])->name('contact.us.store');
 
+//about us
+Route::get('/about-us', [IndexController::class, 'aboutUs'])->name('about.us');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
