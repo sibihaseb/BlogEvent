@@ -12,38 +12,123 @@
         <div class="flex gap-4 flex-col md:flex-row mt-10">
           <div class="flex-1 grid gap-2">
             <h1>
-              <span class="text-2xl font-semibold">Address:</span><br />
-              <span class="text-lg text-gray-600 dark:text-white"
-                >205 E Carver St Alvarado, Texas 76009</span
-              >
+              <span class="text-3xl font-semibold">Shekinah Haitian SDA Church</span>
             </h1>
-            <h1>
-              <span class="text-2xl font-semibold">Website:</span><br />
-              <span class="text-lg text-gray-600 dark:text-white"
-                ><Link :href="props.appUrl" class="text-primary dark:text-white"
-                  >Shekinah Haitian Seventh-Day Adventist Church</Link
-                ></span
-              >
-            </h1>
-            <h1>
-              <span class="text-2xl font-semibold">Email:</span><br />
-              <span class="text-lg text-gray-600 dark:text-white"
-                ><a
-                  href="mailto:info@shekinahsda.org"
-                  class="text-primary dark:text-white"
-                  >info@shekinahsda.org</a
-                ></span
-              >
-            </h1>
+            <p>
+              Welcome to Shekinah Haitian SDA Church, the first Haitian Seventh-Day
+              Adventist church in Fort Worth, Texas. We are a warm and loving congregation
+              dedicated to spreading the message of God's love through vibrant worship,
+              inspiring preaching, uplifting music, engaging kid programs, dynamic youth
+              activities, and delicious Haitian food. We invite you to join us on this
+              incredible journey of faith and discovery.
+            </p>
+            <p>
+              Our dedicated team is the heart and soul serving God and our community with
+              integrity, compassion, and excellence under the direction of our pastor and
+              with the help of passionate leaders and volunteers. With diverse gifts and
+              talents, we work collaboratively to create an atmosphere that encourages
+              spiritual growth, discipleship, and a deepening relationship with Jesus
+              Christ.
+            </p>
           </div>
-          <div class="flex-1">
-            <div class="relative w-full aspect-video rounded-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.619162376989!2d-97.21068012387472!3d32.402569103027055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e5b96faea41df%3A0xb63ef95cc5029c8c!2s205%20E%20Carver%20St%2C%20Alvarado%2C%20TX%2076009%2C%20USA!5e0!3m2!1sen!2s!4v1748550604995!5m2!1sen!2s"
-                class="absolute top-0 left-0 w-full h-full border-0"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+          <div class="flex-1 ml-5">
+            <!-- Purpose and Goals -->
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-yellow-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 16h-1v-4h-1m1-4h.01M12 4a8 8 0 100 16 8 8 0 000-16z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900">Purpose and Goals</h3>
+                <p class="mt-2 text-gray-700">
+                  Our goals include fostering spiritual growth, nurturing strong family
+                  foundations, equipping the next generation, and promoting unity and
+                  community service.
+                </p>
+              </div>
+            </div>
+
+            <!-- Introduction to the Team -->
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-yellow-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5.121 17.804A13.937 13.937 0 0112 15c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Introduction to the Team
+                </h3>
+                <p class="mt-2 text-gray-700">
+                  With diverse gifts and talents, we work collaboratively to create an
+                  atmosphere that encourages spiritual growth, discipleship, and a
+                  deepening relationship with Jesus Christ.
+                </p>
+              </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div
+                  class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-yellow-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 21h4m4 0h-4m4-6V5a2 2 0 00-2-2H8a2 2 0 00-2 2v10m10 0h-4m-4 0H4"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-xl font-semibold text-gray-900">Achievements</h3>
+                <p class="mt-2 text-gray-700">
+                  Shekinah Haitian SDA Church has achieved several significant milestones,
+                  including community outreach programs, youth mentorship, and
+                  establishing the first Haitian Seventh-Day Adventist congregation in
+                  Fort Worth.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -119,17 +204,14 @@
   </FrontendLayout>
 </template>
 <script setup lang="ts">
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import FrontendLayout from "@/layouts/FrontendLayout.vue";
 import HeroSectionPage from "@/components/frontend/HeroSectionPage.vue";
 import Accordion from "@/components/Accordion.vue";
 import { AccordionData } from "@/client";
 import InputError from "@/components/InputError.vue";
-import { LoaderCircle } from "lucide-vue-next";
+import { LoaderCircle, User } from "lucide-vue-next";
 import { onMounted } from "vue";
-const props = defineProps<{
-  appUrl: string;
-}>();
 
 const form = useForm({
   name: "",
