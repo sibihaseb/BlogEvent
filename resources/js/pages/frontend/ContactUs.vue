@@ -52,22 +52,22 @@
     <section class="bg-gradient-to-r from-primary to-blue-900 py-12">
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div class="w-full md:w-auto">
+          <div class="w-full md:flex-1">
             <form
               @submit.prevent="submit"
-              class="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto"
+              class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto"
             >
               <h3 class="text-3xl font-semibold text-primary mb-4">Get in touch today</h3>
               <h3 class="text-lg font-semibold text-primary mb-4">
                 We'd love to hear from you
               </h3>
-              <div class="space-y-4">
+              <div class="space-y-5">
                 <input
                   type="text"
                   required
                   placeholder="Enter Your Name"
                   v-model="form.name"
-                  class="w-full px-4 text-black py-2 rounded-button border focus:border-secondary"
+                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary"
                 />
                 <InputError :message="form.errors.name" />
                 <input
@@ -75,38 +75,40 @@
                   type="email"
                   v-model="form.email"
                   placeholder="Enter Your Email"
-                  class="w-full px-4 py-2 text-black rounded-button border focus:border-secondary"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
                 />
                 <input
                   required
                   v-model="form.subject"
                   type="text"
                   placeholder="Subject"
-                  class="w-full px-4 py-2 text-black rounded-button border focus:border-secondary"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
                 />
                 <textarea
                   v-model="form.message"
                   required
-                  class="w-full px-4 py-2 text-black rounded-button border focus:border-secondary"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
                   placeholder="Message"
+                  rows="6"
                 ></textarea>
                 <button
                   :disabled="form.processing"
                   type="submit"
-                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 !rounded-button whitespace-nowrap"
+                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300"
                 >
                   <LoaderCircle
                     v-if="form.processing"
                     class="mr-2 h-4 w-4 animate-spin"
                   />
-                  Subscribe Now
+                  Send Message
                 </button>
               </div>
-              <p class="text-sm text-gray-500 mt-4 text-center">
+              <p class="text-sm text-gray-500 mt-6 text-center">
                 Join 2,000+ members already in our community
               </p>
             </form>
           </div>
+
           <div class="text-white max-w-xl">
             <h2 class="text-4xl font-bold mb-4">
               Connect with Shekinah: Join Our Spiritual Family

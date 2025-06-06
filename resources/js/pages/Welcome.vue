@@ -9,7 +9,7 @@
     <Ministry />
     <AboutUs />
     <Blog :blogs="props.churcheventBlogs" />
-    <Contact />
+    <!-- <Contact /> -->
   </FrontendLayout>
 </template>
 
@@ -25,7 +25,7 @@ import EventCalendar from "@/components/frontend/EventCalendar.vue";
 import Ministry from "@/components/frontend/Ministry.vue";
 import AboutUs from "@/components/frontend/AboutUs.vue";
 import Blog from "@/components/frontend/Blog.vue";
-import Contact from "@/components/frontend/Contact.vue";
+// import Contact from "@/components/frontend/Contact.vue";
 import type { ChurchEvent, EventBlogs } from "@/client";
 
 const props = defineProps<{
