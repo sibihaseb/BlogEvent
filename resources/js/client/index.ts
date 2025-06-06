@@ -14,4 +14,5 @@ export type { MinistryTable } from './models/MinistryTable'
 export type { AccordionData } from './models/AccordionData'
 export type { PaginatorObject } from './models/PaginatorObject'
 export type { ContactUs } from './models/ContactUs'
+export type { PrayerRequest } from './models/PrayerRequest'
 

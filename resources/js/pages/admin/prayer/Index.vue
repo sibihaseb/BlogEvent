@@ -1,58 +1,59 @@
 <template>
-  <Head title="User Management" />
+  <Head title="Prayer Requests" />
   <AppLayout :breadcrumbs="breadcrumbs">
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
-      <h1 class="text-xl font-bold">User Management</h1>
+      <h1 class="text-xl font-bold">Prayer Requests</h1>
 
       <div class="flex justify-between mb-4">
         <input
           v-model="form.search"
-          @input="searchUsers(users.current_page)"
+          @input="searchUsers(allprayers.current_page)"
           type="text"
           placeholder="Search by name or email"
           class="border border-gray-300 rounded px-3 py-2"
         />
-        <Button @click="createRecord">Create user</Button>
+        <Button @click="createRecord">Create Prayer Request</Button>
       </div>
 
       <Datatable
-        :title="'Users List'"
+        :title="'Prayers List'"
         :columns="columns"
-        :rows="users.data"
+        :rows="allprayers.data"
         :selectable="true"
         :actions="actions"
       />
 
       <div class="flex justify-between items-center mt-4">
         <span class="text-sm text-gray-500">
-          Showing {{ users.from }} to {{ users.to }} of {{ users.total }} results
+          Showing {{ allprayers.from }} to {{ allprayers.to }} of
+          {{ allprayers.total }} results
         </span>
 
         <div class="space-x-2">
           <Button
             variant="outline"
             size="sm"
-            :disabled="users.current_page === 1"
-            @click="handlePageChange(users.current_page - 1)"
+            :disabled="allprayers.current_page === 1"
+            @click="handlePageChange(allprayers.current_page - 1)"
           >
             Prev
           </Button>
           <Button
             variant="outline"
             size="sm"
-            :disabled="users.current_page === users.last_page"
-            @click="handlePageChange(users.current_page + 1)"
+            :disabled="allprayers.current_page === allprayers.last_page"
+            @click="handlePageChange(allprayers.current_page + 1)"
           >
             Next
           </Button>
         </div>
       </div>
-      <EditUserModal v-if="editOpen" :user="userEdit" v-model:open="editOpen" />
-      <CreateUserModal v-if="createOpen" v-model:open="createOpen" />
+      <!-- <EditUserModal v-if="editOpen" :user="userEdit" v-model:open="editOpen" /> -->
+      <Create v-if="createOpen" v-model:open="createOpen" />
       <DeleteModal
         v-if="deleteRecord"
         :id="deleteId"
-        route="users.destroy"
+        route="prayers.destroy"
         :open="deleteRecord"
         @update:open="deleteRecord = $event"
       />
@@ -68,35 +69,35 @@ import Datatable from "@/components/Datatable.vue";
 import BaseToast from "@/components/BaseToast.vue";
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
-import { Trash2, Pencil } from "lucide-vue-next";
+import { Trash2 } from "lucide-vue-next";
 import type { BreadcrumbItem } from "@/types";
-import type { UserTable, User } from "@/client";
+import type { PrayerRequest, PaginatorObject } from "@/client";
 import DeleteModal from "@/components/DeleteModal.vue";
-import EditUserModal from "./EditUserModal.vue";
-import CreateUserModal from "./CreateUserModal.vue";
+// import EditUserModal from "./EditUserModal.vue";
+import Create from "./Create.vue";
 import type { Ref } from "vue";
 const props = defineProps<{
-  users: UserTable;
+  allprayers: PaginatorObject<PrayerRequest>;
   filters: Record<string, any>;
 }>();
 
-const breadcrumbs: BreadcrumbItem[] = [{ title: "User Management", href: "/users" }];
+const breadcrumbs: BreadcrumbItem[] = [{ title: "Prayer Request", href: "/prayers" }];
 const createOpen = ref(false);
 const deleteRecord: Ref<boolean> = ref(false);
 const deleteId: Ref<number> = ref(0);
-const editOpen = ref(false);
-const userEdit: Ref<User> = ref({});
+// const editOpen = ref(false);
+// const userEdit: Ref<User> = ref({});
 const form = useForm({
   search: props.filters.search || "",
 });
 
 // debounce search input
 let debounceTimeout: number = 0;
-const searchUsers = (page) => {
+const searchUsers = (page: number) => {
   clearTimeout(debounceTimeout);
   debounceTimeout = setTimeout(() => {
     router.get(
-      route("users.index"),
+      route("prayers.index"),
       { search: form.search, page },
       { preserveState: true, replace: true }
     );
@@ -105,7 +106,7 @@ const searchUsers = (page) => {
 
 const handlePageChange = (page: number) => {
   router.get(
-    route("users.index"),
+    route("prayers.index"),
     { search: form.search, page },
     { preserveState: true, replace: true }
   );
@@ -113,7 +114,6 @@ const handlePageChange = (page: number) => {
 
 const createRecord = () => {
   createOpen.value = true;
-  console.log("Create user modal should open");
 };
 
 // Define columns
@@ -130,20 +130,28 @@ const columns = [
     header: "Email",
     cell: (row: any) => row.email,
   },
+  {
+    header: "Request",
+    cell: (row: any) => row.request,
+  },
+  {
+    header: "Public",
+    cell: (row: any) => (row.is_public ? "yes" : "no"),
+  },
 ];
 
 // Define actions with icons
 const actions = [
-  {
-    label: "Edit",
-    type: "edit",
-    icon: Pencil,
-    onClick: (row: any) => {
-      userEdit.value = row;
-      console.log("Edit user", userEdit.value);
-      editOpen.value = true;
-    },
-  },
+  //   {
+  //     label: "Edit",
+  //     type: "edit",
+  //     icon: Pencil,
+  //     onClick: (row: any) => {
+  //       userEdit.value = row;
+  //       console.log("Edit user", userEdit.value);
+  //       editOpen.value = true;
+  //     },
+  //   },
   {
     label: "Delete",
     type: "delete",

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ChurchEventTypeController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\MinistryController;
 use App\Http\Controllers\Admin\EventStaffControlller;
+use App\Http\Controllers\Admin\PrayerRequestController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -28,6 +29,11 @@ Route::post('/querycontact', [ContactUsController::class, 'contactFormSubmit'])-
 //about us
 Route::get('/about-us', [IndexController::class, 'aboutUs'])->name('about.us');
 
+//prayer request
+//contact us
+Route::get('/prayer-request', [IndexController::class, 'prayerpage'])->name('prayer.page');
+Route::post('/submit-prayer', [ContactUsController::class, 'contactFormSubmit'])->name('contact.us.store');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
@@ -40,6 +46,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('ministries', MinistryController::class);
     Route::resource('staffs', EventStaffControlller::class);
     Route::resource('contactus', ContactUsController::class);
+    Route::resource('prayers', PrayerRequestController::class);
 });
 
 require __DIR__ . '/settings.php';

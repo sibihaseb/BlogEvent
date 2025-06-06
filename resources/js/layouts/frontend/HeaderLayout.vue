@@ -33,10 +33,10 @@
           class="text-primary hover:text-secondary font-bold transition duration-300"
           >Events</Link
         >
-        <a
-          href="#sermons"
+        <Link
+          :href="route('prayer.page')"
           class="text-primary hover:text-secondary font-bold transition duration-300"
-          >Prayer Requests</a
+          >Prayer Requests</Link
         >
         <Link
           :href="route('event.blogs')"

@@ -63,4 +63,9 @@ class IndexController extends Controller
     {
         return Inertia::render('frontend/AboutUs');
     }
+
+    public function prayerpage()
+    {
+        return Inertia::render('frontend/PrayerRequest');
+    }
 }
