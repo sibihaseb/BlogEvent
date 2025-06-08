@@ -20,7 +20,7 @@
         >
         <Link
           :href="route('about.us')"
-          class="text-primary hover:text-secondary font-bold transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition whitespace-nowrap duration-300"
           >About Us</Link
         >
         <a
@@ -35,7 +35,7 @@
         >
         <Link
           :href="route('prayer.page')"
-          class="text-primary hover:text-secondary font-bold transition duration-300"
+          class="text-primary hover:text-secondary font-bold transition whitespace-nowrap duration-300"
           >Prayer Requests</Link
         >
         <Link
@@ -58,7 +58,7 @@
         <template v-else>
           <Link
             :href="route('login')"
-            class="text-primary hover:text-secondary font-bold transition duration-300"
+            class="text-primary hover:text-secondary whitespace-nowrap font-bold transition duration-300"
           >
             Log in
           </Link>

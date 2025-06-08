@@ -80,4 +80,12 @@ class PrayerRequestController extends Controller
         return redirect()->route('prayers.index')
             ->with('message', 'Prayer request deleted successfully.');
     }
+
+    public function prayerFormSubmit(PrayerDataRequest $request)
+    {
+        $input = $request->validated();
+        PrayerRequest::create($input);
+        return back()
+            ->with('message', 'Prayer request submitted successfully.');
+    }
 }

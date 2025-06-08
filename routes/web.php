@@ -32,7 +32,7 @@ Route::get('/about-us', [IndexController::class, 'aboutUs'])->name('about.us');
 //prayer request
 //contact us
 Route::get('/prayer-request', [IndexController::class, 'prayerpage'])->name('prayer.page');
-Route::post('/submit-prayer', [ContactUsController::class, 'contactFormSubmit'])->name('contact.us.store');
+Route::post('/submit-prayer', [PrayerRequestController::class, 'prayerFormSubmit'])->name('prayer.store');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {

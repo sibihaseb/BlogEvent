@@ -1,5 +1,5 @@
 <template>
-  <Head title="Contact Us" />
+  <Head title="Prayer Request" />
   <FrontendLayout>
     <HeroSectionPage
       heading="Prayer Request"
@@ -61,7 +61,7 @@
                 Share your prayer request with us
               </h3>
               <h3 class="text-lg font-semibold text-primary mb-4">
-                We'd love to hear from you
+                We'd love to pray for you
               </h3>
               <div class="space-y-4">
                 <input
@@ -106,7 +106,7 @@
                     v-if="form.processing"
                     class="mr-2 h-4 w-4 animate-spin"
                   />
-                  Subscribe Now
+                  Submit Now
                 </button>
               </div>
               <p class="text-sm text-gray-500 mt-4 text-center">
@@ -126,7 +126,7 @@
   </FrontendLayout>
 </template>
 <script setup lang="ts">
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import FrontendLayout from "@/layouts/FrontendLayout.vue";
 import HeroSectionPage from "@/components/frontend/HeroSectionPage.vue";
 import Accordion from "@/components/Accordion.vue";
@@ -145,13 +145,14 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.post(route("contact.us.store"), {
+  form.post(route("prayer.store"), {
     forceFormData: true,
 
     // Called when the request is successful
     onSuccess: () => {
       // Reset the form after a successful submission
       form.reset();
+      console.log("Prayer request submitted successfully.");
     },
 
     // Called if there are validation errors
@@ -161,7 +162,7 @@ const submit = () => {
 
     // Called regardless of success or error (after request completes)
     onFinish: () => {
-      console.log("Form submission finished.");
+      console.log("Form TEST finished.");
     },
   });
 };
