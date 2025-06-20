@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ChurchEvent;
 use App\Models\ChurchEventBlog;
+use App\Models\FrequentlyQuestion;
 
 class IndexController extends Controller
 {
@@ -54,18 +55,47 @@ class IndexController extends Controller
 
     public function contactUs()
     {
+        $fQuestions = FrequentlyQuestion::active()->where('type', 'contact')->get()->map(function ($item) {
+            return [
+                'value' => 'item-' . $item->id,
+                'title' => $item->question,
+                'content' => $item->answer,
+            ];
+        });
         return Inertia::render('frontend/ContactUs', [
             'appUrl' => env('APP_URL'),
+            'fQuestions' => $fQuestions
+
         ]);
     }
 
     public function aboutUs()
     {
-        return Inertia::render('frontend/AboutUs');
+        $fQuestions = FrequentlyQuestion::active()->where('type', 'about')->get()->map(function ($item) {
+            return [
+                'value' => 'item-' . $item->id,
+                'title' => $item->question,
+                'content' => $item->answer,
+            ];
+        });
+
+        return Inertia::render('frontend/AboutUs', [
+            'fQuestions' => $fQuestions
+        ]);
     }
 
     public function prayerpage()
     {
-        return Inertia::render('frontend/PrayerRequest');
+        $fQuestions = FrequentlyQuestion::active()->where('type', 'prayer')->get()->map(function ($item) {
+            return [
+                'value' => 'item-' . $item->id,
+                'title' => $item->question,
+                'content' => $item->answer,
+            ];
+        });
+        return Inertia::render('frontend/PrayerRequest', [
+            'fQuestions' => $fQuestions
+
+        ]);
     }
 }

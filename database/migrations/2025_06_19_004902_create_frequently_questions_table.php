@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('frequently_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question')->unique();
+            $table->string('question')->nullable();
             $table->text('answer');
             $table->text('type')->nullable();
             $table->boolean('is_active')->default(true);
