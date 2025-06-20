@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ChurchEventTypeController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\MinistryController;
 use App\Http\Controllers\Admin\EventStaffControlller;
+use App\Http\Controllers\Admin\FrequentlyQuestionController;
 use App\Http\Controllers\Admin\PrayerRequestController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('staffs', EventStaffControlller::class);
     Route::resource('contactus', ContactUsController::class);
     Route::resource('prayers', PrayerRequestController::class);
+    Route::resource('frequently-questions', FrequentlyQuestionController::class);
 });
 
 require __DIR__ . '/settings.php';

@@ -24,11 +24,11 @@ const mainNavItems: NavItem[] = [
     href: '/churchevents',
     icon: CalendarDays,
   },
-//   {
-//     title: 'Event Types',
-//     href: route('types.index'),
-//     icon: CalendarDays,
-//   },
+  //   {
+  //     title: 'Event Types',
+  //     href: route('types.index'),
+  //     icon: CalendarDays,
+  //   },
   {
     title: 'Blogs',
     href: route('blogs.index'),
@@ -54,6 +54,11 @@ const mainNavItems: NavItem[] = [
     href: '/contactus',
     icon: Mail,
   },
+  {
+    title: 'Frequently Questions',
+    href: route('frequently-questions.index'),
+    icon: BookOpen,
+  },
 ];
 
 // const footerNavItems: NavItem[] = [
@@ -77,7 +82,7 @@ const mainNavItems: NavItem[] = [
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" as-child>
             <Link :href="route('dashboard')">
-              <AppLogo />
+            <AppLogo />
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
