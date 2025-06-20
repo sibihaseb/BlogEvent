@@ -16,14 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 // import { Select } from "@/components/ui/select"; // Ensure Select is imported
 import InputError from "@/components/InputError.vue";
+import { FQuestion } from "@/client/models/FQuestion";
 
-interface FQuestion {
-  id: number;
-  question: string;
-  answer: string;
-  type: 'about' | 'home' | 'contact' | 'prayer';
-  is_active: boolean;
-}
 
 const props = defineProps<{
   open: boolean;
