@@ -135,6 +135,30 @@
               >Learn More <ArrowRight class="ml-2" :size="20"
             /></a>
           </div>
+          <div
+            v-for="ministry in ministries"
+            :key="ministry.id"
+            class="bg-white p-8 rounded-lg shadow-md ministry-card transition duration-300"
+          >
+            <div class="w-16 h-16 rounded-full mb-6 flex items-center justify-center">
+              <img
+                :src="'storage/' + ministry.icon"
+                alt="Ministry Icon"
+                class="w-46 h-46 object-cover"
+              />
+            </div>
+            <h3 class="text-xl dark:text-black font-semibold mb-3">
+              {{ ministry.name }}
+            </h3>
+            <p class="text-gray-600 mb-4">
+              {{ ministry.description }}
+            </p>
+            <a
+              href="#"
+              class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
+              >Learn More <ArrowRight class="ml-2" :size="20"
+            /></a>
+          </div>
         </div>
       </div>
     </section>
@@ -145,6 +169,7 @@
 import { Head, Link } from "@inertiajs/vue3";
 import FrontendLayout from "@/layouts/FrontendLayout.vue";
 import HeroSectionPage from "@/components/frontend/HeroSectionPage.vue";
+import { Ministry } from "@/client";
 import {
   User,
   Users,
@@ -154,6 +179,14 @@ import {
   HandHelping,
   ArrowRight,
 } from "lucide-vue-next";
+import { computed } from "vue";
+
+const props = defineProps<{
+  allministries: Ministry[];
+}>();
+
+const ministries = computed(() => props.allministries);
+
 const heroProps = {
   heading: "Our Ministerys",
   subheading: "Join Us",

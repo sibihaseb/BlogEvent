@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ChurchEvent;
 use App\Models\ChurchEventBlog;
+use App\Models\Ministry;
 
 class IndexController extends Controller
 {
@@ -71,6 +72,9 @@ class IndexController extends Controller
 
     public function oursponsers()
     {
-        return Inertia::render('frontend/OurMinistery/Index');
+        $allministries = Ministry::all();
+        return Inertia::render('frontend/OurMinistery/Index', [
+            'allministries' => $allministries,
+        ]);
     }
 }
