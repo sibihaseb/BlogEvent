@@ -24,7 +24,7 @@
           >About Us</Link
         >
         <a
-          href="#ministries"
+          :href="route('our.sponsers')"
           class="text-primary hover:text-secondary font-bold transition duration-300"
           >Ministries</a
         >

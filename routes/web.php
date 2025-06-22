@@ -34,6 +34,9 @@ Route::get('/about-us', [IndexController::class, 'aboutUs'])->name('about.us');
 Route::get('/prayer-request', [IndexController::class, 'prayerpage'])->name('prayer.page');
 Route::post('/submit-prayer', [PrayerRequestController::class, 'prayerFormSubmit'])->name('prayer.store');
 
+//allministery
+Route::get('oursponsers', [IndexController::class, 'oursponsers'])->name('our.sponsers');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');

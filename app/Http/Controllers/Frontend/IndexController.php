@@ -68,4 +68,9 @@ class IndexController extends Controller
     {
         return Inertia::render('frontend/PrayerRequest');
     }
+
+    public function oursponsers()
+    {
+        return Inertia::render('frontend/OurMinistery/Index');
+    }
 }
