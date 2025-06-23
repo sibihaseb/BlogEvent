@@ -2,6 +2,7 @@
   <Head title="Create Event" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
+      <h1 class="text-xl font-bold">Event Management</h1>
       <form @submit.prevent="submit" class="space-y-6">
         <!-- Picture and Name -->
         <div class="flex gap-4 flex-col md:flex-row">

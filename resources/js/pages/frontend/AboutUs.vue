@@ -1,78 +1,75 @@
 <template>
-
   <Head title="About Us" />
   <FrontendLayout>
-    <HeroSectionPage heading="About Us" subheading="Connect with Shekinah Church: Join Our Spiritual Community"
-      text="" />
+    <HeroSectionPage
+      heading="About Us"
+      subheading="Connect with Shekinah Church: Join Our Spiritual Community"
+      text=""
+    />
     <section class="py-16">
       <div class="container mx-auto px-4 max-w-6xl">
         <!-- <h1 class="text-center text-5xl font-bold">Church Location</h1> -->
         <div class="flex gap-4 flex-col md:flex-row mt-10">
           <div class="flex-1 grid gap-2">
             <h1>
-              <span class="text-3xl font-semibold">Shekinah Haitian SDA Church</span>
+              <span class="text-3xl font-semibold">{{ props.aboutUsPage.heading }}</span>
             </h1>
             <p>
-              Welcome to Shekinah Haitian SDA Church, the first Haitian Seventh-Day
-              Adventist church in Fort Worth, Texas. We are a warm and loving congregation
-              dedicated to spreading the message of God's love through vibrant worship,
-              inspiring preaching, uplifting music, engaging kid programs, dynamic youth
-              activities, and delicious Haitian food. We invite you to join us on this
-              incredible journey of faith and discovery.
+              {{ props.aboutUsPage.para_first }}
             </p>
             <p>
-              Our dedicated team is the heart and soul serving God and our community with
-              integrity, compassion, and excellence under the direction of our pastor and
-              with the help of passionate leaders and volunteers. With diverse gifts and
-              talents, we work collaboratively to create an atmosphere that encourages
-              spiritual growth, discipleship, and a deepening relationship with Jesus
-              Christ.
+              {{ props.aboutUsPage.para_second }}
             </p>
           </div>
           <div class="flex-1 ml-5">
             <div class="flex gap-2 items-start space-x-4 mb-4">
               <div class="flex-shrink-0">
-                <div class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center">
+                <div
+                  class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center"
+                >
                   <Building class="text-black" />
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-semibold">Purpose and Goals</h3>
+                <h3 class="text-xl font-semibold">
+                  {{ props.aboutUsPage.goal_heading }}
+                </h3>
                 <p class="mt-2">
-                  Our goals include fostering spiritual growth, nurturing strong family
-                  foundations, equipping the next generation, and promoting unity and
-                  community service.
+                  {{ props.aboutUsPage.goal_text }}
                 </p>
               </div>
             </div>
             <div class="flex gap-2 items-start space-x-4 mb-4">
               <div class="flex-shrink-0">
-                <div class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center">
+                <div
+                  class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center"
+                >
                   <Users class="text-black" />
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-semibold">Introduction to the Team</h3>
+                <h3 class="text-xl font-semibold">
+                  {{ props.aboutUsPage.goal_heading_second }}
+                </h3>
                 <p class="mt-2">
-                  With diverse gifts and talents, we work collaboratively to create an
-                  atmosphere that encourages spiritual growth, discipleship, and a
-                  deepening relationship with Jesus Christ.
+                  {{ props.aboutUsPage.goal_text_second }}
                 </p>
               </div>
             </div>
             <div class="flex gap-2 items-start space-x-4">
               <div class="flex-shrink-0">
-                <div class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center">
+                <div
+                  class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center"
+                >
                   <Award class="text-black" />
                 </div>
               </div>
               <div>
-                <h3 class="text-xl font-semibold">Achievements</h3>
+                <h3 class="text-xl font-semibold">
+                  {{ props.aboutUsPage.goal_heading_third }}
+                </h3>
                 <p class="mt-2">
-                  Shekinah Haitian SDA Church has achieved several significant milestones,
-                  including community outreach programs, youth mentorship, and
-                  establishing the first Haitian Seventh-Day Adventist congregation in
-                  Fort Worth.
+                  {{ props.aboutUsPage.goal_text_third }}
                 </p>
               </div>
             </div>
@@ -84,25 +81,53 @@
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="w-full md:flex-1">
-            <form @submit.prevent="submit" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto">
+            <form
+              @submit.prevent="submit"
+              class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto"
+            >
               <h3 class="text-3xl font-semibold text-primary mb-4">Get in touch today</h3>
               <h3 class="text-lg font-semibold text-primary mb-4">
                 We'd love to hear from you
               </h3>
               <div class="space-y-5">
-                <input type="text" required placeholder="Enter Your Name" v-model="form.name"
-                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary" />
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter Your Name"
+                  v-model="form.name"
+                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary"
+                />
                 <InputError :message="form.errors.name" />
-                <input required type="email" v-model="form.email" placeholder="Enter Your Email"
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" />
-                <input required v-model="form.subject" type="text" placeholder="Subject"
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" />
-                <textarea v-model="form.message" required
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" placeholder="Message"
-                  rows="6"></textarea>
-                <button :disabled="form.processing" type="submit"
-                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300">
-                  <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
+                <input
+                  required
+                  type="email"
+                  v-model="form.email"
+                  placeholder="Enter Your Email"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
+                />
+                <input
+                  required
+                  v-model="form.subject"
+                  type="text"
+                  placeholder="Subject"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
+                />
+                <textarea
+                  v-model="form.message"
+                  required
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
+                  placeholder="Message"
+                  rows="6"
+                ></textarea>
+                <button
+                  :disabled="form.processing"
+                  type="submit"
+                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300"
+                >
+                  <LoaderCircle
+                    v-if="form.processing"
+                    class="mr-2 h-4 w-4 animate-spin"
+                  />
                   Send Message
                 </button>
               </div>
@@ -116,7 +141,7 @@
             <h2 class="text-4xl font-bold mb-4">
               Connect with Shekinah: Join Our Spiritual Family
             </h2>
-            <Accordion :accordionItems="fQuestions" />
+            <Accordion :accordionItems="props.fQuestions" />
           </div>
         </div>
       </div>
@@ -132,12 +157,11 @@ import { AccordionData } from "@/client";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle, Building, Users, Award } from "lucide-vue-next";
 import { onMounted } from "vue";
-import { FQuestion } from "@/client/models/FQuestion";
 
-const { fQuestions } = defineProps<{
-  fQuestions: AccordionData[]
-}>()
-console.log('test about question', fQuestions);
+const props = defineProps<{
+  fQuestions: AccordionData[];
+  aboutUsPage: any;
+}>();
 
 const form = useForm({
   name: "",
@@ -176,22 +200,4 @@ onMounted(() => {
   });
   console.log("Contact Us page mounted, scroll position set.");
 });
-
-const accordionItems: AccordionData[] = [
-  {
-    value: "item-1",
-    title: "Is it accessible?",
-    content: "Yes. It adheres to the WAI-ARIA design pattern.",
-  },
-  {
-    value: "item-2",
-    title: "Is it unstyled?",
-    content: "Yes. It's unstyled by default, giving you freedom over the look and feel.",
-  },
-  {
-    value: "item-3",
-    title: "Can it be animated?",
-    content: "Yes! You can use the transition prop to configure the animation.",
-  },
-];
 </script>

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\ChurchEvent;
-use App\Models\ChurchEventBlog;
 use App\Models\Ministry;
+use App\Models\ChurchEvent;
+use Illuminate\Http\Request;
+use App\Models\ChurchEventBlog;
+use App\Models\FrontWebsitePage;
 use App\Models\FrequentlyQuestion;
+use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
 {
@@ -79,9 +80,13 @@ class IndexController extends Controller
                 'content' => $item->answer,
             ];
         });
-
+        $aboutUsPage = FrontWebsitePage::where('key', 'aboutus')->first();
+        if ($aboutUsPage) {
+            $aboutUsPage = json_decode($aboutUsPage->value, true);
+        }
         return Inertia::render('frontend/AboutUs', [
-            'fQuestions' => $fQuestions
+            'fQuestions' => $fQuestions,
+            'aboutUsPage' => $aboutUsPage
         ]);
     }
 

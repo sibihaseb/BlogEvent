@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PrayerRequestController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WebsitePageController;
 use App\Http\Controllers\Frontend\IndexController;
 
 Route::get('/', [IndexController::class, 'index'])->name('home');
@@ -52,6 +53,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('contactus', ContactUsController::class);
     Route::resource('prayers', PrayerRequestController::class);
     Route::resource('frequently-questions', FrequentlyQuestionController::class);
+
+    //website pages
+    Route::get('content/aboutus', [WebsitePageController::class, 'aboutUsPage'])->name('website.aboutus');
+    Route::post('content/aboutus/update', [WebsitePageController::class, 'aboutUsPageUpdate'])->name('website.aboutus.update');
 });
 
 require __DIR__ . '/settings.php';
