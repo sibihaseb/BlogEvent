@@ -7,6 +7,7 @@ use App\Http\Requests\EventStaffRequest;
 use App\Models\EventStaff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class EventStaffControlller extends Controller
@@ -46,7 +47,12 @@ class EventStaffControlller extends Controller
         $input = $request->validated();
 
         if ($request->hasFile('image')) {
-            $input['image'] = $request->file('image')->store('staff_images', 'public');
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
+            $input['image'] = $request->file('image')->storeAs('staff_images', $filename, 'public');
+            if (Storage::exists($staff->image)) {
+                Storage::delete($staff->image);
+            }
         }
         $staff->update($input);
 
@@ -55,8 +61,11 @@ class EventStaffControlller extends Controller
 
     public function destroy(string $id)
     {
-        $Staff = EventStaff::findOrFail($id);
-        $Staff->delete();
+        $staff = EventStaff::findOrFail($id);
+        if (Storage::exists($staff->image)) {
+            Storage::delete($staff->image);
+        }
+        $staff->delete();
 
         return redirect()->route('staffs.index')->with('messages', ['title' => 'Staff deleted successfully.']);
     }

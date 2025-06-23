@@ -42,6 +42,7 @@ watch(localOpen, (val) => {
 
 // `image` is null by default since it's optional in edit
 const form = useForm({
+  _method: "PUT",
   name: props.staff.name,
   position: props.staff.position,
   image: null as File | null,
@@ -49,7 +50,7 @@ const form = useForm({
 
 const submit = (e: Event) => {
   e.preventDefault();
-form.put(route("staffs.update", props.staff.id), {
+form.post(route("staffs.update", props.staff.id), {
   preserveScroll: true,
   forceFormData: true, // Required for file uploads
   onSuccess: () => {

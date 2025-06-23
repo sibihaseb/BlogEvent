@@ -27,8 +27,6 @@ class EventStaffRequest extends FormRequest
         ];
         if ($this->route()->getName() === 'staffs.store') {
             $rules['image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
-        } else {
-            $rules['image'] = 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif|max:2048';
         }
         return $rules;
     }
