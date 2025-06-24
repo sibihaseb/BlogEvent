@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ChurchEvent;
 use App\Models\ChurchEventBlog;
+use App\Models\EventStaff;
 
 class IndexController extends Controller
 {
@@ -61,7 +62,10 @@ class IndexController extends Controller
 
     public function aboutUs()
     {
-        return Inertia::render('frontend/AboutUs');
+        $eventstaff = EventStaff::orderBy('created_at', 'desc')->get();
+        return Inertia::render('frontend/AboutUs',[
+            'eventstaff' => $eventstaff,
+        ]);
     }
 
     public function prayerpage()

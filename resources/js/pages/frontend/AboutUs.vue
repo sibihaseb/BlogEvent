@@ -157,6 +157,57 @@
         </div>
       </div>
     </section>
+     <section id="events" class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-primary mb-2">Our Team</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Join us for these special gatherings and be part of our community.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div
+            v-for="staff in visibleEventstaff"
+            :key="staff.id"
+            class="bg-white rounded-lg overflow-hidden shadow-md event-card transition duration-300"
+          >
+            <div class="h-80 bg-gray-200 relative">
+              <img
+                :src="'storage/' + staff.image || defaultImage"
+                :alt="staff.name"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">{{ staff.name }}</h3>
+              <p class="text-gray-600 mb-4">{{ staff.position ?? "" }}</p>
+              <div class="flex items-center text-gray-500 mb-4">
+                <i class="ri-time-line mr-2"></i>
+              
+              </div>
+             
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10" v-if="props.eventstaff.length > 10">
+          <button
+            @click="loadMore"
+            v-if="!allLoaded"
+            :class="[
+              'inline-block border-2 px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap',
+              allLoaded
+                ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                : 'border-primary text-primary hover:bg-primary hover:text-white',
+            ]"
+          >
+            {{ allLoaded ? "All Events Loaded" : "Load More Events" }}
+          </button>
+        </div>
+      </div>
+    </section>
   </FrontendLayout>
 </template>
 <script setup lang="ts">
@@ -168,6 +219,8 @@ import { AccordionData } from "@/client";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle, Building, Users, Award } from "lucide-vue-next";
 import { onMounted } from "vue";
+import { ref, computed } from "vue";
+import type { EventStaff } from "@/client";
 
 const form = useForm({
   name: "",
@@ -224,4 +277,25 @@ const accordionItems: AccordionData[] = [
     content: "Yes! You can use the transition prop to configure the animation.",
   },
 ];
+// Default fallback image
+const defaultImage = "https://via.placeholder.com/600x400?text=Event+Image";
+
+// Props
+const props = defineProps<{
+  eventstaff: EventStaff[];
+}>();
+
+// Reactive data
+const displayLimit = ref(9);
+
+// Computed visible events
+const visibleEventstaff = computed(() => props.eventstaff.slice(0, displayLimit.value));
+
+// Load more function
+const loadMore = () => {
+  displayLimit.value += 9;
+};
+
+// Check if all events are loaded
+const allLoaded = computed(() => displayLimit.value >= props.eventstaff.length);
 </script>
