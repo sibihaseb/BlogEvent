@@ -69,6 +69,11 @@ const mainNavItems: NavItem[] = [
     href: route('website.contactus'),
     icon: Globe,
   },
+   {
+    title: 'Home Page',
+    href: route('website.home'),
+    icon: Globe,
+  },
   // {
 ];
 

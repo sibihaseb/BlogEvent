@@ -60,4 +60,30 @@ class WebsitePageController extends Controller
             'messageType' => 'success',
         ]);
     }
+
+      public function homePage()
+    {
+        $data = FrontWebsitePage::where('key', 'homepage')->first();
+        if ($data) {
+            $data = json_decode($data->value, true);
+        }
+        return Inertia::render('admin/website/HomePage', [
+            'data' => $data
+        ]);
+    }
+
+    public function homeUpdate(Request $request)
+    {
+        $input = $request->all();
+
+        FrontWebsitePage::updateOrCreate(
+            ['key' => 'homepage'],
+            ['value' => json_encode($input, true)]
+        );
+
+        return redirect()->route('website.home')->with([
+            'messages' => ['title' => 'Site Updated successfully'],
+            'messageType' => 'success',
+        ]);
+    }
 }

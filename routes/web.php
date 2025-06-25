@@ -60,6 +60,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Contacts
     Route::get('content/contactus', [WebsitePageController::class, 'contactUsPage'])->name('website.contactus');
     Route::post('content/contactus/update', [WebsitePageController::class, 'contactUsPageUpdate'])->name('website.contactus.update');
+
+     //website pages
+    Route::get('content/home', [WebsitePageController::class, 'homePage'])->name('website.home');
+    Route::post('content/home/update', [WebsitePageController::class, 'homeUpdate'])->name('website.home.update');
 });
 
 require __DIR__ . '/settings.php';
