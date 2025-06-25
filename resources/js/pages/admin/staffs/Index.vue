@@ -123,8 +123,8 @@ const columns = [
    {
     header: "Image",
     cell: (row: any) => {
-      return row.picture
-        ? `<img src="${row.image}" alt="user avatar" class="w-10 h-10 rounded-full object-cover" />`
+      return row.image
+        ? `<img src="storage/${row.image}" alt="user avatar" class="w-10 h-10 rounded-full object-cover" />`
         : "";
     },
   },
