@@ -10,6 +10,7 @@ use App\Models\ChurchEventBlog;
 use App\Models\FrontWebsitePage;
 use App\Models\FrequentlyQuestion;
 use App\Http\Controllers\Controller;
+use App\Models\EventStaff;
 
 class IndexController extends Controller
 {
@@ -88,9 +89,12 @@ class IndexController extends Controller
         if ($aboutUsPage) {
             $aboutUsPage = json_decode($aboutUsPage->value, true);
         }
+        $eventstaff = EventStaff::orderBy('created_at', 'desc')->get();
         return Inertia::render('frontend/AboutUs', [
             'fQuestions' => $fQuestions,
-            'aboutUsPage' => $aboutUsPage
+            'aboutUsPage' => $aboutUsPage,
+            'eventstaff' => $eventstaff,
+
         ]);
     }
 

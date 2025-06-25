@@ -50,7 +50,7 @@ class EventStaffControlller extends Controller
             $ext = $request->file('image')->getClientOriginalExtension();
             $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
             $input['image'] = $request->file('image')->storeAs('staff_images', $filename, 'public');
-            if (Storage::exists($staff->image)) {
+            if (!empty($staff->image) && Storage::exists($staff->image)) {
                 Storage::delete($staff->image);
             }
         }
@@ -62,7 +62,7 @@ class EventStaffControlller extends Controller
     public function destroy(string $id)
     {
         $staff = EventStaff::findOrFail($id);
-        if (Storage::exists($staff->image)) {
+        if (!empty($staff->image) && Storage::exists($staff->image)) {
             Storage::delete($staff->image);
         }
         $staff->delete();

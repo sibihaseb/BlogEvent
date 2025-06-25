@@ -4,6 +4,7 @@
   <FrontendLayout>
     <HeroSectionPage heading="About Us" subheading="Connect with Shekinah Church: Join Our Spiritual Community"
       text="" />
+      <div v-if="props.aboutUsPage">
     <section class="py-16">
       <div class="container mx-auto px-4 max-w-6xl">
         <!-- <h1 class="text-center text-5xl font-bold">Church Location</h1> -->
@@ -69,6 +70,7 @@
         </div>
       </div>
     </section>
+  </div>
     <section class="bg-gradient-to-r from-primary to-blue-900 py-12">
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -110,6 +112,59 @@
         </div>
       </div>
     </section>
+    <div v-if="props.eventstaff">
+     <section id="events" class="py-16">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-primary mb-2">Our Team</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Join us for these special gatherings and be part of our community.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div
+            v-for="staff in visibleEventstaff"
+            :key="staff.id"
+            class="bg-white rounded-lg overflow-hidden shadow-md event-card transition duration-300"
+          >
+            <div class="h-80 bg-gray-200 relative">
+              <img
+                :src="'storage/' + staff.image || defaultImage"
+                :alt="staff.name"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">{{ staff.name }}</h3>
+              <p class="text-gray-600 mb-4">{{ staff.position ?? "" }}</p>
+              <div class="flex items-center text-gray-500 mb-4">
+                <i class="ri-time-line mr-2"></i>
+              
+              </div>
+             
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-10" v-if="props.eventstaff.length > 10">
+          <button
+            @click="loadMore"
+            v-if="!allLoaded"
+            :class="[
+              'inline-block border-2 px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap',
+              allLoaded
+                ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                : 'border-primary text-primary hover:bg-primary hover:text-white',
+            ]"
+          >
+            {{ allLoaded ? "All Events Loaded" : "Load More Events" }}
+          </button>
+        </div>
+      </div>
+    </section>
+    </div>
   </FrontendLayout>
 </template>
 <script setup lang="ts">
@@ -121,10 +176,13 @@ import { AccordionData } from "@/client";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle, Building, Users, Award } from "lucide-vue-next";
 import { onMounted } from "vue";
+import { ref, computed } from "vue";
+import type { EventStaff } from "@/client";
 
 const props = defineProps<{
   fQuestions: AccordionData[];
   aboutUsPage: any;
+  eventstaff: EventStaff[];
 }>();
 
 const form = useForm({
@@ -164,4 +222,38 @@ onMounted(() => {
   });
   console.log("Contact Us page mounted, scroll position set.");
 });
+
+const accordionItems: AccordionData[] = [
+  {
+    value: "item-1",
+    title: "Is it accessible?",
+    content: "Yes. It adheres to the WAI-ARIA design pattern.",
+  },
+  {
+    value: "item-2",
+    title: "Is it unstyled?",
+    content: "Yes. It's unstyled by default, giving you freedom over the look and feel.",
+  },
+  {
+    value: "item-3",
+    title: "Can it be animated?",
+    content: "Yes! You can use the transition prop to configure the animation.",
+  },
+];
+// Default fallback image
+const defaultImage = "https://via.placeholder.com/600x400?text=Event+Image";
+
+// Reactive data
+const displayLimit = ref(9);
+
+// Computed visible events
+const visibleEventstaff = computed(() => props.eventstaff.slice(0, displayLimit.value));
+
+// Load more function
+const loadMore = () => {
+  displayLimit.value += 9;
+};
+
+// Check if all events are loaded
+const allLoaded = computed(() => displayLimit.value >= props.eventstaff.length);
 </script>
