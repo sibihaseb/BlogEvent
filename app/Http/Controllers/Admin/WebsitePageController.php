@@ -34,4 +34,30 @@ class WebsitePageController extends Controller
             'messageType' => 'success',
         ]);
     }
+    public function contactUsPage()
+    {
+        $contactUsPage = FrontWebsitePage::where('key', 'contactus')->first();
+
+        if ($contactUsPage) {
+            $contactUsPage = json_decode($contactUsPage->value, true);
+        }
+        // dd($contactUsPage);
+        return Inertia::render('admin/website/ContactUs', [
+            'contactUsPage' => $contactUsPage
+        ]);
+    }
+
+    public function contactUsPageUpdate(Request $request)
+    {
+        $input = $request->all();
+        FrontWebsitePage::updateOrCreate(
+            ['key' => 'contactus'],
+            ['value' => json_encode($input, true)]
+        );
+
+        return redirect()->route('website.contactus')->with([
+            'messages' => ['title' => 'Site Updated successfully'],
+            'messageType' => 'success',
+        ]);
+    }
 }

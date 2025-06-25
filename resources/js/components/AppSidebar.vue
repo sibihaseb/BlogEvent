@@ -64,6 +64,12 @@ const mainNavItems: NavItem[] = [
     href: route('website.aboutus'),
     icon: Globe,
   },
+  {
+    title: 'Contact Us Page',
+    href: route('website.contactus'),
+    icon: Globe,
+  },
+  // {
 ];
 
 // const footerNavItems: NavItem[] = [
@@ -87,7 +93,7 @@ const mainNavItems: NavItem[] = [
         <SidebarMenuItem>
           <SidebarMenuButton size="lg" as-child>
             <Link :href="route('dashboard')">
-              <AppLogo />
+            <AppLogo />
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>

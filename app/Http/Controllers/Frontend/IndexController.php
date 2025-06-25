@@ -64,10 +64,14 @@ class IndexController extends Controller
                 'content' => $item->answer,
             ];
         });
+        $contactUsPage = FrontWebsitePage::where('key', 'contactus')->first();
+        if ($contactUsPage) {
+            $contactUsPage = json_decode($contactUsPage->value, true);
+        }
         return Inertia::render('frontend/ContactUs', [
             'appUrl' => env('APP_URL'),
-            'fQuestions' => $fQuestions
-
+            'fQuestions' => $fQuestions,
+            'contactUsPage' => $contactUsPage
         ]);
     }
 

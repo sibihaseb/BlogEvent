@@ -10,27 +10,24 @@
         <div class="flex gap-4 flex-col md:flex-row mt-30">
           <div class="flex-1 grid gap-2">
             <h1>
-              <span class="text-2xl font-semibold">Address:</span><br />
-              <span class="text-lg text-gray-600 dark:text-white">205 E Carver St Alvarado, Texas 76009</span>
+              <span class="text-2xl font-semibold">{{ contactUsPage.address_heading }}:</span><br />
+              <span class="text-lg text-gray-600 dark:text-white">{{ contactUsPage.address_text }}</span>
             </h1>
             <h1>
-              <span class="text-2xl font-semibold">Website:</span><br />
+              <span class="text-2xl font-semibold">{{ contactUsPage.website_heading }}:</span><br />
               <span class="text-lg text-gray-600 dark:text-white">
-                <Link :href="props.appUrl" class="text-primary dark:text-white">Shekinah Haitian Seventh-Day Adventist
-                Church</Link>
+                <Link :href="props.appUrl" class="text-primary dark:text-white">{{ contactUsPage.website_text }}</Link>
               </span>
             </h1>
             <h1>
-              <span class="text-2xl font-semibold">Email:</span><br />
+              <span class="text-2xl font-semibold">{{ contactUsPage.email_heading }}:</span><br />
               <span class="text-lg text-gray-600 dark:text-white"><a href="mailto:info@shekinahsda.org"
-                  class="text-primary dark:text-white">info@shekinahsda.org</a></span>
+                  class="text-primary dark:text-white">{{ contactUsPage.email_text }}</a></span>
             </h1>
           </div>
           <div class="flex-1">
             <div class="relative w-full aspect-video rounded-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3368.619162376989!2d-97.21068012387472!3d32.402569103027055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864e5b96faea41df%3A0xb63ef95cc5029c8c!2s205%20E%20Carver%20St%2C%20Alvarado%2C%20TX%2076009%2C%20USA!5e0!3m2!1sen!2s!4v1748550604995!5m2!1sen!2s"
-                class="absolute top-0 left-0 w-full h-full border-0" loading="lazy"
+              <iframe :src="contactUsPage.map_url" class="absolute top-0 left-0 w-full h-full border-0" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
@@ -92,7 +89,17 @@ import { onMounted } from "vue";
 const props = defineProps<{
   appUrl: string;
   fQuestions: AccordionData[];
+  contactUsPage: {
+    address_heading: string;
+    address_text: string;
+    website_heading: string;
+    website_text: string;
+    email_heading: string;
+    email_text: string;
+    map_url: string
+  };
 }>();
+console.log(props);
 
 const form = useForm({
   name: "",

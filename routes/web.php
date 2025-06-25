@@ -57,6 +57,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     //website pages
     Route::get('content/aboutus', [WebsitePageController::class, 'aboutUsPage'])->name('website.aboutus');
     Route::post('content/aboutus/update', [WebsitePageController::class, 'aboutUsPageUpdate'])->name('website.aboutus.update');
+    // Contacts
+    Route::get('content/contactus', [WebsitePageController::class, 'contactUsPage'])->name('website.contactus');
+    Route::post('content/contactus/update', [WebsitePageController::class, 'contactUsPageUpdate'])->name('website.contactus.update');
 });
 
 require __DIR__ . '/settings.php';
