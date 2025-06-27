@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Models\NotifySetting;
 use App\Models\PrayerRequest;
-use App\Http\Requests\PrayerRequest as PrayerDataRequest;
+use App\Mail\PrayerRequestMail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PrayerRequest as PrayerDataRequest;
 
 class PrayerRequestController extends Controller
 {
@@ -43,7 +46,10 @@ class PrayerRequestController extends Controller
         $input = $request->validated();
         PrayerRequest::create($input);
         return redirect()->route('prayers.index')
-            ->with('message', 'Prayer request created successfully.');
+            ->with([
+                'messages' => ['title' => 'Prayer request created successfully.'],
+                'messageType' => 'success',
+            ]);
     }
 
     /**
@@ -85,6 +91,16 @@ class PrayerRequestController extends Controller
     {
         $input = $request->validated();
         PrayerRequest::create($input);
+
+        $emails = NotifySetting::where('page', 'prayerrequest')->first()->emails ?? '';
+
+        if ($emails) {
+            $emailsArray = explode(',', $emails);
+            foreach ($emailsArray as $email) {
+                Mail::to(trim($email))->send(new PrayerRequestMail($input));
+            }
+        }
+
         return back()
             ->with('message', 'Prayer request submitted successfully.');
     }

@@ -8,6 +8,13 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="heading">Heading</Label>
+            <Input id="picture" type="file" accept="image/*" @change="handleFileChange" />
+            <InputError :message="form.errors.heading" />
+          </div>
+        </div>
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="heading">Heading</Label>
             <Input id="heading" type="text" v-model="form.heading" />
             <InputError :message="form.errors.heading" />
           </div>
@@ -108,7 +115,15 @@ const form = useForm({
   goal_text_third: props.aboutUsPage?.goal_text_third
     ? props.aboutUsPage?.goal_text_third
     : "",
+  heroimage: props.aboutUsPage?.heroimage ? props.aboutUsPage?.heroimage : "",
 });
+
+const handleFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  if (target.files?.length) {
+    form.heroimage = target.files[0];
+  }
+};
 
 const submit = () => {
   form.post(route("website.aboutus.update"), {

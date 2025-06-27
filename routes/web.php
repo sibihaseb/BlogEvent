@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\MinistryController;
 use App\Http\Controllers\Admin\EventStaffControlller;
 use App\Http\Controllers\Admin\FrequentlyQuestionController;
+use App\Http\Controllers\Admin\NotifyEmailController;
 use App\Http\Controllers\Admin\PrayerRequestController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Contacts
     Route::get('content/contactus', [WebsitePageController::class, 'contactUsPage'])->name('website.contactus');
     Route::post('content/contactus/update', [WebsitePageController::class, 'contactUsPageUpdate'])->name('website.contactus.update');
+
+    //notify settings
+    Route::get('notify/settings', [NotifyEmailController::class, 'index'])->name('notify.settings');
+    Route::post('notify/settings/update', [NotifyEmailController::class, 'storeNotifyEmail'])->name('notify.settings.update');
 });
 
 require __DIR__ . '/settings.php';
