@@ -88,7 +88,8 @@
                 class="h-12 w-12 object-contain border rounded" />
             </div>
           </div>
-        </div> {{ form }} <!-- Submit Button -->
+        </div>
+        <!-- Submit Button -->
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" /> Update Page
