@@ -11,12 +11,11 @@ abstract class Controller
     public function imageresize($imagepath, $size)
     {
         $manager = new ImageManager(new Driver());
-
         // Fetch the file content from Wasabi
-        if (!Storage::exists($imagepath)) {
+        if (!Storage::disk('public')->exists($imagepath)) {
             return response()->json(['error' => 'File not found in Wasabi storage.'], 404);
         }
-        $filecontent = Storage::get($imagepath);
+        $filecontent = Storage::disk('public')->get($imagepath);
 
         // Extract the file extension
         $extension = pathinfo($imagepath, PATHINFO_EXTENSION);
@@ -26,13 +25,17 @@ abstract class Controller
 
         // Resize or cover the image based on $size
         switch ($size) {
-            case 1:
+            case "1":
                 // Resize proportionally and pad to 1920x1080 (16:9) with black background
-                $image->resize(1920, 1080, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                $image->resizeCanvas(1920, 1080, 'center', false, '#000000'); // padding
+                $image->cover(1920, 1080);
+                break;
+            case "2":
+                $targetWidth = 1900;
+                $targetHeight = 300;
+
+                $width = $image->width();
+                $height = $image->height();
+                $image->crop($targetWidth, $targetHeight, intval(($width - $targetWidth) / 2), intval(($height - $targetHeight) / 2));
                 break;
 
             default:
@@ -51,6 +54,6 @@ abstract class Controller
         };
 
         // Replace the existing file in the same location
-        Storage::put($imagepath, $imageBinary);
+        return Storage::disk('public')->put($imagepath, $imageBinary);
     }
 }

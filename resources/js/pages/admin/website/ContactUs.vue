@@ -1,12 +1,39 @@
 <template>
-
   <Head title="Create Contact us" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
       <h1 class="text-xl font-bold">ContactUs Page Content</h1>
       <form @submit.prevent="submit" class="space-y-6">
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="picture">Hero Section Image </Label>
+            <Input id="picture" type="file" accept="image/*" @change="handleFileChange" />
+            <InputError :message="form.errors.heading" />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="type">Image Style</Label>
+            <select
+              id="states"
+              v-model="form.heroimage_style"
+              class="text-sm rounded-[var(--radius)] max-h-9 border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]"
+            >
+              <option selected value="">Choose a Image Style</option>
+              <option value="1">1920x1080</option>
+              <option value="2">1900x300</option>
+            </select>
 
-        <!-- <Label>Goals</Label> -->
+            <InputError :message="form.errors.type" />
+          </div>
+          <div class="flex-1 grid gap-2 justify-center">
+            <Label for="heading">Preview</Label>
+            <img
+              v-if="imagePreviews || form.heroimage"
+              :src="imagePreviews ? imagePreviews : '/storage/' + form.heroimage"
+              alt="Passport Back Preview"
+              class="rounded border border-gray-300 max-w-xs h-auto shadow"
+            />
+          </div>
+        </div>
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="heading_left_side">Address Heading</Label>
@@ -69,23 +96,47 @@ import { Button } from "@/components/ui/button";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle } from "lucide-vue-next";
 import BaseToast from "@/components/BaseToast.vue";
+import { ref } from "vue";
 
 const props = defineProps<{
   contactUsPage: any;
 }>();
 
+const imagePreviews = ref<string | null>(null);
+
 const form = useForm({
   address_heading: props.contactUsPage?.address_heading
     ? props.contactUsPage?.address_heading
     : "",
-  address_text: props.contactUsPage?.address_text ? props.contactUsPage?.address_text : "",
-  website_heading: props.contactUsPage?.website_heading ? props.contactUsPage?.website_heading : "",
-  website_text: props.contactUsPage?.website_text ? props.contactUsPage?.website_text : "",
-  email_heading: props.contactUsPage?.email_heading ? props.contactUsPage?.email_heading : "",
+  address_text: props.contactUsPage?.address_text
+    ? props.contactUsPage?.address_text
+    : "",
+  website_heading: props.contactUsPage?.website_heading
+    ? props.contactUsPage?.website_heading
+    : "",
+  website_text: props.contactUsPage?.website_text
+    ? props.contactUsPage?.website_text
+    : "",
+  email_heading: props.contactUsPage?.email_heading
+    ? props.contactUsPage?.email_heading
+    : "",
   email_text: props.contactUsPage?.email_text ? props.contactUsPage?.email_text : "",
   map_url: props.contactUsPage?.map_url ? props.contactUsPage?.map_url : "",
+  heroimage: props.contactUsPage?.heroimage ? props.contactUsPage?.heroimage : "",
+  heroimage_style: "",
 });
 
+const handleFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  if (target.files?.length) {
+    form.heroimage = target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      imagePreviews.value = reader.result as string;
+    };
+    reader.readAsDataURL(target.files[0]);
+  }
+};
 
 const submit = () => {
   form.post(route("website.contactus.update"), {

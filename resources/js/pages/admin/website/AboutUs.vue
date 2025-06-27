@@ -7,9 +7,32 @@
         <Label>Section One</Label>
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
-            <Label for="heading">Heading</Label>
+            <Label for="picture">Hero Section Image</Label>
             <Input id="picture" type="file" accept="image/*" @change="handleFileChange" />
             <InputError :message="form.errors.heading" />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="type">Image Style</Label>
+            <select
+              id="states"
+              v-model="form.heroimage_style"
+              class="text-sm rounded-[var(--radius)] max-h-9 border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]"
+            >
+              <option selected value="">Choose a Image Style</option>
+              <option value="1">1920x1080</option>
+              <option value="2">1900x300</option>
+            </select>
+
+            <InputError :message="form.errors.type" />
+          </div>
+          <div class="flex-1 grid gap-2 justify-center">
+            <Label for="heading">Preview</Label>
+            <img
+              v-if="imagePreviews || form.heroimage"
+              :src="imagePreviews ? imagePreviews : '/storage/' + form.heroimage"
+              alt="Passport Back Preview"
+              class="rounded border border-gray-300 max-w-xs h-auto shadow"
+            />
           </div>
         </div>
         <div class="flex gap-4 flex-col md:flex-row">
@@ -92,10 +115,13 @@ import { Button } from "@/components/ui/button";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle } from "lucide-vue-next";
 import BaseToast from "@/components/BaseToast.vue";
+import { ref } from "vue";
 
 const props = defineProps<{
   aboutUsPage: any;
 }>();
+
+const imagePreviews = ref<string | null>(null);
 
 const form = useForm({
   heading: props.aboutUsPage?.heading ? props.aboutUsPage?.heading : "",
@@ -116,12 +142,18 @@ const form = useForm({
     ? props.aboutUsPage?.goal_text_third
     : "",
   heroimage: props.aboutUsPage?.heroimage ? props.aboutUsPage?.heroimage : "",
+  heroimage_style: "",
 });
 
 const handleFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
   if (target.files?.length) {
     form.heroimage = target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      imagePreviews.value = reader.result as string;
+    };
+    reader.readAsDataURL(target.files[0]);
   }
 };
 
