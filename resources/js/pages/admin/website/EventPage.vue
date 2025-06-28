@@ -1,8 +1,8 @@
 <template>
-  <Head title="Ministry" />
+  <Head title="Event" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
-      <h1 class="text-xl font-bold">Ministry Page Content</h1>
+      <h1 class="text-xl font-bold">Event Page Content</h1>
       <form @submit.prevent="submit" class="space-y-6">
         <Label>Hero Section</Label>
         <div class="flex gap-4 flex-col md:flex-row">
@@ -55,7 +55,7 @@
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
-            Update Ministries Page
+            Update Event Page
           </Button>
         </div>
       </form>
@@ -76,18 +76,16 @@ import BaseToast from "@/components/BaseToast.vue";
 import { ref } from "vue";
 
 const props = defineProps<{
-  ministriesPage: any;
+  eventPage: any;
 }>();
 
 const imagePreviews = ref<string | null>(null);
 
 const form = useForm({
-  heroheading: props.ministriesPage?.heroheading ? props.ministriesPage?.heroheading : "",
-  herosubheading: props.ministriesPage?.herosubheading
-    ? props.ministriesPage?.herosubheading
-    : "",
-  herotext: props.ministriesPage?.herotext ? props.ministriesPage?.herotext : "",
-  heroimage: props.ministriesPage?.heroimage ? props.ministriesPage?.heroimage : "",
+  heroheading: props.eventPage?.heroheading ? props.eventPage?.heroheading : "",
+  herosubheading: props.eventPage?.herosubheading ? props.eventPage?.herosubheading : "",
+  herotext: props.eventPage?.herotext ? props.eventPage?.herotext : "",
+  heroimage: props.eventPage?.heroimage ? props.eventPage?.heroimage : "",
   heroimage_style: "",
 });
 
@@ -104,7 +102,7 @@ const handleFileChange = (e: Event) => {
 };
 
 const submit = () => {
-  form.post(route("website.ministries.update"), {
+  form.post(route("website.event.update"), {
     forceFormData: true,
   });
 };

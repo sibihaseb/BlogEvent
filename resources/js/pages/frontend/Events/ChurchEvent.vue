@@ -2,9 +2,13 @@
   <Head title="Welcome" />
   <FrontendLayout>
     <HeroSectionPage
-      :heading="heroProps.heading"
-      :subheading="heroProps.subheading"
-      :text="heroProps.text"
+      :heading="props.eventPage?.heroheading ?? 'Church Events'"
+      :subheading="props.eventPage?.herosubheading ?? 'Join Us'"
+      :text="
+        props.eventPage?.herotext ??
+        'Experience a warm and welcoming community where faith and fellowship come together.'
+      "
+      :image="'/storage/' + props.eventPage?.heroimage"
     />
     <section id="events" class="py-16">
       <div class="container mx-auto px-4">
@@ -93,6 +97,7 @@ const defaultImage = "https://via.placeholder.com/600x400?text=Event+Image";
 // Props
 const props = defineProps<{
   churchevents: ChurchEvent[];
+  eventPage: any;
 }>();
 
 // Reactive data
@@ -113,12 +118,4 @@ const allLoaded = computed(() => displayLimit.value >= props.churchevents.length
 const formatMonth = (date: Date | string) => moment(date).format("MMM").toUpperCase();
 const formatDay = (date: Date | string) => moment(date).format("D");
 const formatTime = (date: Date | string) => moment(date).format("hh:mm A");
-
-// Hero section content
-const heroProps = {
-  heading: "Church Events",
-  subheading: "Join Us",
-  text:
-    "Experience a warm and welcoming community where faith and fellowship come together.",
-};
 </script>

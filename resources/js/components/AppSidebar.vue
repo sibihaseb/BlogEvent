@@ -75,6 +75,11 @@ const mainNavItems: NavItem[] = [
     icon: Globe,
   },
   {
+    title: 'Event Page',
+    href: route('website.event'),
+    icon: Globe,
+  },
+  {
     title: 'Notifications',
     href: route('notify.settings'),
     icon: Bell,

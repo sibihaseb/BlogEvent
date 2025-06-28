@@ -26,9 +26,14 @@ class IndexController extends Controller
 
     public function churchEvents()
     {
+        $eventPage = FrontWebsitePage::where('key', 'event')->first();
+        if ($eventPage) {
+            $eventPage = json_decode($eventPage->value, true);
+        }
         $churchevents = ChurchEvent::orderBy('created_at', 'desc')->get();
         return Inertia::render('frontend/Events/ChurchEvent', [
             'churchevents' => $churchevents,
+            'eventPage' => $eventPage,
         ]);
     }
 

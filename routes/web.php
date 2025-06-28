@@ -61,9 +61,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     // Contacts
     Route::get('content/contactus', [WebsitePageController::class, 'contactUsPage'])->name('website.contactus');
     Route::post('content/contactus/update', [WebsitePageController::class, 'contactUsPageUpdate'])->name('website.contactus.update');
-    // Contacts
+    // Ministries
     Route::get('content/ministries', [WebsitePageController::class, 'ministriesPage'])->name('website.ministries');
     Route::post('content/ministries/update', [WebsitePageController::class, 'ministriesPageUpdate'])->name('website.ministries.update');
+    // Event Page
+    Route::get('content/events', [WebsitePageController::class, 'eventPage'])->name('website.event');
+    Route::post('content/events/update', [WebsitePageController::class, 'eventPageUpdate'])->name('website.event.update');
 
     //notify settings
     Route::get('notify/settings', [NotifyEmailController::class, 'index'])->name('notify.settings');
