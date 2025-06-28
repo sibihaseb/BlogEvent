@@ -115,9 +115,14 @@ class IndexController extends Controller
 
     public function oursponsers()
     {
+        $ministryPage = FrontWebsitePage::where('key', 'ministries')->first();
+        if ($ministryPage) {
+            $ministryPage = json_decode($ministryPage->value, true);
+        }
         $allministries = Ministry::all();
         return Inertia::render('frontend/OurMinistery/Index', [
             'allministries' => $allministries,
+            'ministryPage' => $ministryPage,
         ]);
     }
 }

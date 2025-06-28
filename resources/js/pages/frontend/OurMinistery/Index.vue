@@ -2,9 +2,13 @@
   <Head title="Our Ministries" />
   <FrontendLayout>
     <HeroSectionPage
-      :heading="heroProps.heading"
-      :subheading="heroProps.subheading"
-      :text="heroProps.text"
+      :heading="props.ministryPage?.heroheading ?? 'Our Ministerys'"
+      :subheading="props.ministryPage?.herosubheading ?? 'Join Us'"
+      :text="
+        props.ministryPage?.herotext ??
+        'Experience a warm and welcoming community where faith and fellowship come together.'
+      "
+      :image="'/storage/' + props.ministryPage?.heroimage"
     />
     <section id="ministries" class="py-16">
       <div class="container mx-auto px-4">
@@ -166,7 +170,7 @@
 </template>
 
 <script setup lang="ts">
-import { Head, Link } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
 import FrontendLayout from "@/layouts/FrontendLayout.vue";
 import HeroSectionPage from "@/components/frontend/HeroSectionPage.vue";
 import { Ministry } from "@/client";
@@ -183,16 +187,10 @@ import { computed } from "vue";
 
 const props = defineProps<{
   allministries: Ministry[];
+  ministryPage: any;
 }>();
 
 const ministries = computed(() => props.allministries);
-
-const heroProps = {
-  heading: "Our Ministerys",
-  subheading: "Join Us",
-  text:
-    "Experience a warm and welcoming community where faith and fellowship come together.",
-};
 </script>
 
 <style scoped></style>

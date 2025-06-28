@@ -30,19 +30,22 @@ class WebsitePageController extends Controller
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
             $style = $input['heroimage_style']; // Default to '1' if not set
         }
-
+        // dd($input['heroimage']);
         FrontWebsitePage::updateOrCreate(
             ['key' => 'aboutus'],
             ['value' => json_encode($input, true)]
         );
 
-        $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage')) {
+            $this->imageresize($input['heroimage'], $style);
+        }
 
         return redirect()->route('website.aboutus')->with([
             'messages' => ['title' => 'Site Updated successfully'],
             'messageType' => 'success',
         ]);
     }
+
     public function contactUsPage()
     {
         $contactUsPage = FrontWebsitePage::where('key', 'contactus')->first();
@@ -72,11 +75,91 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage')) {
+            $this->imageresize($input['heroimage'], $style);
+        }
 
         return redirect()->route('website.contactus')->with([
             'messages' => ['title' => 'Site Updated successfully'],
             'messageType' => 'success',
         ]);
     }
+
+    public function ministriesPage()
+    {
+        $ministriesPage = FrontWebsitePage::where('key', 'ministries')->first();
+
+        if ($ministriesPage) {
+            $ministriesPage = json_decode($ministriesPage->value, true);
+        }
+
+        return Inertia::render('admin/website/Ministry', [
+            'ministriesPage' => $ministriesPage
+        ]);
+    }
+
+    public function ministriesPageUpdate(Request $request)
+    {
+        $input = $request->all();
+        $style = "1";
+        if ($request->hasFile('heroimage')) {
+            $ext = $input['heroimage']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'ministries' . '.' . $ext);
+            $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
+            $style = $input['heroimage_style'];
+        }
+
+        FrontWebsitePage::updateOrCreate(
+            ['key' => 'ministries'],
+            ['value' => json_encode($input, true)]
+        );
+
+        if ($request->hasFile('heroimage')) {
+            $this->imageresize($input['heroimage'], $style);
+        }
+
+        return redirect()->route('website.ministries')->with([
+            'messages' => ['title' => 'Site Updated successfully'],
+            'messageType' => 'success',
+        ]);
+    }
+
+    // public function ministriesPage()
+    // {
+    //     $ministriesPage = FrontWebsitePage::where('key', 'ministries')->first();
+
+    //     if ($ministriesPage) {
+    //         $ministriesPage = json_decode($ministriesPage->value, true);
+    //     }
+
+    //     return Inertia::render('admin/website/Ministry', [
+    //         'ministriesPage' => $ministriesPage
+    //     ]);
+    // }
+
+    // public function ministriesPageUpdate(Request $request)
+    // {
+    //     $input = $request->all();
+    //     $style = "1";
+    //     if ($request->hasFile('heroimage')) {
+    //         $ext = $input['heroimage']->getClientOriginalExtension();
+    //         $filename = str_replace(' ', '', 'ministries' . '.' . $ext);
+    //         $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
+    //         $style = $input['heroimage_style'];
+    //     }
+
+    //     FrontWebsitePage::updateOrCreate(
+    //         ['key' => 'ministries'],
+    //         ['value' => json_encode($input, true)]
+    //     );
+
+    //     if ($request->hasFile('heroimage')) {
+    //         $this->imageresize($input['heroimage'], $style);
+    //     }
+
+    //     return redirect()->route('website.ministries')->with([
+    //         'messages' => ['title' => 'Site Updated successfully'],
+    //         'messageType' => 'success',
+    //     ]);
+    // }
 }

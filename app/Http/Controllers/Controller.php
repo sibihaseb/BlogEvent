@@ -30,12 +30,7 @@ abstract class Controller
                 $image->cover(1920, 1080);
                 break;
             case "2":
-                $targetWidth = 1900;
-                $targetHeight = 300;
-
-                $width = $image->width();
-                $height = $image->height();
-                $image->crop($targetWidth, $targetHeight, intval(($width - $targetWidth) / 2), intval(($height - $targetHeight) / 2));
+                $image->cover(1900, 300);
                 break;
 
             default:

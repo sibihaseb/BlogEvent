@@ -2,9 +2,12 @@
   <Head title="About Us" />
   <FrontendLayout>
     <HeroSectionPage
-      heading="About Us"
-      subheading="Connect with Shekinah Church: Join Our Spiritual Community"
-      text=""
+      :heading="props.aboutUsPage?.heroheading ?? 'About Us'"
+      :subheading="
+        props.aboutUsPage?.herosubheading ??
+        'Connect with Shekinah Church: Join Our Spiritual Community'
+      "
+      :text="props.aboutUsPage?.herotext ?? ''"
       :image="'/storage/' + props.aboutUsPage?.heroimage"
     />
     <div v-if="props.aboutUsPage">

@@ -1,10 +1,27 @@
 <template>
-  <Head title="Create Event" />
+  <Head title="About Us" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
       <h1 class="text-xl font-bold">AboutUs Page Content</h1>
       <form @submit.prevent="submit" class="space-y-6">
-        <Label>Section One</Label>
+        <Label>Hero Section</Label>
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="heroheading">Hero Section Heading</Label>
+            <Input id="heroheading" type="text" v-model="form.heroheading" />
+            <InputError :message="form.errors.heroheading" />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="herosubheading">Hero Section SubHeading</Label>
+            <Input id="herosubheading" type="text" v-model="form.herosubheading" />
+            <InputError :message="form.errors.herosubheading" />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="herotext">Hero Section Text</Label>
+            <Input id="herotext" type="text" v-model="form.herotext" />
+            <InputError :message="form.errors.herotext" />
+          </div>
+        </div>
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="picture">Hero Section Image</Label>
@@ -35,6 +52,7 @@
             />
           </div>
         </div>
+        <Label>Section One</Label>
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="heading">Heading</Label>
@@ -141,6 +159,11 @@ const form = useForm({
   goal_text_third: props.aboutUsPage?.goal_text_third
     ? props.aboutUsPage?.goal_text_third
     : "",
+  heroheading: props.aboutUsPage?.heroheading ? props.aboutUsPage?.heroheading : "",
+  herosubheading: props.aboutUsPage?.herosubheading
+    ? props.aboutUsPage?.herosubheading
+    : "",
+  herotext: props.aboutUsPage?.herotext ? props.aboutUsPage?.herotext : "",
   heroimage: props.aboutUsPage?.heroimage ? props.aboutUsPage?.heroimage : "",
   heroimage_style: "",
 });

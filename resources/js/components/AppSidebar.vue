@@ -70,6 +70,11 @@ const mainNavItems: NavItem[] = [
     icon: Globe,
   },
   {
+    title: 'Ministry Page',
+    href: route('website.ministries'),
+    icon: Globe,
+  },
+  {
     title: 'Notifications',
     href: route('notify.settings'),
     icon: Bell,

@@ -2,9 +2,13 @@
   <Head title="Contact Us" />
   <FrontendLayout>
     <HeroSectionPage
-      heading="Contact Us"
-      subheading="Connect with Shekinah Church: Join Our Spiritual Community"
-      text=""
+      :heading="props.contactUsPage?.heroheading ?? 'Contact Us'"
+      :subheading="
+        props.contactUsPage?.herosubheading ??
+        'Connect with Shekinah Church: Join Our Spiritual Community'
+      "
+      :text="props.contactUsPage?.herotext ?? ''"
+      :image="'/storage/' + props.contactUsPage?.heroimage"
     />
     <section class="py-16">
       <div class="container mx-auto px-4 max-w-6xl">

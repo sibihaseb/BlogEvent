@@ -48,12 +48,3 @@ const backgroundStyle = computed(() => ({
   maxHeight: "450px",
 }));
 </script>
-
-<style scoped>
-.hero-section {
-  background-image: linear-gradient(rgba(27, 49, 71, 0.7), rgba(27, 49, 71, 0.7)), url("");
-  background-size: cover;
-  max-height: 450px;
-  background-position: center;
-}
-</style>
