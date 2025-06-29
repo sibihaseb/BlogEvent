@@ -56,6 +56,45 @@
               class="w-full h-24 rounded-md p-2 border border-gray-300"></textarea>
             <InputError :message="form.errors.church_description" />
           </div>
+          <div class="flex-1 grid">
+            <Label for="side_img">Side Poster</Label>
+
+            <input id="side_img" type="file" accept="image/*" @change="handleSideImgChange"
+              class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+
+            <InputError :message="form.errors.side_img" />
+
+            <div v-if="previewSideImg" class="mt-1">
+              <img :src="previewSideImg" alt="Side Image Preview" class="h-12 w-12 object-contain border rounded" />
+            </div>
+          </div>
+
+        </div>
+        <Label>Sabbath Service Times:</Label>
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="service_times">Service Time</Label>
+            <Input id="service_times" type="text" v-model="form.service_times" />
+            <InputError :message="form.errors.church_title" />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="school_time">Sabbath School</Label>
+            <Input id="school_time" type="text" v-model="form.school_time" />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="devine_time">Divine Service</Label>
+            <Input id="devine_time" type="text" v-model="form.devine_time" />
+          </div>
+           <div class="flex-1 grid">
+            <Label for="side_img">Flag Icon</Label>
+            <input id="flag_icon" type="file" accept="image/*" @change="handleflagiconChange"
+              class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+            <InputError :message="form.errors.flag_icon" />
+
+            <div v-if="previewflagicon" class="mt-1">
+              <img :src="previewflagicon" alt="Side Image Preview" class="h-12 w-12 object-contain border rounded" />
+            </div>
+          </div>
         </div>
         <hr />
         <!-- Info Cards Section -->
@@ -204,10 +243,19 @@ import { Button } from "@/components/ui/button";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle } from "lucide-vue-next";
 import BaseToast from "@/components/BaseToast.vue";
+import { ref } from "vue";
 
 const props = defineProps<{
   data: any;
 }>();
+// Initialize preview with old image if exists
+const previewSideImg = ref(
+  props.data?.side_img ? `/storage/${props.data.side_img}` : null
+);
+// Initialize preview with old image if exists
+const previewflagicon = ref(
+  props.data?.flag_icon ? `/storage/${props.data.flag_icon}` : null
+);
 
 const form = useForm({
   // Hero section
@@ -222,6 +270,11 @@ const form = useForm({
   // Church welcome
   church_title: props.data?.church_title ?? "",
   church_description: props.data?.church_description ?? "",
+  side_img: props.data?.side_img ?? "",
+  service_times: props.data?.service_times ?? "",
+  school_time: props.data?.school_time ?? "",
+  devine_time: props.data?.devine_time ?? "",
+  flag_icon: props.data?.flag_icon ?? "",
 
   // Info Cards section
   info_cards: props.data?.info_cards ?? [
@@ -265,7 +318,21 @@ const handleFileUpload = (event: Event, index: number) => {
     reader.readAsDataURL(file);
   }
 };
-
+// Handle file change
+const handleSideImgChange = (e: Event) => {
+  const file = (e.target as HTMLInputElement).files?.[0];
+  if (file) {
+    form.side_img = file;
+    previewSideImg.value = URL.createObjectURL(file);
+  }
+};
+const handleflagiconChange = (e: Event) => {
+  const file = (e.target as HTMLInputElement).files?.[0];
+  if (file) {
+    form.flag_icon = file;
+    previewflagicon.value = URL.createObjectURL(file);
+  }
+};
 
 const submit = () => {
   form.post(route("website.home.update"), {

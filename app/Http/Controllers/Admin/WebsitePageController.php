@@ -111,6 +111,16 @@ class WebsitePageController extends Controller
                 }
             }
         }
+         if ($request->hasFile('side_img')) {
+            $ext = $input['side_img']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'sideposter' . '.' . $ext);
+            $input['side_img'] = $request->file('side_img')->storeAs('website', $filename, 'public');
+        }
+        if ($request->hasFile('flag_icon')) {
+            $ext = $input['flag_icon']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'flag_icon' . '.' . $ext);
+            $input['flag_icon'] = $request->file('flag_icon')->storeAs('website', $filename, 'public');
+        }
 
         FrontWebsitePage::updateOrCreate(
             ['key' => 'homepage'],
