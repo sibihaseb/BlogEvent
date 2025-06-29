@@ -80,7 +80,7 @@ class WebsitePageController extends Controller
         ]);
     }
 
-      public function homePage()
+    public function homePage()
     {
         $data = FrontWebsitePage::where('key', 'homepage')->first();
         if ($data) {
@@ -94,6 +94,23 @@ class WebsitePageController extends Controller
     public function homeUpdate(Request $request)
     {
         $input = $request->all();
+        // Handle uploaded icons for info_cards
+        if ($request->has('info_cards')) {
+            foreach ($request->info_cards as $index => $card) {
+                unset($input['info_cards'][$index]['icon_preview']);
+                // Check if file is uploaded
+                if ($request->hasFile("info_cards.$index.icon")) {
+                    $file = $request->file("info_cards.$index.icon");
+                    $path = $file->store('uploads/icons', 'public');
+                    $input['info_cards'][$index]['icon'] = $path;
+                } elseif (isset($card['icon']) && is_string($card['icon'])) {
+                    // Existing image path retained
+                    $input['info_cards'][$index]['icon'] = $card['icon'];
+                } else {
+                    $input['info_cards'][$index]['icon'] = null;
+                }
+            }
+        }
 
         FrontWebsitePage::updateOrCreate(
             ['key' => 'homepage'],
