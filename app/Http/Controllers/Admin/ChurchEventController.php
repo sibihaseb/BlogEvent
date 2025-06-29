@@ -49,7 +49,7 @@ class ChurchEventController extends Controller
 
         ChurchEvent::create($input);
 
-        $this->imageresize($input['picture'], 1);
+        $this->imageresize($input['picture'], "1");
 
         return redirect()
             ->route('churchevents.index')
