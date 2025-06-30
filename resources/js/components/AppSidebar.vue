@@ -80,6 +80,11 @@ const mainNavItems: NavItem[] = [
     icon: Globe,
   },
   {
+    title: 'Home Page',
+    href: route('website.home'),
+    icon: Globe,
+  },
+  {
     title: 'Notifications',
     href: route('notify.settings'),
     icon: Bell,

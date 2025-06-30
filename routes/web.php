@@ -68,6 +68,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('content/events', [WebsitePageController::class, 'eventPage'])->name('website.event');
     Route::post('content/events/update', [WebsitePageController::class, 'eventPageUpdate'])->name('website.event.update');
 
+    //website pages
+    Route::get('content/home', [WebsitePageController::class, 'homePage'])->name('website.home');
+    Route::post('content/home/update', [WebsitePageController::class, 'homeUpdate'])->name('website.home.update');
     //notify settings
     Route::get('notify/settings', [NotifyEmailController::class, 'index'])->name('notify.settings');
     Route::post('notify/settings/update', [NotifyEmailController::class, 'storeNotifyEmail'])->name('notify.settings.update');
