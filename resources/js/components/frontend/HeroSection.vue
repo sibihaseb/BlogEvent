@@ -10,42 +10,58 @@
           of our community and the power of God's presence every Sabbath.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mb-12">
-          <a
-            href="#services"
-            class="bg-secondary text-primary px-8 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 text-center !rounded-button whitespace-nowrap"
-          >
+          <a href="#services"
+            class="bg-secondary text-primary px-8 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 text-center !rounded-button whitespace-nowrap">
             Join Us This Sabbath
           </a>
-          <a
-            href="#about"
-            class="bg-transparent border-2 border-white px-8 py-3 rounded-button font-semibold hover:bg-white hover:text-primary transition duration-300 text-center !rounded-button whitespace-nowrap"
-          >
+          <a href="#about"
+            class="bg-transparent border-2 border-white px-8 py-3 rounded-button font-semibold hover:bg-white hover:text-primary transition duration-300 text-center !rounded-button whitespace-nowrap">
             Learn More
           </a>
         </div>
         <div class="bg-opacity-10 backdrop-blur-sm p-6 rounded-lg max-w-md">
           <h3 class="text-xl font-semibold mb-4">Stay Connected</h3>
           <p class="mb-4">Subscribe to our newsletter for updates and announcements.</p>
-          <form class="flex flex-col sm:flex-row gap-2">
-            <input
-              type="email"
-              placeholder="Your email address"
-              class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none flex-grow"
-            />
-            <button
-              type="submit"
-              class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap !rounded-button"
-            >
+
+          <form @submit.prevent="submit" class="flex flex-col sm:flex-row gap-2 w-full max-w-md">
+            <div class="flex flex-col flex-grow">
+              <input type="email" v-model="form.email" placeholder="Your email address"
+                class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none w-full" />
+              <div v-if="form.errors.email" class="text-red-600 text-sm mt-1">
+                {{ form.errors.email }}
+              </div>
+              <div v-else-if="form.recentlySuccessful" class="text-green-600 text-sm mt-1">
+                Subscription successful!
+              </div>
+            </div>
+
+            <button type="submit" :disabled="form.processing"
+              class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap h-[48px]">
               Subscribe
             </button>
           </form>
         </div>
+
+
       </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useForm } from "@inertiajs/vue3";
+
+const form = useForm({
+  email: "",
+});
+
+const submit = () => {
+  form.post(route("subscriber.subscribe"), {
+    onSuccess: () => {
+      form.reset();
+    },
+  });
+};</script>
 
 <style scoped>
 .hero-section {

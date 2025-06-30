@@ -80,6 +80,11 @@ const mainNavItems: NavItem[] = [
     href: route('notify.settings'),
     icon: Bell,
   },
+  {
+    title: 'Subscriber',
+    href: route('subscriber.index'),
+    icon: Users,
+  },
 ];
 
 // const footerNavItems: NavItem[] = [
