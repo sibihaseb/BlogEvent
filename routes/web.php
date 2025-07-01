@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\EventStaffControlller;
 use App\Http\Controllers\Admin\FrequentlyQuestionController;
 use App\Http\Controllers\Admin\NotifyEmailController;
 use App\Http\Controllers\Admin\PrayerRequestController;
+use App\Http\Controllers\Admin\SubscriberController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -40,6 +41,9 @@ Route::post('/submit-prayer', [PrayerRequestController::class, 'prayerFormSubmit
 //allministery
 Route::get('oursponsers', [IndexController::class, 'oursponsers'])->name('our.sponsers');
 
+//post subscribes
+Route::post('/subscribe/now', [SubscriberController::class, 'subscribe'])->name('subscriber.subscribe');
+
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
@@ -54,7 +58,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::resource('contactus', ContactUsController::class);
     Route::resource('prayers', PrayerRequestController::class);
     Route::resource('frequently-questions', FrequentlyQuestionController::class);
-
+    //subscriber
+    Route::resource('subscriber', SubscriberController::class);
     //website pages
     Route::get('content/aboutus', [WebsitePageController::class, 'aboutUsPage'])->name('website.aboutus');
     Route::post('content/aboutus/update', [WebsitePageController::class, 'aboutUsPageUpdate'])->name('website.aboutus.update');
