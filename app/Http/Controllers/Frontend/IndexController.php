@@ -18,9 +18,15 @@ class IndexController extends Controller
     {
         $churchevents = ChurchEvent::take(3)->orderBy('created_at', 'desc')->get();
         $churcheventBlogs = ChurchEventBlog::take(3)->orderBy('created_at', 'desc')->get();
+
+        $homepage = FrontWebsitePage::where('key', 'homepage')->first();
+        if ($homepage) {
+            $homepage = json_decode($homepage->value, true);
+        }
         return Inertia::render('Welcome', [
             'churchevents' => $churchevents,
             'churcheventBlogs' => $churcheventBlogs,
+            'homepage' => $homepage
         ]);
     }
 

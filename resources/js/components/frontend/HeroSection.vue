@@ -3,39 +3,32 @@
   <section class="hero-section min-h-screen flex items-center pt-24">
     <div class="container mx-auto px-4 py-20 text-white">
       <div class="max-w-3xl">
-        <h1 class="text-5xl font-bold mb-6">Welcome to Shekinah</h1>
-        <h2 class="text-2xl mb-8 text-secondary">Where Faith Meets Community</h2>
+        <h1 class="text-5xl font-bold mb-6">{{ props.homepage.hero_title || "Welcome to Our Church" }}</h1>
+        <h2 class="text-2xl mb-8 text-secondary">{{ props.homepage.hero_subtitle || "Where Faith Meets Community" }}
+        </h2>
         <p class="text-lg mb-10 max-w-2xl">
-          Join us as we worship, grow, and serve together in Christ. Experience the warmth
-          of our community and the power of God's presence every Sabbath.
+          {{ props.homepage.hero_description || "Join us for a transformative worship experience" }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mb-12">
-          <a
-            href="#services"
-            class="bg-secondary text-primary px-8 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 text-center !rounded-button whitespace-nowrap"
-          >
+          <a href="#services"
+            class="bg-secondary text-primary px-8 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 text-center !rounded-button whitespace-nowrap">
             Join Us This Sabbath
           </a>
-          <a
-            href="#about"
-            class="bg-transparent border-2 border-white px-8 py-3 rounded-button font-semibold hover:bg-white hover:text-primary transition duration-300 text-center !rounded-button whitespace-nowrap"
-          >
+          <a href="#about"
+            class="bg-transparent border-2 border-white px-8 py-3 rounded-button font-semibold hover:bg-white hover:text-primary transition duration-300 text-center !rounded-button whitespace-nowrap">
             Learn More
           </a>
         </div>
         <div class="bg-opacity-10 backdrop-blur-sm p-6 rounded-lg max-w-md">
-          <h3 class="text-xl font-semibold mb-4">Stay Connected</h3>
-          <p class="mb-4">Subscribe to our newsletter for updates and announcements.</p>
+          <h3 class="text-xl font-semibold mb-4">{{ homepage.stay_heading || 'Stay Connected' }}</h3>
+          <p class="mb-4">{{ homepage.stay_description || 'Subscribe to our newsletter for updates and announcements.'
+          }}
+          </p>
           <form class="flex flex-col sm:flex-row gap-2">
-            <input
-              type="email"
-              placeholder="Your email address"
-              class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none flex-grow"
-            />
-            <button
-              type="submit"
-              class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap !rounded-button"
-            >
+            <input type="email" placeholder="Your email address"
+              class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none flex-grow" />
+            <button type="submit"
+              class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap !rounded-button">
               Subscribe
             </button>
           </form>
@@ -45,7 +38,19 @@
   </section>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { defineProps } from "vue";
+
+const props = defineProps<{
+  homepage: {
+    hero_title?: string;
+    hero_subtitle?: string;
+    hero_description?: string;
+    stay_heading?: string;
+    stay_description?: string;
+  };
+}>();
+</script>
 
 <style scoped>
 .hero-section {

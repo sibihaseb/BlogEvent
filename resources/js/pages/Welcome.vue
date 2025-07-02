@@ -1,13 +1,14 @@
 <template>
+
   <Head title="Welcome"> </Head>
   <FrontendLayout>
-    <HeroSection />
-    <HaitianHeritage />
-    <QuickAccessGrid />
+    <HeroSection :homepage="homepage" />
+    <HaitianHeritage :homepage="homepage" />
+    <QuickAccessGrid :homepage="homepage" />
     <UpcomingEvents :churchevents="props.churchevents" />
-    <EventCalendar />
-    <Ministry />
-    <AboutUs />
+    <EventCalendar :homepage="homepage" />
+    <Ministry :homepage="homepage" />
+    <AboutUs :homepage="homepage" />
     <Blog :blogs="props.churcheventBlogs" />
     <!-- <Contact /> -->
   </FrontendLayout>
@@ -31,6 +32,7 @@ import type { ChurchEvent, EventBlogs } from "@/client";
 const props = defineProps<{
   churchevents: ChurchEvent[];
   churcheventBlogs: EventBlogs[];
+  homepage: any;
 }>();
 console.log("Welcome page props:", props);
 

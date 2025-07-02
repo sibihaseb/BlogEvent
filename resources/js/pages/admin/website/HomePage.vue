@@ -91,8 +91,8 @@
               class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
             <InputError :message="form.errors.flag_icon" />
 
-            <div v-if="previewflagicon" class="mt-1">
-              <img :src="previewflagicon" alt="Side Image Preview" class="h-12 w-12 object-contain border rounded" />
+            <div v-if="flag_icon_preview" class="mt-1">
+              <img :src="flag_icon_preview" alt="Side Image Preview" class="h-12 w-12 object-contain border rounded" />
             </div>
           </div>
         </div>
@@ -256,6 +256,7 @@
           <Button type="submit" class="text-end" :disabled="form.processing">
             <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" /> Update Page
           </Button>
+          {{ form }}
         </div>
       </form>
       <BaseToast />
@@ -274,38 +275,38 @@ import BaseToast from "@/components/BaseToast.vue";
 import { ref } from "vue";
 
 const props = defineProps<{
-  data: any;
+  homepage: any;
 }>();
 // Initialize preview with old image if exists
 const previewSideImg = ref(
-  props.data?.side_img ? `/storage/${props.data.side_img}` : null
+  props.homepage?.side_img ? `/storage/${props.homepage.side_img}` : null
 );
 // Initialize preview with old image if exists
-const previewflagicon = ref(
-  props.data?.flag_icon ? `/storage/${props.data.flag_icon}` : null
+const flag_icon_preview = ref(
+  props.homepage?.flag_icon ? `/storage/${props.homepage.flag_icon}` : null
 );
 
 const form = useForm({
   // Hero section
-  hero_title: props.data?.hero_title ?? "",
-  hero_subtitle: props.data?.hero_subtitle ?? "",
-  hero_description: props.data?.hero_description ?? "",
+  hero_title: props.homepage?.hero_title ?? "",
+  hero_subtitle: props.homepage?.hero_subtitle ?? "",
+  hero_description: props.homepage?.hero_description ?? "",
 
   // Stay connected
-  stay_heading: props.data?.stay_heading ?? "",
-  stay_description: props.data?.stay_description ?? "",
+  stay_heading: props.homepage?.stay_heading ?? "",
+  stay_description: props.homepage?.stay_description ?? "",
 
   // Church welcome
-  church_title: props.data?.church_title ?? "",
-  church_description: props.data?.church_description ?? "",
-  side_img: props.data?.side_img ?? "",
-  service_times: props.data?.service_times ?? "",
-  school_time: props.data?.school_time ?? "",
-  devine_time: props.data?.devine_time ?? "",
-  flag_icon: props.data?.flag_icon ?? "",
+  church_title: props.homepage?.church_title ?? "",
+  church_description: props.homepage?.church_description ?? "",
+  side_img: props.homepage?.side_img ?? "",
+  service_times: props.homepage?.service_times ?? "",
+  school_time: props.homepage?.school_time ?? "",
+  devine_time: props.homepage?.devine_time ?? "",
+  flag_icon: props.homepage?.flag_icon ?? "",
 
   // Info Cards section
-  info_cards: props.data?.info_cards ?? [
+  info_cards: props.homepage?.info_cards ?? [
     { title: '', description: '', button_text: '', button_url: '' },
     { title: '', description: '', button_text: '', button_url: '' },
     { title: '', description: '', button_text: '', button_url: '' },
@@ -313,31 +314,31 @@ const form = useForm({
   ],
 
   // Recurring events
-  recurring_event_title: props.data?.recurring_event_title ?? "",
-  text_1: props.data?.text_1 ?? "",
-  text_2: props.data?.text_2 ?? "",
-  text_3: props.data?.text_3 ?? "",
-  text_4: props.data?.text_4 ?? "",
+  recurring_event_title: props.homepage?.recurring_event_title ?? "",
+  text_1: props.homepage?.text_1 ?? "",
+  text_2: props.homepage?.text_2 ?? "",
+  text_3: props.homepage?.text_3 ?? "",
+  text_4: props.homepage?.text_4 ?? "",
   // Stay connected items
-  stay_connect_heading: props.data?.stay_connect_heading ?? "",
-  stay_connect_description: props.data?.stay_connect_description ?? "",
-  stay_connect_item_1: props.data?.stay_connect_item_1 ?? "",
-  stay_connect_item_2: props.data?.stay_connect_item_2 ?? "",
-  stay_connect_item_3: props.data?.stay_connect_item_3 ?? "",
+  stay_connect_heading: props.homepage?.stay_connect_heading ?? "",
+  stay_connect_description: props.homepage?.stay_connect_description ?? "",
+  stay_connect_item_1: props.homepage?.stay_connect_item_1 ?? "",
+  stay_connect_item_2: props.homepage?.stay_connect_item_2 ?? "",
+  stay_connect_item_3: props.homepage?.stay_connect_item_3 ?? "",
   // about shekinah
-  about_heading: props.data?.about_heading ?? "",
-  about_para_first: props.data?.about_para_first ?? "",
-  about_para_second: props.data?.about_para_second ?? "",
+  about_heading: props.homepage?.about_heading ?? "",
+  about_para_first: props.homepage?.about_para_first ?? "",
+  about_para_second: props.homepage?.about_para_second ?? "",
   // mission and vision
-  mission_heading: props.data?.mission_heading ?? "",
-  mission_description: props.data?.mission_description ?? "",
-  vision_heading: props.data?.vision_heading ?? "",
-  vision_description: props.data?.vision_description ?? "",
+  mission_heading: props.homepage?.mission_heading ?? "",
+  mission_description: props.homepage?.mission_description ?? "",
+  vision_heading: props.homepage?.vision_heading ?? "",
+  vision_description: props.homepage?.vision_description ?? "",
   // about images
-  about_image_1: props.data?.about_image_1 ?? "",
-  about_image_2: props.data?.about_image_2 ?? "",
-  about_image_3: props.data?.about_image_3 ?? "",
-  about_image_4: props.data?.about_image_4 ?? "",
+  about_image_1: props.homepage?.about_image_1 ?? "",
+  about_image_2: props.homepage?.about_image_2 ?? "",
+  about_image_3: props.homepage?.about_image_3 ?? "",
+  about_image_4: props.homepage?.about_image_4 ?? "",
 
 });
 
@@ -353,7 +354,9 @@ const handleflagiconChange = (e: Event) => {
   const file = (e.target as HTMLInputElement).files?.[0];
   if (file) {
     form.flag_icon = file;
-    previewflagicon.value = URL.createObjectURL(file);
+    flag_icon_preview.value = URL.createObjectURL(form.flag_icon);
+    // console.log("flag icon changed", form.flag_icon);
+
   }
 };
 

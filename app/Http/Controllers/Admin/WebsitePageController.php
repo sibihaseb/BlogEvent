@@ -87,7 +87,7 @@ class WebsitePageController extends Controller
             $data = json_decode($data->value, true);
         }
         return Inertia::render('admin/website/HomePage', [
-            'data' => $data
+            'homepage' => $data
         ]);
     }
 
@@ -111,7 +111,7 @@ class WebsitePageController extends Controller
                 }
             }
         }
-         if ($request->hasFile('side_img')) {
+        if ($request->hasFile('side_img')) {
             $ext = $input['side_img']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'sideposter' . '.' . $ext);
             $input['side_img'] = $request->file('side_img')->storeAs('website', $filename, 'public');
