@@ -170,7 +170,7 @@ class WebsitePageController extends Controller
             $data = json_decode($data->value, true);
         }
         return Inertia::render('admin/website/HomePage', [
-            'data' => $data
+            'homepage' => $data
         ]);
     }
 

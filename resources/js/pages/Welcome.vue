@@ -1,13 +1,13 @@
 <template>
   <Head title="Welcome"> </Head>
   <FrontendLayout>
-    <HeroSection />
-    <HaitianHeritage />
-    <QuickAccessGrid />
+    <HeroSection :homepage="homepage" />
+    <HaitianHeritage :homepage="homepage" />
+    <QuickAccessGrid :homepage="homepage" />
     <UpcomingEvents :churchevents="props.churchevents" />
-    <EventCalendar :churchevents="props.churcheventsAll" />
-    <Ministry />
-    <AboutUs />
+    <EventCalendar :homepage="homepage" :churchevents="props.churcheventsAll" />
+    <Ministry :homepage="homepage" />
+    <AboutUs :homepage="homepage" />
     <Blog :blogs="props.churcheventBlogs" />
     <!-- <Contact /> -->
   </FrontendLayout>
@@ -32,6 +32,7 @@ const props = defineProps<{
   churchevents: ChurchEvent[];
   churcheventBlogs: EventBlogs[];
   churcheventsAll: any;
+  homepage: any;
 }>();
 console.log("Welcome page props:", props);
 
