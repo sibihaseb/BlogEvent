@@ -188,4 +188,30 @@ const calendarOptions = ref({
 });
 </script>
 
-<style scoped></style>
+<style>
+/* Mobile: Smaller FullCalendar header styles */
+@media (max-width: 768px) {
+  /* Header toolbar container */
+  .fc .fc-toolbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Buttons (prev, next, today, etc.) */
+  .fc .fc-button {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important; /* smaller text */
+    height: auto;
+  }
+
+  /* Title (e.g., "July 2025") */
+  .fc .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+
+  /* View buttons (Month/Week/Day) */
+  .fc .fc-button-group {
+    flex-wrap: wrap;
+  }
+}
+</style>

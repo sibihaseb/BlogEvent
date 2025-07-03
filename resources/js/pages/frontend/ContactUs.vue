@@ -8,7 +8,7 @@
         'Connect with Shekinah Church: Join Our Spiritual Community'
       "
       :text="props.contactUsPage?.herotext ?? ''"
-      :image="'/storage/' + props.contactUsPage?.heroimage"
+      :image="props.contactUsPage?.heroimage"
     />
     <section class="py-16">
       <div class="container mx-auto px-4 max-w-6xl">
@@ -150,6 +150,10 @@ const props = defineProps<{
     email_heading: string;
     email_text: string;
     map_url: string;
+    heroheading: string;
+    herosubheading: string;
+    herotext: string;
+    heroimage: string;
   };
 }>();
 console.log(props);

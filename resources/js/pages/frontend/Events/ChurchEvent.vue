@@ -8,7 +8,7 @@
         props.eventPage?.herotext ??
         'Experience a warm and welcoming community where faith and fellowship come together.'
       "
-      :image="'/storage/' + props.eventPage?.heroimage"
+      :image="props.eventPage?.heroimage"
     />
     <section id="events" class="py-16">
       <div class="container mx-auto px-4">

@@ -179,3 +179,9 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer utilities {
+    .rounded-button {
+        border-radius: 8px;
+    }
+}

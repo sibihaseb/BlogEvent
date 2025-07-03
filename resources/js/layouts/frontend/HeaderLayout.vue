@@ -2,16 +2,13 @@
   <header class="bg-white shadow-md fixed w-full z-50">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center">
-        <img
-          src="https://readdy.ai/api/search-image?query=church%2520logo%2520with%2520cross%2520and%2520open%2520bible%2C%2520gold%2520and%2520navy%2520blue%2520colors%2C%2520circular%2520design%2C%2520professional%2C%2520minimalist%2C%2520clean%2520lines&width=150&height=150&seq=54321&orientation=squarish"
-          alt="Shekinah Logo"
-          class="h-16"
-        />
+        <img src="/images/logo.png" alt="Shekinah Logo" class="h-16" />
         <div class="ml-4">
           <h1 class="text-primary font-bold text-2xl">SHEKINAH</h1>
           <p class="text-secondary text-sm">HAITIAN SEVENTH-DAY ADVENTIST CHURCH</p>
         </div>
       </div>
+
       <nav class="hidden lg:flex items-center space-x-8">
         <Link
           :href="route('home')"
@@ -29,47 +26,23 @@
           >Ministries</a
         >
         <Link
-          :href="route('church.event')"
-          class="text-primary hover:text-secondary font-bold transition duration-300"
-          >Events</Link
-        >
-        <Link
           :href="route('prayer.page')"
           class="text-primary hover:text-secondary font-bold transition whitespace-nowrap duration-300"
           >Prayer Requests</Link
-        >
-        <Link
-          :href="route('event.blogs')"
-          class="text-primary hover:text-secondary font-bold transition duration-300"
-          >Blog</Link
         >
         <Link
           :href="route('contact.us')"
           class="text-primary hover:text-secondary font-bold transition duration-300"
           >Contact</Link
         >
-        <Link
-          v-if="$page.props.auth.user"
-          :href="route('dashboard')"
+        <a
+          href="https://www.zeffy.com/donation-form/shekinah-sda-church"
+          target="_blank"
           class="text-primary hover:text-secondary font-bold transition duration-300"
+          >Give</a
         >
-          Dashboard
-        </Link>
-        <template v-else>
-          <Link
-            :href="route('login')"
-            class="text-primary hover:text-secondary whitespace-nowrap font-bold transition duration-300"
-          >
-            Log in
-          </Link>
-          <Link
-            :href="route('register')"
-            class="text-primary hover:text-secondary font-bold transition duration-300"
-          >
-            Register
-          </Link>
-        </template>
       </nav>
+
       <div class="flex items-center space-x-4">
         <div class="hidden lg:flex items-center space-x-2 border-r pr-4 border-gray-200">
           <button class="text-sm text-primary font-bold">EN</button>
@@ -80,25 +53,111 @@
           <Video fill="red" :size="28" />
           <h1 class="ml-2 text-sm font-bold text-primary">Live Stream</h1>
         </div>
-        <button class="lg:hidden text-primary w-10 h-10 flex items-center justify-center">
-          <i class="ri-menu-line ri-lg"></i>
+        <!-- Hamburger button using Lucide Menu -->
+        <button
+          @click="toggleSidebar"
+          class="lg:hidden text-primary w-10 h-10 flex items-center justify-center"
+        >
+          <Menu :size="28" />
         </button>
       </div>
     </div>
+
+    <!-- Mobile Sidebar -->
+    <transition name="slide">
+      <div v-if="isSidebarOpen" class="fixed inset-0 z-50 bg-opacity-50 flex lg:hidden">
+        <div class="w-64 bg-white h-full shadow-lg p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-primary">Menu</h2>
+            <button @click="toggleSidebar" class="text-gray-600 text-2xl font-bold">
+              &times;
+            </button>
+          </div>
+          <nav class="flex flex-col space-y-4">
+            <Link
+              @click="toggleSidebar"
+              :href="route('home')"
+              class="text-primary font-bold"
+              >Home</Link
+            >
+            <Link
+              @click="toggleSidebar"
+              :href="route('about.us')"
+              class="text-primary font-bold"
+              >About Us</Link
+            >
+            <a
+              @click="toggleSidebar"
+              :href="route('our.sponsers')"
+              class="text-primary font-bold"
+              >Ministries</a
+            >
+            <Link
+              @click="toggleSidebar"
+              :href="route('prayer.page')"
+              class="text-primary font-bold"
+              >Prayer Requests</Link
+            >
+            <Link
+              @click="toggleSidebar"
+              :href="route('contact.us')"
+              class="text-primary font-bold"
+              >Contact</Link
+            >
+            <a
+              @click="toggleSidebar"
+              href="https://www.zeffy.com/donation-form/shekinah-sda-church"
+              target="_blank"
+              class="text-primary font-bold"
+              >Give</a
+            >
+          </nav>
+        </div>
+        <div class="flex-1" @click="toggleSidebar"></div>
+      </div>
+    </transition>
   </header>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
-import { Video } from "lucide-vue-next";
+import { Video, Menu } from "lucide-vue-next";
+
+const isSidebarOpen = ref(false);
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
 </script>
 
-<style>
+<style scoped>
 .rounded-button {
   border-radius: 8px;
 }
 
 .rounded-lg {
   border-radius: 8px;
+}
+
+/* Transition for mobile sidebar */
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.slide-enter-to {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.slide-leave-from {
+  transform: translateX(0%);
+  opacity: 1;
+}
+.slide-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 </style>

@@ -8,7 +8,7 @@
         props.ministryPage?.herotext ??
         'Experience a warm and welcoming community where faith and fellowship come together.'
       "
-      :image="'/storage/' + props.ministryPage?.heroimage"
+      :image="props.ministryPage?.heroimage"
     />
     <section id="ministries" class="py-16">
       <div class="container mx-auto px-4">

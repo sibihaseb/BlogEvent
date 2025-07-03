@@ -8,7 +8,7 @@
         'Connect with Shekinah Church: Join Our Spiritual Community'
       "
       :text="props.aboutUsPage?.herotext ?? ''"
-      :image="'/storage/' + props.aboutUsPage?.heroimage"
+      :image="props.aboutUsPage?.heroimage"
     />
     <div v-if="props.aboutUsPage">
       <section class="py-16">

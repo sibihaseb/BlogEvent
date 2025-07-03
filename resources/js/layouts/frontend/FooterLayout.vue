@@ -6,7 +6,9 @@
           <div class="flex items-center mb-6">
             <img
               src="https://readdy.ai/api/search-image?query=church%2520logo%2520with%2520cross%2520and%2520open%2520bible%2C%2520gold%2520and%2520navy%2520blue%2520colors%2C%2520circular%2520design%2C%2520professional%2C%2520minimalist%2C%2520clean%2520lines&width=150&height=150&seq=54321&orientation=squarish"
-              alt="Shekinah Logo" class="h-16 bg-white rounded-full p-2" />
+              alt="Shekinah Logo"
+              class="h-16 bg-white rounded-full p-2"
+            />
             <div class="ml-4">
               <h3 class="text-xl font-bold text-secondary">SHEKINAH</h3>
               <p class="text-xs text-gray-300">HAITIAN SEVENTH-DAY ADVENTIST CHURCH</p>
@@ -17,16 +19,22 @@
             together in Christ.
           </p>
           <div class="flex space-x-4">
-            <a href="#"
-              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300">
+            <a
+              href="#"
+              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
+            >
               <i class="ri-facebook-fill"></i>
             </a>
-            <a href="#"
-              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300">
+            <a
+              href="#"
+              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
+            >
               <i class="ri-youtube-fill"></i>
             </a>
-            <a href="#"
-              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300">
+            <a
+              href="#"
+              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
+            >
               <i class="ri-instagram-line"></i>
             </a>
           </div>
@@ -35,30 +43,55 @@
           <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
           <ul class="space-y-3">
             <li>
-              <Link :href="route('home')" class="text-gray-300 hover:text-secondary transition duration-300">Home</Link>
+              <Link
+                :href="route('home')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+                >Home</Link
+              >
             </li>
             <li>
-              <Link :href="route('about.us')" class="text-gray-300 hover:text-secondary transition duration-300">About
-              Us
+              <Link
+                :href="route('about.us')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+                >About Us
               </Link>
             </li>
             <li>
-              <a href="#ministries" class="text-gray-300 hover:text-secondary transition duration-300">Ministries</a>
+              <Link
+                :href="route('our.sponsers')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+                >Ministries</Link
+              >
             </li>
             <li>
-              <Link :href="route('church.event')" class="text-gray-300 hover:text-secondary transition duration-300">
-              Events</Link>
+              <Link
+                :href="route('church.event')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+              >
+                Events</Link
+              >
             </li>
             <li>
-              <a href="#sermons" class="text-gray-300 hover:text-secondary transition duration-300">Prayer Requests</a>
+              <Link
+                :href="route('prayer.page')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+                >Prayer Requests</Link
+              >
             </li>
             <li>
-              <Link :href="route('event.blogs')" class="text-gray-300 hover:text-secondary transition duration-300">Blog
+              <Link
+                :href="route('event.blogs')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+                >Blog
               </Link>
             </li>
             <li>
-              <Link :href="route('contact.us')" class="text-gray-300 hover:text-secondary transition duration-300">
-              Contact</Link>
+              <Link
+                :href="route('contact.us')"
+                class="text-gray-300 hover:text-secondary transition duration-300"
+              >
+                Contact</Link
+              >
             </li>
           </ul>
         </div>
@@ -100,35 +133,37 @@
           <p class="text-gray-300 mb-4">
             Subscribe to our newsletter for updates and announcements.
           </p>
-        <form class="mb-6" @submit.prevent="submit">
-  <!-- Input and Button Row -->
-  <div class="flex flex-col sm:flex-row gap-2">
-    <!-- Email Input -->
-    <input type="email" v-model="form.email" placeholder="Your email address"
-                class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none" />
+          <form class="mb-6" @submit.prevent="submit">
+            <!-- Input and Button Row -->
+            <div class="flex flex-col sm:flex-row gap-2">
+              <!-- Email Input -->
+              <input
+                type="email"
+                v-model="form.email"
+                placeholder="Your email address"
+                class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none"
+              />
 
-    <!-- Submit Button (outside input column) -->
-    <button
-      type="submit"
-      :disabled="form.processing"
-      class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap !rounded-button"
-    >
-      Subscribe
-    </button>
-  </div>
+              <!-- Submit Button (outside input column) -->
+              <button
+                type="submit"
+                :disabled="form.processing"
+                class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap !rounded-button"
+              >
+                Subscribe
+              </button>
+            </div>
 
-  <!-- Validation / Success Message UNDER the input only -->
-  <div class="mt-2 min-h-[1.25rem]">
-    <p v-if="form.errors.email" class="text-red-400 text-sm">
-      {{ form.errors.email }}
-    </p>
-    <p v-else-if="form.recentlySuccessful" class="text-green-400 text-sm">
-      Subscription successful!
-    </p>
-  </div>
-</form>
-
-
+            <!-- Validation / Success Message UNDER the input only -->
+            <div class="mt-2 min-h-[1.25rem]">
+              <p v-if="form.errors.email" class="text-red-400 text-sm">
+                {{ form.errors.email }}
+              </p>
+              <p v-else-if="form.recentlySuccessful" class="text-green-400 text-sm">
+                Subscription successful!
+              </p>
+            </div>
+          </form>
 
           <div class="flex items-center space-x-4">
             <div class="flex items-center">
@@ -147,9 +182,13 @@
           &copy; 2025 Shekinah Haitian Seventh-Day Adventist Church. All rights reserved.
         </p>
         <div class="flex justify-center space-x-4 mt-4">
-          <a href="#" class="hover:text-secondary transition duration-300">Privacy Policy</a>
+          <a href="#" class="hover:text-secondary transition duration-300"
+            >Privacy Policy</a
+          >
           <span>|</span>
-          <a href="#" class="hover:text-secondary transition duration-300">Terms of Service</a>
+          <a href="#" class="hover:text-secondary transition duration-300"
+            >Terms of Service</a
+          >
         </div>
       </div>
     </div>
@@ -157,7 +196,7 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Link } from "@inertiajs/vue3";
 
 const form = useForm({
   email: "",
@@ -169,6 +208,7 @@ const submit = () => {
       form.reset();
     },
   });
-};</script>
+};
+</script>
 
 <style scoped></style>

@@ -33,7 +33,7 @@ const props = defineProps<{
   heading: string;
   subheading: string;
   text: string;
-  image: string;
+  image: string | undefined;
 }>();
 
 const defaultImage =
@@ -41,7 +41,7 @@ const defaultImage =
 
 const backgroundStyle = computed(() => ({
   backgroundImage: `linear-gradient(rgba(27, 49, 71, 0.7), rgba(27, 49, 71, 0.7)), url('${
-    props.image || defaultImage
+    props.image ? "/storage/" + props.image : defaultImage
   }')`,
   backgroundSize: "cover",
   backgroundPosition: "center",
