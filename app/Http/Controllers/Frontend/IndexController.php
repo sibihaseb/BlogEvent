@@ -17,9 +17,11 @@ class IndexController extends Controller
     public function index(Request $request)
     {
         $churchevents = ChurchEvent::take(3)->orderBy('created_at', 'desc')->get();
+        $churcheventsAll = ChurchEvent::take(20)->orderBy('created_at', 'desc')->get()->toArray();
         $churcheventBlogs = ChurchEventBlog::take(3)->orderBy('created_at', 'desc')->get();
         return Inertia::render('Welcome', [
             'churchevents' => $churchevents,
+            'churcheventsAll' => $churcheventsAll,
             'churcheventBlogs' => $churcheventBlogs,
         ]);
     }

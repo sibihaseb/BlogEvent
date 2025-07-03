@@ -5,7 +5,7 @@
     <HaitianHeritage />
     <QuickAccessGrid />
     <UpcomingEvents :churchevents="props.churchevents" />
-    <EventCalendar />
+    <EventCalendar :churchevents="props.churcheventsAll" />
     <Ministry />
     <AboutUs />
     <Blog :blogs="props.churcheventBlogs" />
@@ -31,6 +31,7 @@ import type { ChurchEvent, EventBlogs } from "@/client";
 const props = defineProps<{
   churchevents: ChurchEvent[];
   churcheventBlogs: EventBlogs[];
+  churcheventsAll: any;
 }>();
 console.log("Welcome page props:", props);
 

@@ -9,6 +9,7 @@ use App\Models\ChurchEventTag;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ChurchEventRequest;
+use Carbon\Carbon;
 
 class ChurchEventController extends Controller
 {
@@ -44,7 +45,7 @@ class ChurchEventController extends Controller
     {
         $input = $request->validated();
         $ext = $input['picture']->getClientOriginalExtension();
-        $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
+        $filename = str_replace(' ', '', $input['name'] . Carbon::now() . '.' . $ext);
         $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
 
         ChurchEvent::create($input);
@@ -82,7 +83,7 @@ class ChurchEventController extends Controller
         $input = $request->validated();
         if ($request->hasFile('picture')) {
             $ext = $input['picture']->getClientOriginalExtension();
-            $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
+            $filename = str_replace(' ', '', $input['name'] . Carbon::now() . '.' . $ext);
             $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
             if (Storage::exists($churchevent->picture)) {
                 Storage::delete($churchevent->picture);
