@@ -2,8 +2,10 @@
   <section id="events" class="py-16">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-primary mb-2">Upcoming Events</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold text-primary mb-2 dark:text-white">
+          Upcoming Events
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto dark:text-white">
           Join us for these special gatherings and be part of our community.
         </p>
       </div>
@@ -59,7 +61,7 @@
       <div class="text-center mt-10">
         <Link
           :href="route('church.event')"
-          class="inline-block border-2 border-primary text-primary px-8 py-3 rounded-button font-semibold hover:bg-primary hover:text-white transition duration-300 !rounded-button whitespace-nowrap"
+          class="inline-block border-2 dark:text-white border-primary text-primary px-8 py-3 rounded-button font-semibold hover:bg-primary hover:text-white transition duration-300 !rounded-button whitespace-nowrap"
         >
           View All Events
         </Link>

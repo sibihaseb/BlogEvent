@@ -2,32 +2,34 @@
   <section id="calendar" class="py-16">
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-primary mb-2">Church Calendar</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto">
+        <h2 class="text-3xl font-bold text-primary mb-2 dark:text-white">
+          Church Calendar
+        </h2>
+        <p class="text-gray-600 max-w-2xl mx-auto dark:text-white">
           Stay updated with all our upcoming events and activities
         </p>
       </div>
-      <div class="bg-gray-50 p-6 rounded-lg mb-6">
+      <div class="bg-gray-50 p-6 rounded-lg mb-6 dark:bg-black dark:text-white">
         <FullCalendar :options="calendarOptions" />
       </div>
       <div class="bg-gray-50 p-6 rounded-lg">
-        <h3 class="text-xl font-semibold mb-4">Recurring Events</h3>
+        <h3 class="text-xl font-semibold mb-4 text-black">Recurring Events</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="flex items-center space-x-3">
             <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
-            <span>Sabbath Service (Every Saturday)</span>
+            <span class="dark:text-black">Sabbath Service (Every Saturday)</span>
           </div>
           <div class="flex items-center space-x-3">
             <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
-            <span>Prayer Meeting (Every Wednesday)</span>
+            <span class="dark:text-black">Prayer Meeting (Every Wednesday)</span>
           </div>
           <div class="flex items-center space-x-3">
             <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
-            <span>Youth Night (Every Friday)</span>
+            <span class="dark:text-black">Youth Night (Every Friday)</span>
           </div>
           <div class="flex items-center space-x-3">
             <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
-            <span>Community Service (Monthly)</span>
+            <span class="dark:text-black">Community Service (Monthly)</span>
           </div>
         </div>
       </div>

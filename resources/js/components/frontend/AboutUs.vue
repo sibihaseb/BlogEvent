@@ -3,16 +3,17 @@
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="text-3xl font-bold text-primary mb-6">
+          <h2 class="text-3xl font-bold text-primary mb-6 dark:text-white">
+            {{ homepage.about_us_heading || "About Us" }}
             {{ homepage.about_heading || "About Us" }}
           </h2>
-          <p class="text-gray-600 mb-6">
+          <p class="text-gray-600 mb-6 dark:text-white">
             {{
               homepage.about_para_first ||
               "Welcome to the Haitian Heritage Church, a place where faith, culture,"
             }}
           </p>
-          <p class="text-gray-600 mb-6">
+          <p class="text-gray-600 mb-6 dark:text-white">
             {{
               homepage.about_para_second ||
               "We are dedicated to serving our congregation and the wider "
@@ -22,7 +23,7 @@
             <h3 class="text-xl font-semibold mb-4">
               {{ homepage.mission_heading || "Our Mission" }}
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-white">
               {{
                 homepage.mission_description ||
                 "To glorify God through worship, service, and community "
@@ -30,10 +31,10 @@
             </p>
           </div>
           <div class="mb-8">
-            <h3 class="text-xl font-semibold mb-4">
+            <h3 class="text-xl font-semibold mb-4 dark:text-white">
               {{ homepage.vision_heading || "Our Vision" }}
             </h3>
-            <p class="text-gray-600">
+            <p class="text-gray-600 dark:text-white">
               {{
                 homepage.vision_description ||
                 "To be a beacon of hope, healing, and spiritual growth, reflecting "
@@ -99,9 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
-const props = defineProps<{
+defineProps<{
   homepage: {
     about_us_heading: string;
     about_us_description: string;
