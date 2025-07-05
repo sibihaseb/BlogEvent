@@ -4,11 +4,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <div>
           <div class="flex items-center mb-6">
-            <img
-              src="https://readdy.ai/api/search-image?query=church%2520logo%2520with%2520cross%2520and%2520open%2520bible%2C%2520gold%2520and%2520navy%2520blue%2520colors%2C%2520circular%2520design%2C%2520professional%2C%2520minimalist%2C%2520clean%2520lines&width=150&height=150&seq=54321&orientation=squarish"
-              alt="Shekinah Logo"
-              class="h-16 bg-white rounded-full p-2"
-            />
+            <img src="/images/logo.png" alt="Shekinah Logo" class="h-36" />
             <div class="ml-4">
               <h3 class="text-xl font-bold text-secondary">SHEKINAH</h3>
               <p class="text-xs text-gray-300">HAITIAN SEVENTH-DAY ADVENTIST CHURCH</p>
@@ -23,20 +19,20 @@
               href="#"
               class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
             >
-              <i class="ri-facebook-fill"></i>
+              <Facebook :size="26" color="blue" />
             </a>
             <a
               href="#"
               class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
             >
-              <i class="ri-youtube-fill"></i>
+              <Youtube :size="26" color="red" />
             </a>
-            <a
+            <!-- <a
               href="#"
               class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
             >
               <i class="ri-instagram-line"></i>
-            </a>
+            </a> -->
           </div>
         </div>
         <div>
@@ -197,7 +193,7 @@
 
 <script setup lang="ts">
 import { useForm, Link } from "@inertiajs/vue3";
-
+import { Facebook, Youtube } from "lucide-vue-next";
 const form = useForm({
   email: "",
 });
