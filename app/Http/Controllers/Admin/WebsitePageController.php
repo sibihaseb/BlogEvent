@@ -215,4 +215,81 @@ class WebsitePageController extends Controller
             'messageType' => 'success',
         ]);
     }
+
+    public function blogPage()
+    {
+        $blogPage = FrontWebsitePage::where('key', 'blog')->first();
+
+        if ($blogPage) {
+            $blogPage = json_decode($blogPage->value, true);
+        }
+
+        return Inertia::render('admin/website/Blog', [
+            'blogPage' => $blogPage
+        ]);
+    }
+
+    public function blogPageUpdate(Request $request)
+    {
+        $input = $request->all();
+        $style = "1";
+        if ($request->hasFile('heroimage')) {
+            $ext = $input['heroimage']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'blog' . '.' . $ext);
+            $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
+            $style = $input['heroimage_style'];
+        }
+
+        FrontWebsitePage::updateOrCreate(
+            ['key' => 'blog'],
+            ['value' => json_encode($input, true)]
+        );
+
+        if ($request->hasFile('heroimage')) {
+            $this->imageresize($input['heroimage'], $style);
+        }
+
+        return redirect()->route('website.blog')->with([
+            'messages' => ['title' => 'Site Updated successfully'],
+            'messageType' => 'success',
+        ]);
+    }
+
+    public function prayerPage()
+    {
+        $prayerPage = FrontWebsitePage::where('key', 'prayer')->first();
+
+        if ($prayerPage) {
+            $prayerPage = json_decode($prayerPage->value, true);
+        }
+        return Inertia::render('admin/website/PrayerRequest', [
+            'prayerPage' => $prayerPage
+        ]);
+    }
+
+    public function prayerPageUpdate(Request $request)
+    {
+        $input = $request->all();
+        $style = "1";
+        if ($request->hasFile('heroimage')) {
+            $ext = $input['heroimage']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'prayer' . '.' . $ext);
+            $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
+            $style = $input['heroimage_style'];
+        }
+
+        FrontWebsitePage::updateOrCreate(
+            ['key' => 'prayer'],
+            ['value' => json_encode($input, true)]
+        );
+
+        if ($request->hasFile('heroimage')) {
+            $this->imageresize($input['heroimage'], $style);
+        }
+
+        return redirect()->route('website.prayer')->with([
+            'messages' => ['title' => 'Site Updated successfully'],
+            'messageType' => 'success',
+        ]);
+    }
 }

@@ -1,5 +1,4 @@
 <template>
-
   <Head title="Create Event" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
@@ -20,8 +19,10 @@
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="description">Description</Label>
-            <textarea v-model="form.hero_description"
-              class="w-full h-24 rounded-md p-2 border border-gray-300"></textarea>
+            <textarea
+              v-model="form.hero_description"
+              class="w-full h-24 rounded-md p-2 border border-gray-300"
+            ></textarea>
             <InputError :message="form.errors.hero_description" />
           </div>
         </div>
@@ -36,8 +37,10 @@
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="stay_description">Description</Label>
-            <textarea v-model="form.stay_description"
-              class="w-full h-24 rounded-md p-2 border border-gray-300"></textarea>
+            <textarea
+              v-model="form.stay_description"
+              class="w-full h-24 rounded-md p-2 border border-gray-300"
+            ></textarea>
             <InputError :message="form.errors.stay_description" />
           </div>
         </div>
@@ -52,23 +55,33 @@
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="church_description">Description</Label>
-            <textarea v-model="form.church_description"
-              class="w-full h-24 rounded-md p-2 border border-gray-300"></textarea>
+            <textarea
+              v-model="form.church_description"
+              class="w-full h-24 rounded-md p-2 border border-gray-300"
+            ></textarea>
             <InputError :message="form.errors.church_description" />
           </div>
           <div class="flex-1 grid">
             <Label for="side_img">Side Poster</Label>
 
-            <input id="side_img" type="file" accept="image/*" @change="handleSideImgChange"
-              class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+            <input
+              id="side_img"
+              type="file"
+              accept="image/*"
+              @change="handleSideImgChange"
+              class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
 
             <InputError :message="form.errors.side_img" />
 
             <div v-if="previewSideImg" class="mt-1">
-              <img :src="previewSideImg" alt="Side Image Preview" class="h-12 w-12 object-contain border rounded" />
+              <img
+                :src="previewSideImg"
+                alt="Side Image Preview"
+                class="h-12 w-12 object-contain border rounded"
+              />
             </div>
           </div>
-
         </div>
         <Label>Sabbath Service Times:</Label>
         <div class="flex gap-4 flex-col md:flex-row">
@@ -87,45 +100,70 @@
           </div>
           <div class="flex-1 grid">
             <Label for="side_img">Flag Icon</Label>
-            <input id="flag_icon" type="file" accept="image/*" @change="handleflagiconChange"
-              class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+            <input
+              id="flag_icon"
+              type="file"
+              accept="image/*"
+              @change="handleflagiconChange"
+              class="mt-2 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
             <InputError :message="form.errors.flag_icon" />
 
             <div v-if="flag_icon_preview" class="mt-1">
-              <img :src="flag_icon_preview" alt="Side Image Preview" class="h-12 w-12 object-contain border rounded" />
+              <img
+                :src="flag_icon_preview"
+                alt="Side Image Preview"
+                class="h-12 w-12 object-contain border rounded"
+              />
             </div>
           </div>
         </div>
         <hr />
         <!-- Info Cards Section -->
         <Label>Info Cards Section</Label>
-        <div v-for="(card, index) in form.info_cards" :key="index"
-          class="flex gap-4 flex-col md:flex-row border p-4 rounded-lg mb-4">
+        <div
+          v-for="(card, index) in form.info_cards"
+          :key="index"
+          class="flex gap-4 flex-col md:flex-row border p-4 rounded-lg mb-4"
+        >
           <div class="flex-1 grid gap-2">
             <Label :for="`card_title_${index}`">Title</Label>
             <Input :id="`card_title_${index}`" type="text" v-model="card.title" />
           </div>
           <div class="flex-1 grid gap-2">
             <Label :for="`card_description_${index}`">Description</Label>
-            <textarea :id="`card_description_${index}`" v-model="card.description"
-              class="w-full h-24 rounded-md p-2 border border-gray-300"></textarea>
+            <textarea
+              :id="`card_description_${index}`"
+              v-model="card.description"
+              class="w-full h-24 rounded-md p-2 border border-gray-300"
+            ></textarea>
           </div>
           <div class="flex-1 grid gap-2">
             <Label :for="`card_button_text_${index}`">Button Text</Label>
-            <Input :id="`card_button_text_${index}`" type="text" v-model="card.button_text" />
+            <Input
+              :id="`card_button_text_${index}`"
+              type="text"
+              v-model="card.button_text"
+            />
           </div>
           <div class="flex-1 grid gap-2">
             <Label :for="`card_button_url_${index}`">Button URL</Label>
-            <Input :id="`card_button_url_${index}`" type="text" v-model="card.button_url" />
+            <Input
+              :id="`card_button_url_${index}`"
+              type="text"
+              v-model="card.button_url"
+            />
           </div>
-
         </div>
-
 
         <!-- Recurring Events -->
         <Label>Recurring Events</Label>
         <Label for="recurring_event_title">Title</Label>
-        <Input id="recurring_event_title" type="text" v-model="form.recurring_event_title" />
+        <Input
+          id="recurring_event_title"
+          type="text"
+          v-model="form.recurring_event_title"
+        />
         <InputError :message="form.errors.recurring_event_title" />
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
@@ -161,25 +199,39 @@
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="stay_connect_description">Description</Label>
-            <textarea v-model="form.stay_connect_description"
-              class="w-full h-24 rounded-md p-2 border border-gray-300"></textarea>
+            <textarea
+              v-model="form.stay_connect_description"
+              class="w-full h-24 rounded-md p-2 border border-gray-300"
+            ></textarea>
             <InputError :message="form.errors.stay_connect_description" />
           </div>
         </div>
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="stay_connect_item_1">Stay Connect Item 1</Label>
-            <Input id="stay_connect_item_1" type="text" v-model="form.stay_connect_item_1" />
+            <Input
+              id="stay_connect_item_1"
+              type="text"
+              v-model="form.stay_connect_item_1"
+            />
             <InputError :message="form.errors.stay_connect_item_1" />
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="stay_connect_item_2">Stay Connect Item 2</Label>
-            <Input id="stay_connect_item_2" type="text" v-model="form.stay_connect_item_2" />
+            <Input
+              id="stay_connect_item_2"
+              type="text"
+              v-model="form.stay_connect_item_2"
+            />
             <InputError :message="form.errors.stay_connect_item_2" />
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="stay_connect_item_3">Stay Connect Item 3</Label>
-            <Input id="stay_connect_item_3" type="text" v-model="form.stay_connect_item_3" />
+            <Input
+              id="stay_connect_item_3"
+              type="text"
+              v-model="form.stay_connect_item_3"
+            />
             <InputError :message="form.errors.stay_connect_item_3" />
           </div>
         </div>
@@ -254,9 +306,9 @@
         <!-- Submit Button -->
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
-            <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" /> Update Page
+            <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
+            Update Page
           </Button>
-          {{ form }}
         </div>
       </form>
       <BaseToast />
@@ -307,10 +359,10 @@ const form = useForm({
 
   // Info Cards section
   info_cards: props.homepage?.info_cards ?? [
-    { title: '', description: '', button_text: '', button_url: '' },
-    { title: '', description: '', button_text: '', button_url: '' },
-    { title: '', description: '', button_text: '', button_url: '' },
-    { title: '', description: '', button_text: '', button_url: '' },
+    { title: "", description: "", button_text: "", button_url: "" },
+    { title: "", description: "", button_text: "", button_url: "" },
+    { title: "", description: "", button_text: "", button_url: "" },
+    { title: "", description: "", button_text: "", button_url: "" },
   ],
 
   // Recurring events
@@ -339,7 +391,6 @@ const form = useForm({
   about_image_2: props.homepage?.about_image_2 ?? "",
   about_image_3: props.homepage?.about_image_3 ?? "",
   about_image_4: props.homepage?.about_image_4 ?? "",
-
 });
 
 // Handle file change
@@ -356,7 +407,6 @@ const handleflagiconChange = (e: Event) => {
     form.flag_icon = file;
     flag_icon_preview.value = URL.createObjectURL(form.flag_icon);
     // console.log("flag icon changed", form.flag_icon);
-
   }
 };
 
@@ -387,6 +437,5 @@ const submit = () => {
     forceFormData: true,
   });
 };
-
 </script>
 <style scoped></style>

@@ -55,15 +55,20 @@ class IndexController extends Controller
     //  blogs
     public function churchEventBlogs()
     {
-
+        $blogPage = FrontWebsitePage::where('key', 'event')->first();
+        if ($blogPage) {
+            $blogPage = json_decode($blogPage->value, true);
+        }
         $churcheventBlogs = ChurchEventBlog::orderBy('created_at', 'desc')->get();
         return Inertia::render('frontend/Blogs/Index', [
             'churcheventBlogs' => $churcheventBlogs,
+            'blogPage' => $blogPage,
         ]);
     }
 
     public function singleBlog(ChurchEventBlog $churcheventBlog)
     {
+
         return Inertia::render('frontend/Blogs/SingleBlog', [
             'churcheventBlog' => $churcheventBlog,
         ]);
@@ -120,9 +125,13 @@ class IndexController extends Controller
                 'content' => $item->answer,
             ];
         });
+        $prayerPage = FrontWebsitePage::where('key', 'prayer')->first();
+        if ($prayerPage) {
+            $prayerPage = json_decode($prayerPage->value, true);
+        }
         return Inertia::render('frontend/PrayerRequest', [
-            'fQuestions' => $fQuestions
-
+            'fQuestions' => $fQuestions,
+            'prayerPage' => $prayerPage
         ]);
     }
 

@@ -70,6 +70,11 @@ const mainNavItems: NavItem[] = [
     icon: Globe,
   },
   {
+    title: 'Home Page',
+    href: route('website.home'),
+    icon: Globe,
+  },
+  {
     title: 'Ministry Page',
     href: route('website.ministries'),
     icon: Globe,
@@ -80,8 +85,13 @@ const mainNavItems: NavItem[] = [
     icon: Globe,
   },
   {
-    title: 'Home Page',
-    href: route('website.home'),
+    title: 'Blog Page',
+    href: route('website.blog'),
+    icon: Globe,
+  },
+  {
+    title: 'Prayer Request Page',
+    href: route('website.prayer'),
     icon: Globe,
   },
   {

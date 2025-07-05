@@ -2,9 +2,13 @@
   <Head title="Welcome" />
   <FrontendLayout>
     <HeroSectionPage
-      :heading="heroProps.heading"
-      :subheading="heroProps.subheading"
-      :text="heroProps.text"
+      :heading="props.blogPage?.heroheading ?? 'Blogs'"
+      :subheading="props.blogPage?.herosubheading ?? 'Join Us'"
+      :text="
+        props.blogPage?.herotext ??
+        'Experience a warm and welcoming community where faith and fellowship come together.'
+      "
+      :image="props.blogPage?.heroimage"
     />
     <section id="events" class="py-16">
       <div class="container mx-auto px-4">
@@ -71,7 +75,7 @@
 import { ref, computed } from "vue";
 import { Head, Link } from "@inertiajs/vue3";
 // Update the path below to the correct location of FrontendLayout.vue
-import FrontendLayout from "../../../Layouts/FrontendLayout.vue";
+import FrontendLayout from "@/layouts/FrontendLayout.vue";
 import HeroSectionPage from "@/components/frontend/HeroSectionPage.vue";
 import type { EventBlogs } from "@/client";
 import moment from "moment";
@@ -82,6 +86,7 @@ const defaultImage = "https://via.placeholder.com/600x400?text=Event+Image";
 // Props
 const props = defineProps<{
   churcheventBlogs: EventBlogs[];
+  blogPage: any;
 }>();
 
 // Reactive data
@@ -100,12 +105,4 @@ const allLoaded = computed(() => displayLimit.value >= props.churcheventBlogs.le
 
 // Formatting functions
 const fomateDate = (date: Date | string) => moment(date).format("MMM D, YYYY");
-
-// Hero section content
-const heroProps = {
-  heading: "Event Blogs",
-  subheading: "Join Us",
-  text:
-    "Experience a warm and welcoming community where faith and fellowship come together.",
-};
 </script>
