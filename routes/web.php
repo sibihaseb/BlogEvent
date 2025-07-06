@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ChurchEventBlogController;
 use App\Http\Controllers\Admin\ChurchEventController;
 use App\Http\Controllers\Admin\ChurchEventTypeController;
 use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MinistryController;
 use App\Http\Controllers\Admin\EventStaffControlller;
 use App\Http\Controllers\Admin\FrequentlyQuestionController;
@@ -45,9 +46,7 @@ Route::get('oursponsers', [IndexController::class, 'oursponsers'])->name('our.sp
 Route::post('/subscribe/now', [SubscriberController::class, 'subscribe'])->name('subscriber.subscribe');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('users', UserController::class);
     Route::resource('churchevents', ChurchEventController::class);

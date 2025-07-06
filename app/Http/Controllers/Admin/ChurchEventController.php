@@ -45,11 +45,9 @@ class ChurchEventController extends Controller
     {
         $input = $request->validated();
         $ext = $input['picture']->getClientOriginalExtension();
-        $filename = str_replace(' ', '', $input['name'] . Carbon::now() . '.' . $ext);
+        $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
         $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
-
         ChurchEvent::create($input);
-
         $this->imageresize($input['picture'], "1");
 
         return redirect()
@@ -83,7 +81,7 @@ class ChurchEventController extends Controller
         $input = $request->validated();
         if ($request->hasFile('picture')) {
             $ext = $input['picture']->getClientOriginalExtension();
-            $filename = str_replace(' ', '', $input['name'] . Carbon::now() . '.' . $ext);
+            $filename = str_replace(' ', '', $input['name'] . '.' . $ext);
             $input['picture'] = $request->file('picture')->storeAs('churchevents', $filename, 'public');
             if (Storage::exists($churchevent->picture)) {
                 Storage::delete($churchevent->picture);
@@ -92,7 +90,7 @@ class ChurchEventController extends Controller
             unset($input['picture']);
         }
         $churchevent->update($input);
-
+        $this->imageresize($input['picture'], "1");
         return redirect()
             ->route('churchevents.index')
             ->with('message', 'Event updated successfully');

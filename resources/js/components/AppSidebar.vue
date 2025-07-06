@@ -24,11 +24,6 @@ const mainNavItems: NavItem[] = [
     href: '/churchevents',
     icon: CalendarDays,
   },
-  //   {
-  //     title: 'Event Types',
-  //     href: route('types.index'),
-  //     icon: CalendarDays,
-  //   },
   {
     title: 'Blogs',
     href: route('blogs.index'),

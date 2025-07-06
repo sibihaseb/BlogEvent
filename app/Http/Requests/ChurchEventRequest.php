@@ -26,7 +26,7 @@ class ChurchEventRequest extends FormRequest
             'description' => 'nullable|string',
             'short_description' => 'required|string',
             'start_time' => 'required|date',
-            'end_time' => 'required|date|after:start_time',
+            'end_time' => 'required|date',
             'location' => 'required|string',
             'type' => 'required|string',
         ];

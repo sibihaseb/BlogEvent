@@ -32,7 +32,9 @@
                 id="start_time"
                 type="datetime-local"
                 v-model="form.start_time"
-                required
+                step="any"
+                required="false"
+                novalidate
               />
               <InputError :message="form.errors.start_time" />
             </div>
@@ -42,7 +44,9 @@
                 id="end_time"
                 type="datetime-local"
                 v-model="form.end_time"
-                required
+                step="any"
+                required="false"
+                novalidate
               />
               <InputError :message="form.errors.end_time" />
             </div>
