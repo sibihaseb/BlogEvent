@@ -26,6 +26,43 @@
             <InputError :message="form.errors.hero_description" />
           </div>
         </div>
+        <div class="flex gap-4 flex-col md:flex-row">
+          <div class="flex-1 grid gap-2">
+            <Label for="picture">Hero Section Image</Label>
+            <Input
+              id="picture"
+              type="file"
+              accept="image/*"
+              @change="handleHeroFileChange"
+            />
+          </div>
+          <div class="flex-1 grid gap-2">
+            <Label for="type">Image Style</Label>
+            <select
+              id="states"
+              v-model="form.heroimage_style"
+              class="text-sm rounded-[var(--radius)] max-h-9 border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]"
+            >
+              <option selected value="">Choose a Image Style</option>
+              <option value="1">1920x1080</option>
+              <option value="2">1900x300</option>
+            </select>
+          </div>
+          <div class="flex-1 grid gap-2 justify-center">
+            <Label for="heading">Preview</Label>
+            <img
+              :src="
+                imagePreviews
+                  ? imagePreviews
+                  : form.heroimage
+                  ? '/storage/' + form.heroimage
+                  : 'https://readdy.ai/api/search-image?query=diverse%2520congregation%2520in%2520a%2520modern%2520church%2520setting%2520with%2520warm%2520lighting%2C%2520people%2520worshipping%2520together%2C%2520hands%2520raised%2520in%2520praise%2C%2520joyful%2520expressions%2C%2520professional%2520photography%2C%2520high%2520quality%2C%2520inspirational%2520atmosphere&width=1920&height=1080&seq=12345&orientation=landscape'
+              "
+              alt="Hero Image Preview"
+              class="rounded border border-gray-300 max-w-xs h-auto shadow"
+            />
+          </div>
+        </div>
         <hr />
         <!-- Stay Connected Section -->
         <Label>Stay Connected</Label>
@@ -338,6 +375,8 @@ const flag_icon_preview = ref(
   props.homepage?.flag_icon ? `/storage/${props.homepage.flag_icon}` : null
 );
 
+const imagePreviews = ref<string | null>(null);
+
 const form = useForm({
   // Hero section
   hero_title: props.homepage?.hero_title ?? "",
@@ -391,6 +430,9 @@ const form = useForm({
   about_image_2: props.homepage?.about_image_2 ?? "",
   about_image_3: props.homepage?.about_image_3 ?? "",
   about_image_4: props.homepage?.about_image_4 ?? "",
+
+  heroimage: props.homepage?.heroimage ? props.homepage?.heroimage : "",
+  heroimage_style: "",
 });
 
 // Handle file change
@@ -429,6 +471,18 @@ const handleFileChange = (e: Event) => {
     case "about_image_4":
       form.about_image_4 = file;
       break;
+  }
+};
+
+const handleHeroFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  if (target.files?.length) {
+    form.heroimage = target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      imagePreviews.value = reader.result as string;
+    };
+    reader.readAsDataURL(target.files[0]);
   }
 };
 

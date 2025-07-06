@@ -204,11 +204,21 @@ class WebsitePageController extends Controller
             $filename = str_replace(' ', '', 'flag_icon' . '.' . $ext);
             $input['flag_icon'] = $request->file('flag_icon')->storeAs('website', $filename, 'public');
         }
+        if ($request->hasFile('heroimage')) {
+            $ext = $input['heroimage']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'blog' . '.' . $ext);
+            $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
+            $style = $input['heroimage_style'];
+        }
 
         FrontWebsitePage::updateOrCreate(
             ['key' => 'homepage'],
             ['value' => json_encode($input, true)]
         );
+
+        if ($request->hasFile('heroimage')) {
+            $this->imageresize($input['heroimage'], $style);
+        }
 
         return redirect()->route('website.home')->with([
             'messages' => ['title' => 'Site Updated successfully'],
