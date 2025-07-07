@@ -1,7 +1,8 @@
 <template>
   <footer class="bg-primary text-white pt-16 pb-8">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Left Column: Logo and About -->
         <div>
           <div class="flex items-center mb-6">
             <img src="/images/logo.png" alt="Shekinah Logo" class="h-36" />
@@ -27,130 +28,125 @@
             >
               <Youtube :size="26" color="red" />
             </a>
-            <!-- <a
-              href="#"
-              class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-secondary hover:text-primary transition duration-300"
-            >
-              <i class="ri-instagram-line"></i>
-            </a> -->
           </div>
         </div>
-        <div>
-          <h3 class="text-xl font-semibold mb-6">Quick Links</h3>
-          <ul class="space-y-3">
-            <li>
-              <Link
-                :href="route('home')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-                >Home</Link
-              >
-            </li>
-            <li>
-              <Link
-                :href="route('about.us')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-                >About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                :href="route('our.sponsers')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-                >Ministries</Link
-              >
-            </li>
-            <li>
-              <Link
-                :href="route('church.event')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-              >
-                Events</Link
-              >
-            </li>
-            <li>
-              <Link
-                :href="route('prayer.page')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-                >Prayer Requests</Link
-              >
-            </li>
-            <li>
-              <Link
-                :href="route('event.blogs')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-                >Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                :href="route('contact.us')"
-                class="text-gray-300 hover:text-secondary transition duration-300"
-              >
-                Contact</Link
-              >
-            </li>
-          </ul>
+
+        <!-- Middle Column: Quick Links + Service Times -->
+        <div class="flex justify-center">
+          <div class="grid grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-lg md:text-xl font-semibold mb-4">Quick Links</h3>
+              <ul class="space-y-2 text-sm">
+                <li>
+                  <Link
+                    :href="route('home')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >Home</Link
+                  >
+                </li>
+                <li>
+                  <Link
+                    :href="route('about.us')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >About Us</Link
+                  >
+                </li>
+                <li>
+                  <Link
+                    :href="route('our.sponsers')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >Ministries</Link
+                  >
+                </li>
+                <li>
+                  <Link
+                    :href="route('church.event')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >Events</Link
+                  >
+                </li>
+                <li>
+                  <Link
+                    :href="route('prayer.page')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >Prayer Requests</Link
+                  >
+                </li>
+                <li>
+                  <Link
+                    :href="route('event.blogs')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >Blog</Link
+                  >
+                </li>
+                <li>
+                  <Link
+                    :href="route('contact.us')"
+                    class="text-gray-300 hover:text-secondary transition duration-300"
+                    >Contact</Link
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-lg md:text-xl font-semibold mb-4">Service Times</h3>
+              <ul class="space-y-3 text-sm">
+                <li class="flex items-start">
+                  <i class="ri-calendar-line mr-3 mt-1"></i>
+                  <div>
+                    <span class="block font-medium">Sabbath School</span>
+                    <span class="text-gray-300">Saturday 9:30 AM</span>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="ri-calendar-line mr-3 mt-1"></i>
+                  <div>
+                    <span class="block font-medium">Divine Service</span>
+                    <span class="text-gray-300">Saturday 11:00 AM</span>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="ri-calendar-line mr-3 mt-1"></i>
+                  <div>
+                    <span class="block font-medium">Prayer Meeting</span>
+                    <span class="text-gray-300">Wednesday 7:00 PM</span>
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <i class="ri-calendar-line mr-3 mt-1"></i>
+                  <div>
+                    <span class="block font-medium">Youth Meeting</span>
+                    <span class="text-gray-300">Friday 7:00 PM</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 class="text-xl font-semibold mb-6">Service Times</h3>
-          <ul class="space-y-3">
-            <li class="flex items-start">
-              <i class="ri-calendar-line mr-3 mt-1"></i>
-              <div>
-                <span class="block font-medium">Sabbath School</span>
-                <span class="text-gray-300">Saturday 9:30 AM</span>
-              </div>
-            </li>
-            <li class="flex items-start">
-              <i class="ri-calendar-line mr-3 mt-1"></i>
-              <div>
-                <span class="block font-medium">Divine Service</span>
-                <span class="text-gray-300">Saturday 11:00 AM</span>
-              </div>
-            </li>
-            <li class="flex items-start">
-              <i class="ri-calendar-line mr-3 mt-1"></i>
-              <div>
-                <span class="block font-medium">Prayer Meeting</span>
-                <span class="text-gray-300">Wednesday 7:00 PM</span>
-              </div>
-            </li>
-            <li class="flex items-start">
-              <i class="ri-calendar-line mr-3 mt-1"></i>
-              <div>
-                <span class="block font-medium">Youth Meeting</span>
-                <span class="text-gray-300">Friday 7:00 PM</span>
-              </div>
-            </li>
-          </ul>
-        </div>
+
+        <!-- Right Column: Stay Connected -->
         <div>
           <h3 class="text-xl font-semibold mb-6">Stay Connected</h3>
           <p class="text-gray-300 mb-4">
             Subscribe to our newsletter for updates and announcements.
           </p>
           <form class="mb-6" @submit.prevent="submit">
-            <!-- Input and Button Row -->
             <div class="flex flex-col sm:flex-row gap-2">
-              <!-- Email Input -->
               <input
                 type="email"
                 v-model="form.email"
                 placeholder="Your email address"
                 class="px-4 py-3 rounded-button bg-white bg-opacity-20 text-black placeholder-black border-none"
               />
-
-              <!-- Submit Button (outside input column) -->
               <button
                 type="submit"
                 :disabled="form.processing"
-                class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap !rounded-button"
+                class="bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 whitespace-nowrap"
               >
                 Subscribe
               </button>
             </div>
-
-            <!-- Validation / Success Message UNDER the input only -->
             <div class="mt-2 min-h-[1.25rem]">
               <p v-if="form.errors.email" class="text-red-400 text-sm">
                 {{ form.errors.email }}
@@ -173,6 +169,7 @@
           </div>
         </div>
       </div>
+
       <div class="pt-8 border-t border-gray-700 text-center text-gray-400 text-sm">
         <p>
           &copy; 2025 Shekinah Haitian Seventh-Day Adventist Church. All rights reserved.

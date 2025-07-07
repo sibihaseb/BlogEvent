@@ -7,7 +7,7 @@
     <UpcomingEvents :churchevents="props.churchevents" />
     <EventCalendar :homepage="homepage" :churchevents="props.churcheventsAll" />
     <Ministry :homepage="homepage" />
-    <AboutUs :homepage="homepage" />
+    <!-- <AboutUs :homepage="homepage" /> -->
     <Blog :blogs="props.churcheventBlogs" />
     <!-- <Contact /> -->
   </FrontendLayout>
@@ -23,7 +23,7 @@ import QuickAccessGrid from "@/components/frontend/QuickAccessGrid.vue";
 import UpcomingEvents from "@/components/frontend/UpcomingEvents.vue";
 import EventCalendar from "@/components/frontend/EventCalendar.vue";
 import Ministry from "@/components/frontend/Ministry.vue";
-import AboutUs from "@/components/frontend/AboutUs.vue";
+// import AboutUs from "@/components/frontend/AboutUs.vue";
 import Blog from "@/components/frontend/Blog.vue";
 // import Contact from "@/components/frontend/Contact.vue";
 import type { ChurchEvent, EventBlogs } from "@/client";

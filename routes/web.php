@@ -41,6 +41,7 @@ Route::post('/submit-prayer', [PrayerRequestController::class, 'prayerFormSubmit
 
 //allministery
 Route::get('oursponsers', [IndexController::class, 'oursponsers'])->name('our.sponsers');
+Route::get('/ministry/{ministry}', [IndexController::class, 'singleMinistry'])->name('single.ministry');
 
 //post subscribes
 Route::post('/subscribe/now', [SubscriberController::class, 'subscribe'])->name('subscriber.subscribe');

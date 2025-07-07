@@ -191,6 +191,9 @@ const calendarOptions = ref({
 </script>
 
 <style>
+.fc .fc-button {
+  text-transform: capitalize;
+}
 /* Mobile: Smaller FullCalendar header styles */
 @media (max-width: 768px) {
   /* Header toolbar container */

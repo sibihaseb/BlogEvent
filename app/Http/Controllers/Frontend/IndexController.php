@@ -147,4 +147,11 @@ class IndexController extends Controller
             'ministryPage' => $ministryPage,
         ]);
     }
+
+    public function singleMinistry(Ministry $ministry)
+    {
+        return Inertia::render('frontend/OurMinistery/SingleMinistry', [
+            'ministry' => $ministry,
+        ]);
+    }
 }
