@@ -18,7 +18,7 @@
         <Link
           :href="route('about.us')"
           class="text-primary hover:text-secondary font-bold transition whitespace-nowrap duration-300"
-          >About Us</Link
+          >About</Link
         >
         <a
           :href="route('our.sponsers')"

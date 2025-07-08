@@ -16,18 +16,18 @@
           }}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 mb-12">
-          <a
-            href="#services"
+          <Link
+            :href="route('contact.us')"
             class="bg-secondary text-primary px-8 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300 text-center !rounded-button whitespace-nowrap"
           >
             Join Us This Sabbath
-          </a>
-          <a
-            href="#about"
+          </Link>
+          <Link
+            :href="route('about.us')"
             class="bg-transparent border-2 border-white px-8 py-3 rounded-button font-semibold hover:bg-white hover:text-primary transition duration-300 text-center !rounded-button whitespace-nowrap"
           >
             Learn More
-          </a>
+          </Link>
         </div>
         <div class="bg-opacity-10 backdrop-blur-sm p-6 rounded-lg max-w-md">
           <h3 class="text-xl font-semibold mb-4">

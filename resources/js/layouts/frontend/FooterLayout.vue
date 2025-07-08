@@ -48,7 +48,7 @@
                   <Link
                     :href="route('about.us')"
                     class="text-gray-300 hover:text-secondary transition duration-300"
-                    >About Us</Link
+                    >About</Link
                   >
                 </li>
                 <li>
@@ -160,11 +160,13 @@
           <div class="flex items-center space-x-4">
             <div class="flex items-center">
               <i class="ri-map-pin-line mr-2"></i>
-              <span class="text-gray-300">Miami, FL</span>
+              <span class="text-gray-300">205 E Carver St Alvarado, Texas 76009</span>
             </div>
             <div class="flex items-center">
               <i class="ri-phone-line mr-2"></i>
-              <span class="text-gray-300">(305) 555-1234</span>
+              <a class="text-gray-300" href="mailto:info@shekinahsda.org"
+                >info@shekinahsda.org</a
+              >
             </div>
           </div>
         </div>
