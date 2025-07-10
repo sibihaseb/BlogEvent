@@ -36,7 +36,7 @@
           >Contact</Link
         >
         <a
-          href="https://www.zeffy.com/donation-form/shekinah-sda-church"
+          href="https://adventistgiving.org/donate/ANWB24"
           target="_blank"
           class="text-primary hover:text-secondary font-bold transition duration-300"
           >Give</a
