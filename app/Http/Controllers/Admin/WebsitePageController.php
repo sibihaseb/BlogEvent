@@ -23,12 +23,10 @@ class WebsitePageController extends Controller
     public function aboutUsPageUpdate(Request $request)
     {
         $input = $request->all();
-        $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'AboutUs' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style']; // Default to '1' if not set
         }
         if ($request->hasFile('genral_image')) {
             $ext = $input['genral_image']->getClientOriginalExtension();
@@ -41,8 +39,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.aboutus')->with([
@@ -67,13 +65,10 @@ class WebsitePageController extends Controller
     public function contactUsPageUpdate(Request $request)
     {
         $input = $request->all();
-
-        $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'ContactUs' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style'];
         }
         if ($request->hasFile('genral_image')) {
             $ext = $input['genral_image']->getClientOriginalExtension();
@@ -86,8 +81,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.contactus')->with([
@@ -112,12 +107,10 @@ class WebsitePageController extends Controller
     public function ministriesPageUpdate(Request $request)
     {
         $input = $request->all();
-        $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'ministries' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style'];
         }
 
         FrontWebsitePage::updateOrCreate(
@@ -125,8 +118,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.ministries')->with([
@@ -151,12 +144,10 @@ class WebsitePageController extends Controller
     public function eventPageUpdate(Request $request)
     {
         $input = $request->all();
-        $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'event' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style'];
         }
 
         FrontWebsitePage::updateOrCreate(
@@ -164,8 +155,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.event')->with([
@@ -227,8 +218,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.home')->with([
@@ -253,12 +244,10 @@ class WebsitePageController extends Controller
     public function blogPageUpdate(Request $request)
     {
         $input = $request->all();
-        $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'blog' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style'];
         }
 
         FrontWebsitePage::updateOrCreate(
@@ -266,8 +255,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.blog')->with([
@@ -291,12 +280,10 @@ class WebsitePageController extends Controller
     public function prayerPageUpdate(Request $request)
     {
         $input = $request->all();
-        $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'prayer' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style'];
         }
 
         FrontWebsitePage::updateOrCreate(
@@ -304,8 +291,8 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage')) {
-            $this->imageresize($input['heroimage'], $style);
+        if ($request->hasFile('heroimage') && $request->heroimage_style) {
+            $this->imageresize($input['heroimage'], $input['heroimage_style']);
         }
 
         return redirect()->route('website.prayer')->with([
