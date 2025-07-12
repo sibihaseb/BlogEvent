@@ -1,15 +1,10 @@
 <template>
+
   <Head title="About Us" />
   <FrontendLayout>
-    <HeroSectionPage
-      :heading="props.aboutUsPage?.heroheading ?? 'About Us'"
-      :subheading="
-        props.aboutUsPage?.herosubheading ??
-        'Connect with Shekinah Church: Join Our Spiritual Community'
-      "
-      :text="props.aboutUsPage?.herotext ?? ''"
-      :image="props.aboutUsPage?.heroimage"
-    />
+    <HeroSectionPage :heading="props.aboutUsPage?.heroheading ?? 'About Us'" :subheading="props.aboutUsPage?.herosubheading ??
+      'Connect with Shekinah Church: Join Our Spiritual Community'
+      " :text="props.aboutUsPage?.herotext ?? ''" :image="props.aboutUsPage?.heroimage" />
     <div v-if="props.aboutUsPage">
       <section class="py-16">
         <div class="container mx-auto px-4 max-w-6xl">
@@ -31,9 +26,7 @@
             <div class="flex-1 ml-5">
               <div class="flex gap-2 items-start space-x-4 mb-4">
                 <div class="flex-shrink-0">
-                  <div
-                    class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center"
-                  >
+                  <div class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center">
                     <Building class="text-black" />
                   </div>
                 </div>
@@ -48,9 +41,7 @@
               </div>
               <div class="flex gap-2 items-start space-x-4 mb-4">
                 <div class="flex-shrink-0">
-                  <div
-                    class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center"
-                  >
+                  <div class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center">
                     <Users class="text-black" />
                   </div>
                 </div>
@@ -65,9 +56,7 @@
               </div>
               <div class="flex gap-2 items-start space-x-4">
                 <div class="flex-shrink-0">
-                  <div
-                    class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center"
-                  >
+                  <div class="h-10 w-10 rounded-full bg-[#e4a853] flex items-center justify-center">
                     <Award class="text-black" />
                   </div>
                 </div>
@@ -89,53 +78,25 @@
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="w-full md:flex-1">
-            <form
-              @submit.prevent="submit"
-              class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto"
-            >
+            <form @submit.prevent="submit" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto">
               <h3 class="text-3xl font-semibold text-primary mb-4">Get in touch today</h3>
               <h3 class="text-lg font-semibold text-primary mb-4">
                 We'd love to hear from you
               </h3>
               <div class="space-y-5">
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter Your Name"
-                  v-model="form.name"
-                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary"
-                />
+                <input type="text" required placeholder="Enter Your Name" v-model="form.name"
+                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary" />
                 <InputError :message="form.errors.name" />
-                <input
-                  required
-                  type="email"
-                  v-model="form.email"
-                  placeholder="Enter Your Email"
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
-                />
-                <input
-                  required
-                  v-model="form.subject"
-                  type="text"
-                  placeholder="Subject"
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
-                />
-                <textarea
-                  v-model="form.message"
-                  required
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
-                  placeholder="Message"
-                  rows="6"
-                ></textarea>
-                <button
-                  :disabled="form.processing"
-                  type="submit"
-                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300"
-                >
-                  <LoaderCircle
-                    v-if="form.processing"
-                    class="mr-2 h-4 w-4 animate-spin"
-                  />
+                <input required type="email" v-model="form.email" placeholder="Enter Your Email"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" />
+                <input required v-model="form.subject" type="text" placeholder="Subject"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" />
+                <textarea v-model="form.message" required
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" placeholder="Message"
+                  rows="6"></textarea>
+                <button :disabled="form.processing" type="submit"
+                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300">
+                  <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
                   Send Message
                 </button>
               </div>
@@ -145,11 +106,18 @@
             </form>
           </div>
 
-          <div class="text-white max-w-xl">
+          <!-- <div class="text-white max-w-xl">
             <h2 class="text-4xl font-bold mb-4">
               Connect with Shekinah: Join Our Spiritual Family
             </h2>
             <Accordion :accordionItems="props.fQuestions" />
+          </div> -->
+
+          <div class="max-w-xl rounded-2xl">
+            <img :src="aboutUsPage.genral_image
+              ? `storage/${aboutUsPage.genral_image}`
+              : 'https://readdy.ai/api/search-image?query=haitian%2520church%2520choir%2520in%2520traditional%2520dress%2C%2520joyful%2520worship%2C%2520professional%2520photography%2C%2520warm%2520lighting&width=600&height=400&seq=12122&orientation=landscape'
+              " alt="Haitian Flag" class=" object-cover rounded-xl" />
           </div>
         </div>
       </div>
@@ -164,20 +132,12 @@
             </p>
           </div>
 
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-          >
-            <div
-              v-for="staff in visibleEventstaff"
-              :key="staff.id"
-              class="bg-white rounded-lg overflow-hidden shadow-md event-card transition duration-300"
-            >
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div v-for="staff in visibleEventstaff" :key="staff.id"
+              class="bg-white rounded-lg overflow-hidden shadow-md event-card transition duration-300">
               <div class="h-80 bg-gray-200 relative">
-                <img
-                  :src="'storage/' + staff.image || defaultImage"
-                  :alt="staff.name"
-                  class="w-full h-full object-cover object-top"
-                />
+                <img :src="'storage/' + staff.image || defaultImage" :alt="staff.name"
+                  class="w-full h-full object-cover object-top" />
               </div>
               <div class="p-6">
                 <h3 class="text-xl font-semibold mb-2">{{ staff.name }}</h3>
@@ -190,16 +150,12 @@
           </div>
 
           <div class="text-center mt-10" v-if="props.eventstaff.length > 10">
-            <button
-              @click="loadMore"
-              v-if="!allLoaded"
-              :class="[
-                'inline-block border-2 px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap',
-                allLoaded
-                  ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                  : 'border-primary text-primary hover:bg-primary hover:text-white',
-              ]"
-            >
+            <button @click="loadMore" v-if="!allLoaded" :class="[
+              'inline-block border-2 px-8 py-3 rounded-button font-semibold transition duration-300 whitespace-nowrap',
+              allLoaded
+                ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                : 'border-primary text-primary hover:bg-primary hover:text-white',
+            ]">
               {{ allLoaded ? "All Events Loaded" : "Load More Events" }}
             </button>
           </div>

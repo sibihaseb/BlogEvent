@@ -30,6 +30,11 @@ class WebsitePageController extends Controller
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
             $style = $input['heroimage_style']; // Default to '1' if not set
         }
+        if ($request->hasFile('genral_image')) {
+            $ext = $input['genral_image']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
+            $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
+        }
         // dd($input['heroimage']);
         FrontWebsitePage::updateOrCreate(
             ['key' => 'aboutus'],
@@ -62,12 +67,18 @@ class WebsitePageController extends Controller
     public function contactUsPageUpdate(Request $request)
     {
         $input = $request->all();
+
         $style = "1";
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'ContactUs' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
             $style = $input['heroimage_style'];
+        }
+        if ($request->hasFile('genral_image')) {
+            $ext = $input['genral_image']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
+            $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
         }
 
         FrontWebsitePage::updateOrCreate(

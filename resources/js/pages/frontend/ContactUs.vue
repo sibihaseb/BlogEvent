@@ -1,32 +1,23 @@
 <template>
+
   <Head title="Contact Us" />
   <FrontendLayout>
-    <HeroSectionPage
-      :heading="props.contactUsPage?.heroheading ?? 'Contact Us'"
-      :subheading="
-        props.contactUsPage?.herosubheading ??
-        'Connect with Shekinah Church: Join Our Spiritual Community'
-      "
-      :text="props.contactUsPage?.herotext ?? ''"
-      :image="props.contactUsPage?.heroimage"
-    />
+    <HeroSectionPage :heading="props.contactUsPage?.heroheading ?? 'Contact Us'" :subheading="props.contactUsPage?.herosubheading ??
+      'Connect with Shekinah Church: Join Our Spiritual Community'
+      " :text="props.contactUsPage?.herotext ?? ''" :image="props.contactUsPage?.heroimage" />
     <section class="py-16">
       <div class="container mx-auto px-4 max-w-6xl">
         <h1 class="text-center text-5xl font-bold">Church Location</h1>
         <div class="flex gap-4 flex-col md:flex-row mt-30">
           <div class="flex-1 grid gap-2">
             <h1>
-              <span class="text-2xl font-semibold"
-                >{{ contactUsPage.address_heading }}:</span
-              ><br />
+              <span class="text-2xl font-semibold">{{ contactUsPage.address_heading }}:</span><br />
               <span class="text-lg text-gray-600 dark:text-white">{{
                 contactUsPage.address_text
-              }}</span>
+                }}</span>
             </h1>
             <h1>
-              <span class="text-2xl font-semibold"
-                >{{ contactUsPage.website_heading }}:</span
-              ><br />
+              <span class="text-2xl font-semibold">{{ contactUsPage.website_heading }}:</span><br />
               <span class="text-lg text-gray-600 dark:text-white">
                 <Link :href="props.appUrl" class="text-primary dark:text-white">{{
                   contactUsPage.website_text
@@ -34,26 +25,15 @@
               </span>
             </h1>
             <h1>
-              <span class="text-2xl font-semibold"
-                >{{ contactUsPage.email_heading }}:</span
-              ><br />
-              <span class="text-lg text-gray-600 dark:text-white"
-                ><a
-                  href="mailto:info@shekinahsda.org"
-                  class="text-primary dark:text-white"
-                  >{{ contactUsPage.email_text }}</a
-                ></span
-              >
+              <span class="text-2xl font-semibold">{{ contactUsPage.email_heading }}:</span><br />
+              <span class="text-lg text-gray-600 dark:text-white"><a href="mailto:info@shekinahsda.org"
+                  class="text-primary dark:text-white">{{ contactUsPage.email_text }}</a></span>
             </h1>
           </div>
           <div class="flex-1">
             <div class="relative w-full aspect-video rounded-lg overflow-hidden">
-              <iframe
-                :src="contactUsPage.map_url"
-                class="absolute top-0 left-0 w-full h-full border-0"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+              <iframe :src="contactUsPage.map_url" class="absolute top-0 left-0 w-full h-full border-0" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
           </div>
         </div>
@@ -63,53 +43,25 @@
       <div class="container mx-auto px-4 max-w-6xl">
         <div class="flex flex-col md:flex-row items-center justify-between gap-8">
           <div class="w-full md:flex-1">
-            <form
-              @submit.prevent="submit"
-              class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto"
-            >
+            <form @submit.prevent="submit" class="bg-white p-8 rounded-lg shadow-lg max-w-xl mx-auto">
               <h3 class="text-3xl font-semibold text-primary mb-4">Get in touch today</h3>
               <h3 class="text-lg font-semibold text-primary mb-4">
                 We'd love to hear from you
               </h3>
               <div class="space-y-5">
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter Your Name"
-                  v-model="form.name"
-                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary"
-                />
+                <input type="text" required placeholder="Enter Your Name" v-model="form.name"
+                  class="w-full px-4 text-black py-3 rounded-button border focus:border-secondary" />
                 <InputError :message="form.errors.name" />
-                <input
-                  required
-                  type="email"
-                  v-model="form.email"
-                  placeholder="Enter Your Email"
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
-                />
-                <input
-                  required
-                  v-model="form.subject"
-                  type="text"
-                  placeholder="Subject"
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
-                />
-                <textarea
-                  v-model="form.message"
-                  required
-                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary"
-                  placeholder="Message"
-                  rows="6"
-                ></textarea>
-                <button
-                  :disabled="form.processing"
-                  type="submit"
-                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300"
-                >
-                  <LoaderCircle
-                    v-if="form.processing"
-                    class="mr-2 h-4 w-4 animate-spin"
-                  />
+                <input required type="email" v-model="form.email" placeholder="Enter Your Email"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" />
+                <input required v-model="form.subject" type="text" placeholder="Subject"
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" />
+                <textarea v-model="form.message" required
+                  class="w-full px-4 py-3 text-black rounded-button border focus:border-secondary" placeholder="Message"
+                  rows="6"></textarea>
+                <button :disabled="form.processing" type="submit"
+                  class="w-full bg-secondary text-primary px-6 py-3 rounded-button font-semibold hover:bg-opacity-90 transition duration-300">
+                  <LoaderCircle v-if="form.processing" class="mr-2 h-4 w-4 animate-spin" />
                   Send Message
                 </button>
               </div>
@@ -119,11 +71,17 @@
             </form>
           </div>
 
-          <div class="text-white max-w-xl">
+          <!-- <div class="text-white max-w-xl">
             <h2 class="text-4xl font-bold mb-4">
               Connect with Shekinah: Join Our Spiritual Family
             </h2>
             <Accordion :accordionItems="fQuestions" />
+          </div> -->
+          <div class="max-w-xl rounded-2xl">
+            <img :src="contactUsPage.genral_image
+              ? `storage/${contactUsPage.genral_image}`
+              : 'https://readdy.ai/api/search-image?query=haitian%2520church%2520choir%2520in%2520traditional%2520dress%2C%2520joyful%2520worship%2C%2520professional%2520photography%2C%2520warm%2520lighting&width=600&height=400&seq=12122&orientation=landscape'
+              " alt="Haitian Flag" class=" object-cover rounded-xl" />
           </div>
         </div>
       </div>
@@ -154,6 +112,7 @@ const props = defineProps<{
     herosubheading: string;
     herotext: string;
     heroimage: string;
+    genral_image: string;
   };
 }>();
 console.log(props);

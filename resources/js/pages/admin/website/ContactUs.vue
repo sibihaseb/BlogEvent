@@ -1,4 +1,5 @@
 <template>
+
   <Head title="Create Contact us" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
@@ -25,16 +26,13 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="picture">Hero Section Image</Label>
-            <Input id="picture" type="file" accept="image/*" @change="handleFileChange" />
+            <Input id="picture" type="file" accept="image/*" @change="handleFileChange('heroimage', $event)" />
             <InputError :message="form.errors.heading" />
           </div>
           <div class="flex-1 grid gap-2">
             <Label for="type">Image Style</Label>
-            <select
-              id="states"
-              v-model="form.heroimage_style"
-              class="text-sm rounded-[var(--radius)] max-h-9 border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]"
-            >
+            <select id="states" v-model="form.heroimage_style"
+              class="text-sm rounded-[var(--radius)] max-h-9 border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]">
               <option selected value="">Choose a Image Style</option>
               <option value="1">1920x1080</option>
               <option value="2">1900x300</option>
@@ -44,12 +42,9 @@
           </div>
           <div class="flex-1 grid gap-2 justify-center">
             <Label for="heading">Preview</Label>
-            <img
-              v-if="imagePreviews || form.heroimage"
-              :src="imagePreviews ? imagePreviews : '/storage/' + form.heroimage"
-              alt="Passport Back Preview"
-              class="rounded border border-gray-300 max-w-xs h-auto shadow"
-            />
+            <img v-if="imagePreviews || form.heroimage"
+              :src="imagePreviews ? imagePreviews : '/storage/' + form.heroimage" alt="Passport Back Preview"
+              class="rounded border border-gray-300 max-w-xs h-auto shadow" />
           </div>
         </div>
         <div class="flex gap-4 flex-col md:flex-row">
@@ -92,6 +87,11 @@
           <Label for="name">Map Url</Label>
           <Input v-model="form.map_url" />
           <InputError :message="form.errors.map_url" />
+        </div>
+        <div class="flex-1 grid gap-2">
+          <Label for="picture">General Image</Label>
+          <Input id="picture" type="file" accept="image/*" @change="handleFileChange('genral_image', $event)" />
+          <InputError :message="form.errors.genral_image" />
         </div>
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
@@ -147,17 +147,23 @@ const form = useForm({
   herotext: props.contactUsPage?.herotext ? props.contactUsPage?.herotext : "",
   heroimage: props.contactUsPage?.heroimage ? props.contactUsPage?.heroimage : "",
   heroimage_style: "",
+  genral_image: props.contactUsPage?.genral_image ? props.contactUsPage?.genral_image : "",
 });
 
-const handleFileChange = (e: Event) => {
+const handleFileChange = (key: string, e: Event) => {
   const target = e.target as HTMLInputElement;
   if (target.files?.length) {
-    form.heroimage = target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      imagePreviews.value = reader.result as string;
-    };
-    reader.readAsDataURL(target.files[0]);
+    if (key == 'heroimage') {
+
+      form.heroimage = target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        imagePreviews.value = reader.result as string;
+      };
+      reader.readAsDataURL(target.files[0]);
+    } else if (key === "genral_image") {
+      form.genral_image = target.files[0];
+    }
   }
 };
 
