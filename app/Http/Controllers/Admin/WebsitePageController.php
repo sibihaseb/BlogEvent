@@ -23,25 +23,27 @@ class WebsitePageController extends Controller
     public function aboutUsPageUpdate(Request $request)
     {
         $input = $request->all();
+
         if ($request->hasFile('heroimage')) {
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'AboutUs' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
         }
+
         if ($request->hasFile('genral_image')) {
             $ext = $input['genral_image']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
             $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
         }
-        // dd($input['heroimage']);
+
         FrontWebsitePage::updateOrCreate(
             ['key' => 'aboutus'],
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.aboutus')->with([
             'messages' => ['title' => 'Site Updated successfully'],
@@ -81,9 +83,9 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.contactus')->with([
             'messages' => ['title' => 'Site Updated successfully'],
@@ -118,9 +120,9 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.ministries')->with([
             'messages' => ['title' => 'Site Updated successfully'],
@@ -155,9 +157,9 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.event')->with([
             'messages' => ['title' => 'Site Updated successfully'],
@@ -210,7 +212,6 @@ class WebsitePageController extends Controller
             $ext = $input['heroimage']->getClientOriginalExtension();
             $filename = str_replace(' ', '', 'blog' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
-            $style = $input['heroimage_style'];
         }
 
         FrontWebsitePage::updateOrCreate(
@@ -218,9 +219,9 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.home')->with([
             'messages' => ['title' => 'Site Updated successfully'],
@@ -255,9 +256,9 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.blog')->with([
             'messages' => ['title' => 'Site Updated successfully'],
@@ -291,9 +292,9 @@ class WebsitePageController extends Controller
             ['value' => json_encode($input, true)]
         );
 
-        if ($request->hasFile('heroimage') && $request->heroimage_style) {
-            $this->imageresize($input['heroimage'], $input['heroimage_style']);
-        }
+        // if ($request->hasFile('heroimage') && $request->heroimage_style) {
+        //     $this->imageresize($input['heroimage'], $input['heroimage_style']);
+        // }
 
         return redirect()->route('website.prayer')->with([
             'messages' => ['title' => 'Site Updated successfully'],

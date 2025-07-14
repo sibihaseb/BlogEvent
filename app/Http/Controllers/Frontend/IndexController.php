@@ -55,7 +55,7 @@ class IndexController extends Controller
     //  blogs
     public function churchEventBlogs()
     {
-        $blogPage = FrontWebsitePage::where('key', 'event')->first();
+        $blogPage = FrontWebsitePage::where('key', 'blog')->first();
         if ($blogPage) {
             $blogPage = json_decode($blogPage->value, true);
         }

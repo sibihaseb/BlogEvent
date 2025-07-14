@@ -1,5 +1,4 @@
 <template>
-
   <Head title="About Us" />
   <AppLayout>
     <div class="flex flex-1 flex-col gap-4 rounded-xl p-6 space-y-6">
@@ -26,10 +25,15 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="picture">Hero Section Image</Label>
-            <Input id="picture" type="file" accept="image/*" @change="handleFileChange('heroimage', $event)" />
+            <Input
+              id="picture"
+              type="file"
+              accept="image/*"
+              @change="handleFileChange('heroimage', $event)"
+            />
             <InputError :message="form.errors.heading" />
           </div>
-          <div class="flex-1 grid gap-2">
+          <!-- <div class="flex-1 grid gap-2">
             <Label for="type">Image Style</Label>
             <select id="states" v-model="form.heroimage_style"
               class="text-sm rounded-[var(--radius)] max-h-9 border border-[var(--border)] focus:ring-[var(--ring)] focus:border-[var(--ring)] block w-full p-2 dark:bg-[var(--input)] dark:text-[var(--foreground)] dark:border-[var(--border)] dark:focus:ring-[var(--ring)] dark:focus:border-[var(--ring)]">
@@ -39,12 +43,15 @@
             </select>
 
             <InputError :message="form.errors.heroimage_style" />
-          </div>
+          </div> -->
           <div class="flex-1 grid gap-2 justify-center">
             <Label for="heading">Preview</Label>
-            <img v-if="imagePreviews || form.heroimage"
-              :src="imagePreviews ? imagePreviews : '/storage/' + form.heroimage" alt="Passport Back Preview"
-              class="rounded border border-gray-300 max-w-xs h-auto shadow" />
+            <img
+              v-if="imagePreviews || form.heroimage"
+              :src="imagePreviews ? imagePreviews : '/storage/' + form.heroimage"
+              alt="Passport Back Preview"
+              class="rounded border border-gray-300 max-w-xs h-auto shadow"
+            />
           </div>
         </div>
         <Label>Section One</Label>
@@ -94,7 +101,11 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="heading_left_side">Goal Heading Third</Label>
-            <Input id="goal_heading_third_third" type="text" v-model="form.goal_heading_third" />
+            <Input
+              id="goal_heading_third_third"
+              type="text"
+              v-model="form.goal_heading_third"
+            />
             <InputError :message="form.errors.goal_heading_third" />
           </div>
           <div class="flex-1 grid gap-2">
@@ -102,11 +113,16 @@
             <textarea v-model="form.goal_text_third"></textarea>
             <InputError :message="form.errors.goal_text_third" />
           </div>
-          <hr>
+          <hr />
         </div>
         <div class="flex-1 grid gap-2">
           <Label for="picture">General Image</Label>
-          <Input id="picture" type="file" accept="image/*" @change="handleFileChange('genral_image', $event)" />
+          <Input
+            id="picture"
+            type="file"
+            accept="image/*"
+            @change="handleFileChange('genral_image', $event)"
+          />
           <InputError :message="form.errors.genral_image" />
         </div>
         <div class="flex justify-end">
@@ -162,18 +178,16 @@ const form = useForm({
     : "",
   herotext: props.aboutUsPage?.herotext ? props.aboutUsPage?.herotext : "",
   heroimage: props.aboutUsPage?.heroimage ? props.aboutUsPage?.heroimage : "",
-  heroimage_style: "",
+  //   heroimage_style: "",
   genral_image: props.aboutUsPage?.genral_image ? props.aboutUsPage?.genral_image : "",
 });
 
 const handleFileChange = (key: string, e: Event) => {
   const target = e.target as HTMLInputElement;
   if (target.files?.length) {
-    if (key === 'genral_image') {
+    if (key === "genral_image") {
       form.genral_image = target.files[0];
-    }
-    else if (key === 'heroimage') {
-
+    } else if (key === "heroimage") {
       form.heroimage = target.files[0];
       const reader = new FileReader();
       reader.onload = () => {

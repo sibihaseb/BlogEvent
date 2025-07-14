@@ -26,9 +26,8 @@
           <div class="flex-1 grid gap-2">
             <Label for="picture">Hero Section Image</Label>
             <Input id="picture" type="file" accept="image/*" @change="handleFileChange" />
-            <InputError :message="form.errors.heading" />
           </div>
-          <div class="flex-1 grid gap-2">
+          <!-- <div class="flex-1 grid gap-2">
             <Label for="type">Image Style</Label>
             <select
               id="states"
@@ -41,7 +40,7 @@
             </select>
 
             <InputError :message="form.errors.type" />
-          </div>
+          </div> -->
           <div class="flex-1 grid gap-2 justify-center">
             <Label for="heading">Preview</Label>
             <img
@@ -86,7 +85,7 @@ const form = useForm({
   herosubheading: props.eventPage?.herosubheading ? props.eventPage?.herosubheading : "",
   herotext: props.eventPage?.herotext ? props.eventPage?.herotext : "",
   heroimage: props.eventPage?.heroimage ? props.eventPage?.heroimage : "",
-  heroimage_style: "",
+  //   heroimage_style: "",
 });
 
 const handleFileChange = (e: Event) => {

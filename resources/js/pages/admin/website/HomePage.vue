@@ -36,7 +36,7 @@
               @change="handleHeroFileChange"
             />
           </div>
-          <div class="flex-1 grid gap-2">
+          <!-- <div class="flex-1 grid gap-2">
             <Label for="type">Image Style</Label>
             <select
               id="states"
@@ -47,7 +47,7 @@
               <option value="1">1920x1080</option>
               <option value="2">1900x300</option>
             </select>
-          </div>
+          </div> -->
           <div class="flex-1 grid gap-2 justify-center">
             <Label for="heading">Preview</Label>
             <img
@@ -432,7 +432,7 @@ const form = useForm({
   about_image_4: props.homepage?.about_image_4 ?? "",
 
   heroimage: props.homepage?.heroimage ? props.homepage?.heroimage : "",
-  heroimage_style: "",
+  //   heroimage_style: "",
 });
 
 // Handle file change

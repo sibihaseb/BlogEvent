@@ -1,6 +1,6 @@
 <template>
   <!-- Hero Section -->
-  <section class="flex items-center pt-24" :style="backgroundStyle">
+  <section class="min-h-screen flex items-center pt-24" :style="backgroundStyle">
     <div class="container mx-auto px-4 py-20 text-white">
       <div class="max-w-3xl">
         <h1 class="text-5xl font-bold mb-6">{{ props.heading }}</h1>
