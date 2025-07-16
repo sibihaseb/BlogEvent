@@ -81,12 +81,12 @@
             Empowering young people to grow in their faith through Bible study,
             mentorship, and community service.
           </p>
-          <a
-            href="#"
+          <Link
+            :href="route('single.ministry', 1)"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
             >Learn More
             <ArrowRight class="ml-2" :size="20" />
-          </a>
+          </Link>
         </div>
         <div
           class="bg-white p-8 rounded-lg shadow-md ministry-card transition duration-300"
@@ -102,12 +102,12 @@
             Using the gift of music to worship God and create an atmosphere for His
             presence in our services.
           </p>
-          <a
-            href="#"
+          <Link
+            :href="route('single.ministry', 2)"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
             >Learn More
             <ArrowRight class="ml-2" :size="20" />
-          </a>
+          </Link>
         </div>
         <div
           class="bg-white p-8 rounded-lg shadow-md ministry-card transition duration-300"
@@ -122,12 +122,12 @@
             Deepening our understanding of God's Word through group studies, discussions,
             and personal application.
           </p>
-          <a
-            href="#"
+          <Link
+            :href="route('single.ministry', 3)"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
             >Learn More
             <ArrowRight class="ml-2" :size="20" />
-          </a>
+          </Link>
         </div>
         <div
           class="bg-white p-8 rounded-lg shadow-md ministry-card transition duration-300"
@@ -143,12 +143,12 @@
             Serving our local community through food drives, clothing distribution, and
             various support programs.
           </p>
-          <a
-            href="#"
+          <Link
+            :href="route('single.ministry', 4)"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
             >Learn More
             <ArrowRight class="ml-2" :size="20" />
-          </a>
+          </Link>
         </div>
         <div
           class="bg-white p-8 rounded-lg shadow-md ministry-card transition duration-300"
@@ -163,12 +163,12 @@
             Interceding for the needs of our church, community, and world through
             dedicated prayer groups.
           </p>
-          <a
-            href="#"
+          <Link
+            :href="route('single.ministry', 5)"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
             >Learn More
             <ArrowRight class="ml-2" :size="20" />
-          </a>
+          </Link>
         </div>
         <div
           class="bg-white p-8 rounded-lg shadow-md ministry-card transition duration-300"
@@ -184,12 +184,12 @@
             Supporting and strengthening families through counseling, workshops, and
             fellowship activities.
           </p>
-          <a
-            href="#"
+          <Link
+            :href="route('single.ministry', 6)"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
             >Learn More
             <ArrowRight class="ml-2" :size="20" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>
@@ -206,6 +206,7 @@ import {
   HandHelping,
   ArrowRight,
 } from "lucide-vue-next";
+import { Link } from "@inertiajs/vue3";
 
 defineProps<{
   homepage: {

@@ -22,14 +22,14 @@
               :alt="event.name"
               class="w-full h-full object-cover object-top"
             />
-            <div
-              class="absolute top-4 left-4 bg-secondary text-primary text-center p-2 rounded-md"
+            <!-- <div
+              class="absolute top-4 left-4 bg-opacity-10 backdrop-blur-sm text-primary text-center p-2 rounded-md"
             >
               <span class="block font-bold">{{ formatMonth(event.start_time) }}</span>
               <span class="block text-xl font-bold">{{
                 formatDay(event.start_time)
               }}</span>
-            </div>
+            </div> -->
           </div>
           <div class="p-6">
             <h3 class="text-xl font-semibold mb-2">{{ event.name }}</h3>
@@ -38,12 +38,15 @@
                 v-html="decodeAndStripQuotes(event.short_description)"
                 class="text-gray-600 mb-4"
               ></div> -->
-            <div class="flex items-center text-gray-500 mb-4">
-              <i class="ri-time-line mr-2"></i>
+            <div class="flex items-center gap-2 text-gray-500 mb-4">
+              <Clock color="black" />
               <span
                 >{{ formatTime(event.start_time) }} -
                 {{ formatTime(event.end_time) }}</span
               >
+              <CalendarDays />
+              <span>{{ formatMonth(event.start_time) }}</span>
+              <span>{{ formatDay(event.start_time) }}</span>
             </div>
             <div class="flex items-center text-gray-500 mb-6" v-if="event.location">
               <i class="ri-map-pin-line mr-2"></i>
@@ -74,6 +77,7 @@
 import type { ChurchEvent } from "@/client";
 import { Link } from "@inertiajs/vue3";
 import moment from "moment";
+import { Clock, CalendarDays } from "lucide-vue-next";
 
 const props = defineProps<{
   churchevents: ChurchEvent[];
