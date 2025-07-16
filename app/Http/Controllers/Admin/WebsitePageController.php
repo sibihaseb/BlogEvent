@@ -286,6 +286,11 @@ class WebsitePageController extends Controller
             $filename = str_replace(' ', '', 'prayer' . '.' . $ext);
             $input['heroimage'] = $request->file('heroimage')->storeAs('website', $filename, 'public');
         }
+        if ($request->hasFile('genral_image')) {
+            $ext = $input['genral_image']->getClientOriginalExtension();
+            $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
+            $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
+        }
 
         FrontWebsitePage::updateOrCreate(
             ['key' => 'prayer'],

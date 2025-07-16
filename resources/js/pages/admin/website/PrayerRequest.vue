@@ -25,7 +25,12 @@
         <div class="flex gap-4 flex-col md:flex-row">
           <div class="flex-1 grid gap-2">
             <Label for="picture">Hero Section Image</Label>
-            <Input id="picture" type="file" accept="image/*" @change="handleFileChange" />
+            <Input
+              id="picture"
+              type="file"
+              accept="image/*"
+              @change="handleFileChange('heroimage', $event)"
+            />
           </div>
           <!-- <div class="flex-1 grid gap-2">
             <Label for="type">Image Style</Label>
@@ -50,6 +55,16 @@
               class="rounded border border-gray-300 max-w-xs h-auto shadow"
             />
           </div>
+        </div>
+        <div class="flex-1 grid gap-2">
+          <Label for="picture">General Image</Label>
+          <Input
+            id="picture"
+            type="file"
+            accept="image/*"
+            @change="handleFileChange('genral_image', $event)"
+          />
+          <InputError :message="form.errors.genral_image" />
         </div>
         <div class="flex justify-end">
           <Button type="submit" class="text-end" :disabled="form.processing">
@@ -88,17 +103,22 @@ const form = useForm({
   herotext: props.prayerPage?.herotext ? props.prayerPage?.herotext : "",
   heroimage: props.prayerPage?.heroimage ? props.prayerPage?.heroimage : "",
   //   heroimage_style: "",
+  genral_image: props.prayerPage?.genral_image ? props.prayerPage?.genral_image : "",
 });
 
-const handleFileChange = (e: Event) => {
+const handleFileChange = (key: string, e: Event) => {
   const target = e.target as HTMLInputElement;
   if (target.files?.length) {
-    form.heroimage = target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      imagePreviews.value = reader.result as string;
-    };
-    reader.readAsDataURL(target.files[0]);
+    if (key == "heroimage") {
+      form.heroimage = target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        imagePreviews.value = reader.result as string;
+      };
+      reader.readAsDataURL(target.files[0]);
+    } else if (key === "genral_image") {
+      form.genral_image = target.files[0];
+    }
   }
 };
 

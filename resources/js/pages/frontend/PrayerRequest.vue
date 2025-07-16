@@ -118,11 +118,22 @@
               </p>
             </form>
           </div>
-          <div class="text-white max-w-xl">
+          <!-- <div class="text-white max-w-xl">
             <h2 class="text-4xl font-bold mb-4">
               Connect with Shekinah: Join Our Spiritual Family
             </h2>
             <Accordion :accordionItems="fQuestions" />
+          </div> -->
+          <div class="max-w-xl rounded-2xl">
+            <img
+              :src="
+                prayerPage.genral_image
+                  ? `storage/${prayerPage.genral_image}`
+                  : 'https://readdy.ai/api/search-image?query=haitian%2520church%2520choir%2520in%2520traditional%2520dress%2C%2520joyful%2520worship%2C%2520professional%2520photography%2C%2520warm%2520lighting&width=600&height=400&seq=12122&orientation=landscape'
+              "
+              alt="Haitian Flag"
+              class="object-cover rounded-xl"
+            />
           </div>
         </div>
       </div>
@@ -133,7 +144,6 @@
 import { Head, useForm } from "@inertiajs/vue3";
 import FrontendLayout from "@/layouts/FrontendLayout.vue";
 import HeroSectionPage from "@/components/frontend/HeroSectionPage.vue";
-import Accordion from "@/components/Accordion.vue";
 import { AccordionData } from "@/client";
 import InputError from "@/components/InputError.vue";
 import { LoaderCircle } from "lucide-vue-next";
