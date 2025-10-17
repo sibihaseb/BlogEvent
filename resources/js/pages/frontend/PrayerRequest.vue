@@ -114,7 +114,7 @@
                 </button>
               </div>
               <p class="text-sm text-gray-500 mt-4 text-center">
-                Join 2,000+ members already in our community
+
               </p>
             </form>
           </div>

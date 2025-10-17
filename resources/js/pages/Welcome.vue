@@ -4,11 +4,11 @@
     <HeroSection :homepage="homepage" />
     <HaitianHeritage :homepage="homepage" />
     <QuickAccessGrid :homepage="homepage" />
-    <UpcomingEvents :churchevents="props.churchevents" />
+    <UpcomingEvents :churchevents="props.churchevents" v-if="props.churchevents.length" />
     <EventCalendar :homepage="homepage" :churchevents="props.churcheventsAll" />
     <Ministry :homepage="homepage" />
     <!-- <AboutUs :homepage="homepage" /> -->
-    <Blog :blogs="props.churcheventBlogs" />
+    <Blog :blogs="props.churcheventBlogs" v-if="props.churcheventBlogs.length" />
     <!-- <Contact /> -->
   </FrontendLayout>
 </template>
@@ -34,7 +34,7 @@ const props = defineProps<{
   churcheventsAll: any;
   homepage: any;
 }>();
-console.log("Welcome page props:", props);
+console.log("Welcome page props:", props.churcheventBlogs);
 
 onMounted(() => {
   // Toggle mobile menu
