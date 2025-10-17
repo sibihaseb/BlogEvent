@@ -1,7 +1,7 @@
 <template>
   <section class="py-16">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Service Times -->
         <div
           class="p-8 rounded-lg text-center transition duration-300 bg-gray-50 dark:bg-neutral-900 hover:shadow-lg dark:hover:shadow-xl dark:shadow-black/30"
@@ -39,7 +39,7 @@
             }}
           </p>
           <a
-            href="#"
+            :href="props.homepage.info_cards[1].button_url"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
           >
             {{ props.homepage.info_cards[1].button_text || "View Livestream" }}
@@ -66,7 +66,7 @@
             }}
           </p>
           <a
-            href="#"
+            :href="props.homepage.info_cards[2].button_url"
             class="text-primary font-medium hover:text-secondary inline-flex items-center dark:hover:text-white"
           >
             {{ props.homepage.info_cards[2].button_text || "Donate Now" }}
@@ -75,7 +75,7 @@
         </div>
 
         <!-- New Here -->
-        <div
+        <!-- <div
           class="p-8 rounded-lg text-center transition duration-300 bg-gray-50 dark:bg-neutral-900 hover:shadow-lg dark:hover:shadow-xl dark:shadow-black/30"
         >
           <div
@@ -99,21 +99,14 @@
             {{ props.homepage.info_cards[3].button_text || "Get Started" }}
             <ArrowRight class="ml-2" :size="20" />
           </Link>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { Link } from "@inertiajs/vue3";
-import {
-  Clock3,
-  SquarePlay,
-  HandHeart,
-  UserRoundPlus,
-  ArrowRight,
-} from "lucide-vue-next";
+import { Clock3, SquarePlay, HandHeart, ArrowRight } from "lucide-vue-next";
 
 const props = defineProps<{
   homepage: {
@@ -121,6 +114,7 @@ const props = defineProps<{
       title: string;
       description: string;
       button_text: string;
+      button_url: string;
     }[];
   };
 }>();

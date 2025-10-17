@@ -32,7 +32,7 @@ class WebsitePageController extends Controller
 
         if ($request->hasFile('genral_image')) {
             $ext = $input['genral_image']->getClientOriginalExtension();
-            $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
+            $filename = str_replace(' ', '', 'genral_image_about' . '.' . $ext);
             $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
         }
 
@@ -74,7 +74,7 @@ class WebsitePageController extends Controller
         }
         if ($request->hasFile('genral_image')) {
             $ext = $input['genral_image']->getClientOriginalExtension();
-            $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
+            $filename = str_replace(' ', '', 'genral_image_contact' . '.' . $ext);
             $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
         }
 
@@ -288,7 +288,7 @@ class WebsitePageController extends Controller
         }
         if ($request->hasFile('genral_image')) {
             $ext = $input['genral_image']->getClientOriginalExtension();
-            $filename = str_replace(' ', '', 'genral_image' . '.' . $ext);
+            $filename = str_replace(' ', '', 'genral_image_prayer' . '.' . $ext);
             $input['genral_image'] = $request->file('genral_image')->storeAs('website', $filename, 'public');
         }
 
