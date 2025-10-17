@@ -20,7 +20,7 @@
             <img
               :src="'storage/' + event.picture || defaultImage"
               :alt="event.name"
-              class="w-full h-full object-cover object-top"
+              class="w-full h-full object-fill object-top"
             />
             <!-- <div
               class="absolute top-4 left-4 bg-opacity-10 backdrop-blur-sm text-primary text-center p-2 rounded-md"
